@@ -1,0 +1,14 @@
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.csproj.AssemblyReference.cache
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.AssemblyInfoInputs.cache
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.AssemblyInfo.cs
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.csproj.CoreCompileInputs.cache
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\bin\Debug\net8.0\Server.Contracts.deps.json
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\bin\Debug\net8.0\Server.Contracts.runtimeconfig.json
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\bin\Debug\net8.0\Server.Contracts.dll
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\bin\Debug\net8.0\Server.Contracts.pdb
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.dll
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\refint\Server.Contracts.dll
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.pdb
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\Server.Contracts.genruntimeconfig.cache
+D:\SWD392\Projects\PetServiceManagementSystem\Server.Contracts\obj\Debug\net8.0\ref\Server.Contracts.dll
