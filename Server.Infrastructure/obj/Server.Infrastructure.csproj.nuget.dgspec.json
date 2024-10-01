@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Infrastructure\\Server.Infrastructure.csproj": {}
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Application\\Server.Application.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Application\\Server.Application.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
         "projectName": "Server.Application",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Application\\Server.Application.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Application\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,17 +26,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Contracts\\Server.Contracts.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Contracts\\Server.Contracts.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
               },
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\Server.Domain.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\Server.Domain.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj"
               }
             }
           }
@@ -97,21 +102,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Contracts\\Server.Contracts.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Contracts\\Server.Contracts.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj",
         "projectName": "Server.Contracts",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Contracts\\Server.Contracts.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Contracts\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -119,6 +128,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -169,21 +179,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\Server.Domain.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\Server.Domain.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj",
         "projectName": "Server.Domain",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\Server.Domain.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -191,6 +205,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -237,21 +252,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Infrastructure\\Server.Infrastructure.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Infrastructure\\Server.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj",
         "projectName": "Server.Infrastructure",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Infrastructure\\Server.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Infrastructure\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -259,17 +278,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Application\\Server.Application.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Application\\Server.Application.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj"
               },
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\Server.Domain.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Domain\\Server.Domain.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj"
               }
             }
           }
@@ -338,7 +358,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
