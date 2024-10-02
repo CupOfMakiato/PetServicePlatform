@@ -14,6 +14,8 @@ namespace Server.Domain.Entities
         }
         public string CategoryName { get; set; }
         public int CategoryStatus { get; set; }
+
+        //Relationship
         public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

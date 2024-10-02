@@ -25,3 +25,17 @@ C:\Learning\SWD\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\refint
 C:\Learning\SWD\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.pdb
 C:\Learning\SWD\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.genruntimeconfig.cache
 C:\Learning\SWD\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\ref\Server.Domain.dll
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.deps.json
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.runtimeconfig.json
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.dll
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.pdb
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.AssemblyInfoInputs.cache
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.AssemblyInfo.cs
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.csproj.CoreCompileInputs.cache
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.sourcelink.json
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.dll
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\refint\Server.Domain.dll
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.pdb
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.genruntimeconfig.cache
+C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\ref\Server.Domain.dll
