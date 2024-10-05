@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8dBF719bsLC25Nve0/s8LsTlshVSUjOWnBmFYAyCW3huM3a9604eQzCBqk9La2Hho4+/Vp5C96GJkHX/TbYySQ==",
+  "dgSpecHash": "6mYJgKWGTTQ=",
   "success": true,
-  "projectFilePath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.Contracts\\Server.Contracts.csproj",
+  "projectFilePath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguye\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\nguye\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",

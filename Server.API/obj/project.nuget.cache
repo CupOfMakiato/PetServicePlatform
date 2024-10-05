@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TpJSU1w+aIjxi7UV2wwJrL9tHkslA74bDNMDBeNjyQfAjj6e/wwMtYjwJZh1fX8/GaHJFjQNsPI6h4uVhGSkIw==",
+  "dgSpecHash": "dSxihsDrwKs=",
   "success": true,
-  "projectFilePath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\Server.API\\Server.API.csproj",
+  "projectFilePath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.API\\Server.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguye\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\nguye\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
