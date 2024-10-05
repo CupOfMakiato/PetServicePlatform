@@ -11,5 +11,6 @@ namespace Server.Domain.Entities
         public string Role_Name { get; set; }
 
         //Relationship
+        public virtual ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
     }
 }

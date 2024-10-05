@@ -12,5 +12,7 @@ namespace Server.Domain.Entities
         public Guid Service_Id { get; set; }
 
         //Relationship
+        public virtual ApplicationUser? User { get; set; }
+        public virtual Service? Service { get; set; }
     }
 }

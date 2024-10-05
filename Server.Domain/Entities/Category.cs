@@ -17,5 +17,6 @@ namespace Server.Domain.Entities
 
         //Relationship
         public virtual ICollection<SubCategory> SubCategories { get; set; }
+        public virtual ICollection<ServiceCategory> ServiceCategories { get; set; } = new HashSet<ServiceCategory>();
     }
 }

@@ -12,5 +12,7 @@ namespace Server.Domain.Entities
         public Guid Category_Id { get; set; }
 
         //Relationship
+        public virtual Category? Category { get; set; }
+        public virtual Service? Service { get; set; }
     }
 }
