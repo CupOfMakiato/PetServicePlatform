@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Server.Domain.Entities
 {
-    public class UserService 
+    public class UserService :BaseEntity
     {
-        public Guid User_Id { get; set; }
-        public Guid Service_Id { get; set; }
-
-        //Relationship
+        public Guid UserId { get; set; }
+        public ApplicationUser User { get; set; }
+        public Guid ServiceId { get; set; }
+        public Service Service { get; set; }
     }
 }
