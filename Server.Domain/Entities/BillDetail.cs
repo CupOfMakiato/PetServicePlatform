@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Server.Domain.Entities
 {
-    public class Booking : BaseEntity
+    public class BillDetail : BaseEntity
     {
-        public Guid UserId { get; set; }
+        public Guid BillId { get; set; }
         public Guid ServiceId { get; set; }
-        public ApplicationUser User { get; set; }
+        public double Price { get; set; }
+        public Payment Payment { get; set; }
         public Service Service { get; set; }
     }
 }

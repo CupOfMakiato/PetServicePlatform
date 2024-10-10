@@ -8,11 +8,9 @@ namespace Server.Domain.Entities
 {
     public class Payment : BaseEntity
     {
-        public Guid User_Id { get; set; }
-        public Guid Service_Id { get; set; }
-
-        //Relationship
-        public virtual ApplicationUser? User { get; set; }
-        public virtual Service? Service { get; set; }
+        public Guid UserId { get; set; }
+        public double TotalAmount { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public List<BillDetail> BillDetail { get; set; }
     }
 }

@@ -20,9 +20,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="SqlTableDependency" Version="8.5.8" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.16" />
   </ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\Server.Application\Server.Application.csproj" />
-		<ProjectReference Include="..\Server.Domain\Server.Domain.csproj" />
-	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Server.Application\Server.Application.csproj" />
+    <ProjectReference Include="..\Server.Contracts\Server.Contracts.csproj" />
+  </ItemGroup>
 </Project>

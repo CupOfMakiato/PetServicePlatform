@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Server.Domain.Entities
 {
-    public class Role : BaseEntity
+    public class Role
     {
-        public string Role_Name { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string RoleName { get; set; }
+        public ICollection<ApplicationUser>? Users { get; set; }
 
-        //Relationship
-        public virtual ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
     }
 }
