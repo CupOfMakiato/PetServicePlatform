@@ -11,15 +11,17 @@ public class UnitOfWork : IUnitOfWork
     private readonly ICategoryRepository _categoryRepository;
     private readonly IAuthRepository _authRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IShopRepository _shopRepository;
 
 
-    public UnitOfWork(AppDbContext dbContext, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository, IAuthRepository authRepository, IUserRepository userRepository)
+    public UnitOfWork(AppDbContext dbContext, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository, IAuthRepository authRepository, IUserRepository userRepository, IShopRepository shopRepository)
     {
         _dbContext = dbContext;
         _subCategoryRepository = subCategoryRepository;
         _categoryRepository = categoryRepository;
         _authRepository = authRepository;
         _userRepository = userRepository;
+        _shopRepository = shopRepository;
     }
 
     public ICategoryRepository categoryRepository => _categoryRepository;
@@ -27,6 +29,7 @@ public class UnitOfWork : IUnitOfWork
     public ISubCategoryRepository subCategoryRepository => _subCategoryRepository;
     public IAuthRepository authRepository => _authRepository;
     public IUserRepository userRepository => _userRepository;
+    public IShopRepository shopRepository => _shopRepository;
 
 
     public async Task<int> SaveChangeAsync()

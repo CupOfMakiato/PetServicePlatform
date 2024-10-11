@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.Application.Enum;
 using Server.Application.Interfaces;
 using Server.Contracts.Abstractions.Shared;
 using Server.Contracts.DTO.Auth;
+using Server.Contracts.DTO.Shop;
 using Server.Contracts.DTO.User;
 using Server.Domain.Entities;
 
@@ -14,11 +16,15 @@ namespace Server.API.Controllers
     {
         private readonly PasswordService _passwordService;
         private readonly IAuthService _authService;
+        private readonly IUserService _userService; 
+        private readonly IEmailService _emailService;
 
-        public AuthController(PasswordService passwordService, IAuthService authService)
+        public AuthController(PasswordService passwordService, IAuthService authService, IUserService userService, IEmailService emailService)
         {
             _passwordService = passwordService;
             _authService = authService;
+            _userService = userService;
+            _emailService = emailService;
         }
 
         [HttpPost("user/login")]
@@ -94,6 +100,8 @@ namespace Server.API.Controllers
             });
         }
 
+
+        //Register user
         [HttpPost("user/register/user")]
         public async Task<IActionResult> RegisterUser([FromForm] UserRegistrationDTO userRegistrationDto)
         {
@@ -106,7 +114,47 @@ namespace Server.API.Controllers
             try
             {
                 await _authService.RegisterUserAsync(userRegistrationDto);
-                return Ok(new { Message = "Registration successful" });
+                return Ok(new { Message = "Registration successful. Please check your email for the OTP. " });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+        //Register Shop
+
+        [HttpPost("user/otp/verify")]
+        public async Task<IActionResult> VerifyOtp(OtpVerificationDTO otpVerificationDto)
+        {
+            try
+            {
+                var isValid = await _authService.VerifyOtpAndCompleteRegistrationAsync(otpVerificationDto.Email, otpVerificationDto.Otp);
+                if (!isValid)
+                {
+                    return BadRequest(new { Message = "Invalid OTP or OTP has expired." });
+                }
+
+                var user = await _userService.GetByEmail(otpVerificationDto.Email);
+                if (user != null)
+                {
+                    user.IsVerified = true;
+
+                    if (user.RoleCodeId == 3) // Role 3 is for shop
+                    {
+                        user.Status = UserStatus.Pending;
+                        await _emailService.SendPendingEmailAsync(user.Email);
+                    }
+                    else
+                    {
+                        user.Status = UserStatus.Active;
+                        await _emailService.SendApprovalEmailAsync(user.Email);
+                    }
+
+                    await _userService.UpdateUserAsync(user);
+                }
+
+                return Ok(new { Message = "Email verified successfully." });
             }
             catch (Exception ex)
             {

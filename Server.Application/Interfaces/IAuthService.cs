@@ -19,6 +19,10 @@ namespace Server.Application.Interfaces
 
         //REGISTER
         Task RegisterUserAsync(UserRegistrationDTO userRegistrationDto);
+        Task<ApplicationUser> GetByVerificationToken(string token);
+        Task<bool> VerifyOtpAsync(string email, string otp);
+
+        Task<bool> VerifyOtpAndCompleteRegistrationAsync(string email, string otp);
         //Google
         /*        Task<Result<object>> UserCompleteSignUpByGoogle(SignupGoogleRequest userRegistrationDto);*/
         //CHANGE PASSWORD 

@@ -23,6 +23,7 @@ public class AppDbContext : DbContext
     public DbSet<BillDetail> BillDetail { get; set; }
     public DbSet<UserService> UserService { get; set; }
     public DbSet<ApplicationUser> Users { get; set; }
+    public DbSet<ShopData> ShopDatas { get; set; }
 
     #endregion
 
@@ -102,6 +103,13 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
         modelBuilder.Entity<UserService>()
             .HasKey(r => new { r.UserId, r.ServiceId });
+
+        // ShopData
+        // User and InstructorData relationship
+        modelBuilder.Entity<ShopData>()
+            .HasOne(i => i.User)
+            .WithOne(u => u.ShopData)
+            .HasForeignKey<ShopData>(i => i.UserId);
     }
 
 }

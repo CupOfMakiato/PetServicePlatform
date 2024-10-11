@@ -59,9 +59,9 @@ namespace Server.Infrastructure.Repositories
             return await _context.Users.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public Task<ApplicationUser> GetUserById(Guid userId)
+        public async Task<ApplicationUser> GetUserById(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<List<ApplicationUser>> GetUsersByRole(int role)
@@ -69,5 +69,9 @@ namespace Server.Infrastructure.Repositories
             return await _context.Users.Where(u => u.RoleCodeId == role).ToListAsync();
         }
 
+        public async Task<ApplicationUser> GetUserByVerificationToken(string token)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.VerificationToken == token);
+        }
     }
 }

@@ -23,16 +23,21 @@ public static class DependencyInjection
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IOtpService, OtpService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ITemporaryStoreService, TemporaryStoreService>();
+        services.AddScoped<IShopService, ShopService>();
         services.AddScoped<PasswordService>();
         services.AddScoped<RedisService>();
         services.AddScoped<OtpService>();
         services.AddScoped<EmailService>();
+        services.AddMemoryCache();
 
         // Repo
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAuthRepository, AuthRepository>();
         services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IShopRepository, ShopRepository>();
 
 
         #region Configuration

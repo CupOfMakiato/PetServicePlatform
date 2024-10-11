@@ -1,15 +1,18 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Server.Application.Enum;
 using Server.Application.Interfaces;
 using Server.Application.Repositories;
 using Server.Application.Utils;
 using Server.Contracts.DTO.Auth;
 using Server.Contracts.DTO.User;
+using Server.Domain.Entities;
 using Server.Infrastructure.Services;
 
 namespace Server.Application.Services
@@ -25,8 +28,10 @@ namespace Server.Application.Services
         private readonly IConfiguration _configuration;
         private readonly RedisService _redisService;
         private readonly IOtpService _otpService;
+        private readonly ITemporaryStoreService _temporaryStoreService;
+        private readonly IShopRepository _shopRepository;
 
-        public AuthService(IAuthRepository authRepository, TokenGenerators tokenGenerators, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor, IEmailService emailService, IConfiguration configuration, RedisService redisService, IOtpService otpService, IMapper mapper)
+        public AuthService(IAuthRepository authRepository, TokenGenerators tokenGenerators, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor, IEmailService emailService, IConfiguration configuration, RedisService redisService, IOtpService otpService, IMapper mapper, IShopRepository shopRepository)
         {
             _authRepository = authRepository;
             _tokenGenerators = tokenGenerators;
@@ -37,6 +42,7 @@ namespace Server.Application.Services
             _redisService = redisService;
             _otpService = otpService;
             _mapper = mapper;
+            _shopRepository = shopRepository;
         }
 
         public async Task<Authenticator> LoginAsync(LoginDTO loginDTO)
@@ -50,7 +56,7 @@ namespace Server.Application.Services
                     throw new KeyNotFoundException("Invalid email or account does not exist.");
                 }
 
-                if (!user.Active)
+                if (!user.IsVerified)
                 {
                     throw new InvalidOperationException("Account is not activated. Please verify your email.");
                 }
@@ -93,23 +99,26 @@ namespace Server.Application.Services
                 {
                     throw new Exception("User with this email or phone number already exists.");
                 }
+                var otp = GenerateOtp();
                 var user = new ApplicationUser
                 {
                     FullName = userRegistrationDto.FullName,
                     Email = userRegistrationDto.Email,
                     Password = HashPassword(userRegistrationDto.Password),
                     Balance = 0,
-                    AvatarUrl = null,
+                    AvatarUrl = "",
                     Introduction = userRegistrationDto.Introduction,
-                    Active = false,
+                    Status = UserStatus.Pending,
+                    Otp = otp,
                     IsStaff = false,
                     RoleCodeId = 2, 
                     CreationDate = DateTime.Now,
-                    
+                    OtpExpiryTime = DateTime.UtcNow.AddMinutes(10)
+
                 };
 
                 await _userRepository.AddAsync(user);
-/*                await _emailService.SendOtpEmailAsync(user.Email, otp);*/
+                await _emailService.SendOtpEmailAsync(user.Email, otp);
             }
             catch (ArgumentNullException ex)
             {
@@ -153,9 +162,17 @@ namespace Server.Application.Services
             };
         }
 
-        private string HashPassword(string password)
+        public async Task<ApplicationUser> GetByVerificationToken(string token)
         {
-            return BCrypt.Net.BCrypt.HashPassword(password);
+            try
+            {
+                return await _userRepository.GetUserByVerificationToken(token);
+            }
+            catch (Exception ex)
+            {
+                // Handle potential exceptions such as token not found
+                throw new ApplicationException("An error occurred while retrieving the user by verification token.", ex);
+            }
         }
 
         private async Task<Authenticator> GenerateJwtToken(ApplicationUser user)
@@ -197,5 +214,90 @@ namespace Server.Application.Services
             return await _authRepository.DeleteRefreshToken(userId);
         }
 
+        private string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
+        private string GenerateOtp()
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                var byteArray = new byte[4];
+                rng.GetBytes(byteArray);
+                var otp = BitConverter.ToUInt32(byteArray, 0) % 1000000; // Generate a 6-digit OTP
+                return otp.ToString("D6");
+            }
+        }
+
+        public async Task<bool> VerifyOtpAsync(string email, string otp)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserByEmail(email);
+                if (user == null)
+                {
+                    throw new KeyNotFoundException("User not found.");
+                }
+
+                if (user.Otp != otp || user.OtpExpiryTime < DateTime.UtcNow)
+                {
+                    return false;
+                }
+
+                user.IsVerified = true;
+                user.Otp = null;
+                user.OtpExpiryTime = null;
+                user.Status = UserStatus.Active; // Update status to Active
+
+                await _userRepository.UpdateAsync(user);
+                return true;
+            }
+            catch (KeyNotFoundException ex)
+            {
+                // Handle cases where the user is not found
+                throw new ApplicationException("User not found for OTP verification.", ex);
+            }
+            catch (Exception ex)
+            {
+                // General exception handling
+                throw new ApplicationException("An error occurred while verifying the OTP.", ex);
+            }
+        }
+
+        public async Task<bool> VerifyOtpAndCompleteRegistrationAsync(string email, string otp)
+        {
+            var user = await _userRepository.GetUserByEmail(email);
+            if (user == null || user.Otp != otp || user.OtpExpiryTime < DateTime.UtcNow)
+            {
+                return false;
+            }
+
+            user.IsVerified = true;
+            user.Status = user.RoleCodeId == 2 ? UserStatus.Pending : UserStatus.Active;
+            user.Otp = "";
+            user.OtpExpiryTime = null;
+
+            await _userRepository.UpdateAsync(user);
+
+            if (user.RoleCodeId == 3)
+            {
+                var shopRegistrationDto = await _temporaryStoreService.GetShopRegistrationAsync(user.Id);
+                if (shopRegistrationDto != null)
+                {
+                    var shopData = new ShopData
+                    {
+                        UserId = user.Id,
+                        TaxNumber = shopRegistrationDto.TaxNumber,
+                        CardNumber = shopRegistrationDto.CardNumber,
+                        CardName = shopRegistrationDto.CardName,
+                        CardProvider = shopRegistrationDto.CardProvider,
+                    };
+
+                    await _shopRepository.AddAsync(shopData);
+                }
+            }
+
+            return true;
+        }
     }
 }

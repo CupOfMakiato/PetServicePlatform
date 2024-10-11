@@ -86,11 +86,11 @@ namespace Server.Application.Services
                     <html>
                     <body style='font-family: Arial, sans-serif; line-height: 1.6;'>
                         <div style='max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
-                            <h2 style='color: #333;'>Thank you for registering as an instructor!</h2>
+                            <h2 style='color: #333;'>Thank you for registering as an shop!</h2>
                             <p style='color: #555;'>We have received your registration and it is currently being reviewed by our admin team.</p>
                             <p style='color: #555;'>You will receive a notification once your account is approved. Please be patient during this process.</p>
                             <p style='color: #555;'>Thank you for your understanding.</p>
-                            <p style='color: #555;'>Best regards,<br />Cursus Team</p>
+                            <p style='color: #555;'>Best regards,<br />Pet Setvice Platform</p>
                         </div>
                     </body>
                     </html>"
@@ -111,7 +111,7 @@ namespace Server.Application.Services
                     <h2 style='color: #333;'>Welcome Back!</h2>
                     <p style='color: #555;'>We are excited to inform you that your account has been reactivated. You can now log in and continue using our system.</p>
                     <p style='color: #555;'>Thank you for being a valued member of our community.</p>
-                    <p style='color: #555;'>Best regards,<br />Cursus Team</p>
+                    <p style='color: #555;'>Best regards,<br />Pet Setvice Platform</p>
                 </div>
             </body>
             </html>"
@@ -135,7 +135,7 @@ namespace Server.Application.Services
                     <p style='color: #555;'>Reason: {reason}</p>
                     <p style='color: #555;'>If you have any questions or need further assistance, please contact our support team.</p>
                     <p style='color: #555;'>We appreciate your understanding.</p>
-                    <p style='color: #555;'>Best regards,<br />Cursus Team</p>
+                    <p style='color: #555;'>Best regards,<br />Pet Setvice Platform</p>
                 </div>
             </body>
             </html>"
@@ -143,6 +143,49 @@ namespace Server.Application.Services
 
             await SendEmailAsync(emailDto);
         }
+        public async Task SendRejectionEmailAsync(string email, string reason)
+        {
+            var emailDto = new EmailDTO
+            {
+                To = email,
+                Subject = "Instructor Rejection",
+                Body = $@"
+                    <html>
+                    <body style='font-family: Arial, sans-serif; line-height: 1.6;'>
+                        <div style='max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
+                            <h2 style='color: #333;'>Registration Update</h2>
+                            <p style='color: #555;'>We regret to inform you that your account registration has been rejected.</p>
+                            <p style='color: #555;'>Reason: {reason}</p>
+                            <p style='color: #555;'>If you have any questions or need further assistance, please contact our support team.</p>
+                            <p style='color: #555;'>Best regards,<br />Cursus Team</p>
+                        </div>
+                    </body>
+                    </html>"
+            };
 
+            await SendEmailAsync(emailDto);
+        }
+
+        public async Task SendApprovalEmailAsync(string email)
+        {
+            var emailDto = new EmailDTO
+            {
+                To = email,
+                Subject = "Account Approval",
+                Body = $@"
+                    <html>
+                    <body style='font-family: Arial, sans-serif; line-height: 1.6;'>
+                        <div style='max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
+                            <h2 style='color: #333;'>Congratulations!</h2>
+                            <p style='color: #555;'>Your account has been approved. You can now log in and start using the system.</p>
+                            <p style='color: #555;'>Thank you for joining our system.</p>
+                            <p style='color: #555;'>Best regards,<br />Cursus Team</p>
+                        </div>
+                    </body>
+                    </html>"
+            };
+
+            await SendEmailAsync(emailDto);
+        }
     }
 }

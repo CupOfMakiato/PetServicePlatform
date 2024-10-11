@@ -1,9 +1,12 @@
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Server.API;
 using Server.Application;
-using Server.Domain.Entities;
 using Server.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Firebase
 
 {
     builder.Services
