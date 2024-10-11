@@ -18,7 +18,7 @@ namespace Server.Domain.Entities
         public string? RefreshToken { get; set; }
         public bool Active { get; set; }
         public int RoleCodeId { get; set; }
-        public bool? IsStaff { get; set; }
+        //public bool? IsStaff { get; set; }
         //public string? Type { get; set; }
         [ForeignKey("RoleCodeId")]
         public Role RoleCode { get; set; }
