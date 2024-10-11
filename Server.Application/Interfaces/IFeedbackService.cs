@@ -15,7 +15,7 @@ namespace Server.Application.Interfaces
         Task<Result<object>> RemoveFeedback(Guid id);
         Task<Result<object>> UpdateFeedback(Guid id, UpdateFeedbackDTO feedbackDto);
         Task<Result<object>> SendFeedback(CreateFeedbackDTO feedbackDto);
-        Task<List<CreateFeedbackDTO>> GetFeedbacksForUser(Guid userId);
+        Task<List<ViewFeedbackDTO>> GetFeedbacksForUser(Guid userId);
         Task<Result<object>> GetAverageRating();
     }
 }

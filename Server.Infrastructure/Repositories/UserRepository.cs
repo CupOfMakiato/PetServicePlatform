@@ -69,5 +69,9 @@ namespace Server.Infrastructure.Repositories
             return await _context.Users.Where(u => u.RoleCodeId == role).ToListAsync();
         }
 
+        public Task<ApplicationUser> GetUserByIdWithServiceUsed(Guid userId)
+        {
+            return _context.Users.Include(u => u.UserSerive).FirstOrDefaultAsync(u => u.Id == userId);
+        }
     }
 }

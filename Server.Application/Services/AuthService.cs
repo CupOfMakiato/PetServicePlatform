@@ -10,6 +10,7 @@ using Server.Application.Repositories;
 using Server.Application.Utils;
 using Server.Contracts.DTO.Auth;
 using Server.Contracts.DTO.User;
+using Server.Domain.Entities;
 using Server.Infrastructure.Services;
 
 namespace Server.Application.Services
@@ -102,7 +103,7 @@ namespace Server.Application.Services
                     AvatarUrl = null,
                     Introduction = userRegistrationDto.Introduction,
                     Active = false,
-                    IsStaff = false,
+                    //IsStaff = false,
                     RoleCodeId = 2, 
                     CreationDate = DateTime.Now,
                     

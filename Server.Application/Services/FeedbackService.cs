@@ -65,7 +65,7 @@ namespace Server.Application.Services
             return feedbackDTO;
         }
 
-        public async Task<List<CreateFeedbackDTO>> GetFeedbacksForUser(Guid userId)
+        public async Task<List<ViewFeedbackDTO>> GetFeedbacksForUser(Guid userId)
         {
             var feedbacks = await _unitOfWork.feedbackRepository.GetAllFeedbacksByUserId(userId);
 
@@ -119,7 +119,7 @@ namespace Server.Application.Services
             }
 
             // Retrieve the user along with their enrolled courses based on the userId provided in reviewDto.
-            var user = await _unitOfWork.userRepository.GetUserByIdWithCourseEnrolled(feedbackDto.UserId);
+            var user = await _unitOfWork.userRepository.GetUserByIdWithServiceUsed(feedbackDto.UserId);
 
             // Check if the user exists.
             if (user == null)
@@ -133,7 +133,7 @@ namespace Server.Application.Services
             }
 
             // Check if the user has used in the service they are trying to review.
-            var isUsed = user.UserService.Any(uec => uec.CourseId == feedbackDto.ServiceId);
+            var isUsed = user.UserSerive.Any(uec => uec.ServiceId == feedbackDto.ServiceId);
             if (!isUsed)
             {
                 return new Result<object>

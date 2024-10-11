@@ -39,3 +39,17 @@ C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\ref
 C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.pdb
 C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.genruntimeconfig.cache
 C:\Learning\SWD392\Project\PetServicePlatform\Server.Domain\obj\Debug\net8.0\ref\Server.Domain.dll
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.deps.json
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.runtimeconfig.json
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.dll
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Domain.pdb
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.AssemblyInfoInputs.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.AssemblyInfo.cs
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.csproj.CoreCompileInputs.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.sourcelink.json
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.dll
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\refint\Server.Domain.dll
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.pdb
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.genruntimeconfig.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\ref\Server.Domain.dll
