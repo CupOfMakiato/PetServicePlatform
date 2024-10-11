@@ -22,7 +22,8 @@ public class AppDbContext : DbContext
     public DbSet<Payment> Payment { get; set; }
     public DbSet<BillDetail> BillDetail { get; set; }
     public DbSet<UserService> UserService { get; set; }
-    
+    public DbSet<ApplicationUser> Users { get; set; }
+
     #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

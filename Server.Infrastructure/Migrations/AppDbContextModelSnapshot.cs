@@ -28,18 +28,9 @@ namespace Server.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("AvatarId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AvatarUrl")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Balance")
-                        .HasColumnType("float");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -61,13 +52,7 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Introduction")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsStaff")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModificationBy")
@@ -77,67 +62,16 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RefreshToken")
+                    b.Property<string>("PhoneNo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleCodeId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleCodeId");
-
-                    b.ToTable("ApplicationUser");
-                });
-
-            modelBuilder.Entity("Server.Domain.Entities.BillDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BillId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleteBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModificationBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModificationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PaymentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaymentId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("BillDetail");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
@@ -167,19 +101,19 @@ namespace Server.Infrastructure.Migrations
                     b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ServiceId")
+                    b.Property<Guid>("Service_Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("User_Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("Service_Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("User_Id");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Category", b =>
@@ -418,6 +352,180 @@ namespace Server.Infrastructure.Migrations
                     b.ToTable("Service");
                 });
 
+            modelBuilder.Entity("Server.Domain.Entities.Feedback", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModificationBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Service_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("User_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Service_Id");
+
+                    b.HasIndex("User_Id");
+
+                    b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModificationBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Service_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("User_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Service_Id");
+
+                    b.HasIndex("User_Id");
+
+                    b.ToTable("Payment");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModificationBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Role_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.Service", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModificationBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Service_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.ServiceCategory", b =>
+                {
+                    b.Property<Guid>("Category_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Service_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Category_Id");
+
+                    b.HasIndex("Service_Id");
+
+                    b.ToTable("ServiceCategories");
+                });
+
             modelBuilder.Entity("Server.Domain.Entities.SubCategory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -652,6 +760,121 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("SubCategory");
                 });
 
+            modelBuilder.Entity("Server.Domain.Entities.UserRole", b =>
+                {
+                    b.Property<Guid>("Role_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("User_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Role_Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.UserService", b =>
+                {
+                    b.Property<Guid>("Service_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("User_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Service_Id");
+
+                    b.HasIndex("User_Id");
+
+                    b.ToTable("UserServices");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
+                {
+                    b.HasOne("Server.Domain.Entities.Service", "Service")
+                        .WithMany("Bookings")
+                        .HasForeignKey("Service_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Server.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.Feedback", b =>
+                {
+                    b.HasOne("Server.Domain.Entities.Service", "Service")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("Service_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Server.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.Payment", b =>
+                {
+                    b.HasOne("Server.Domain.Entities.Service", "Service")
+                        .WithMany("Payments")
+                        .HasForeignKey("Service_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Server.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("Payments")
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.ServiceCategory", b =>
+                {
+                    b.HasOne("Server.Domain.Entities.Category", "Category")
+                        .WithMany("ServiceCategories")
+                        .HasForeignKey("Category_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Server.Domain.Entities.Service", "Service")
+                        .WithMany("ServiceCategories")
+                        .HasForeignKey("Service_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Service");
+                });
+
             modelBuilder.Entity("Server.Domain.Entities.SubCategory", b =>
                 {
                     b.HasOne("Server.Domain.Entities.Category", "Category")
@@ -711,28 +934,58 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("UserSerive");
                 });
 
+            modelBuilder.Entity("Server.Domain.Entities.UserRole", b =>
+                {
+                    b.HasOne("Server.Domain.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId");
+
+                    b.HasOne("Server.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.UserService", b =>
+                {
+                    b.HasOne("Server.Domain.Entities.Service", "Service")
+                        .WithMany("UserServices")
+                        .HasForeignKey("Service_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Server.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("UserServices")
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Bookings");
+
+                    b.Navigation("Feedbacks");
+
+                    b.Navigation("Payments");
+
+                    b.Navigation("UserRoles");
+
+                    b.Navigation("UserServices");
+                });
+
             modelBuilder.Entity("Server.Domain.Entities.Category", b =>
                 {
+                    b.Navigation("ServiceCategories");
+
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("Server.Domain.Entities.Payment", b =>
-                {
-                    b.Navigation("BillDetail");
-                });
-
-            modelBuilder.Entity("Server.Domain.Entities.Role", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("Server.Domain.Entities.Service", b =>
-                {
-                    b.Navigation("BillDetail");
-
-                    b.Navigation("Transaction");
-
-                    b.Navigation("UserService");
                 });
 #pragma warning restore 612, 618
         }

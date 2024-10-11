@@ -12,5 +12,7 @@ namespace Server.Domain.Entities
         public int Status { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
+
+        //Relationship
     }
 }

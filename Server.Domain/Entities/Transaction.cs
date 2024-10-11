@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.Domain.Entities
 {
-    public class Transaction :BaseEntity
+    public class Transaction : BaseEntity
     {
         public Guid UserId { get; set; }
         public Guid? ServiceId { get; set; }
