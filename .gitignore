@@ -4,3 +4,26 @@
 
 /.vs/PetServiceManagementSystem
 /.vs/ProjectEvaluation
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.AssemblyInfo.cs
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.AssemblyInfoInputs.cache
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.csproj.AssemblyReference.cache
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.csproj.CoreCompileInputs.cache
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.csproj.FileListAbsolute.txt
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.sourcelink.json
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.AssemblyInfo.cs
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.AssemblyInfoInputs.cache
+/Server.Application/obj/Debug/net8.0/Server.Application.AssemblyInfo.cs
+/Server.Application/obj/Debug/net8.0/Server.Application.AssemblyInfoInputs.cache
+/Server.Application/obj/Debug/net8.0/Server.Application.csproj.AssemblyReference.cache
+/Server.Application/Server.Application.csproj
+/Server.API/obj/Debug/net8.0/Server.API.AssemblyInfo.cs
+/Server.API/obj/Debug/net8.0/Server.API.AssemblyInfoInputs.cache
+/Server.API/obj/Debug/net8.0/Server.API.csproj.AssemblyReference.cache
+/Server.API/obj/Debug/net8.0/Server.API.csproj.CoreCompileInputs.cache
+/Server.API/obj/Debug/net8.0/Server.API.csproj.FileListAbsolute.txt
+/Server.API/obj/Debug/net8.0/Server.API.dll
+/Server.API/obj/Debug/net8.0/Server.API.pdb
+/Server.API/obj/Debug/net8.0/Server.API.sourcelink.json
+/Server.API/appsettings.json
+/Server.API/obj/Debug/net8.0/apphost.exe
+/Server.API/obj/Debug/net8.0/refint/Server.API.dll
