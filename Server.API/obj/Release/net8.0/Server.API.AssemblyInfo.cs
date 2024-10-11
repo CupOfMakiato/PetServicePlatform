@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Server.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<<< HEAD:Server.API/obj/Release/net8.0/Server.API.AssemblyInfo.cs
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6cef1bf01a874c41a16af0fc13b33cfb5940e5c4")]
+========
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8958f329ce61b6db7cee94963b76778cbb1b6681")]
+>>>>>>>> 105e9ccd21cdc9d9c7346286793a84b0172fa76e:Server.API/obj/Debug/net8.0/Server.API.AssemblyInfo.cs
 [assembly: System.Reflection.AssemblyProductAttribute("Server.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Server.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

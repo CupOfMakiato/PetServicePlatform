@@ -1,11 +1,9 @@
 using Server.API;
 using Server.Application;
+using Server.Domain.Entities;
 using Server.Infrastructure;
-using Server.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 {
     builder.Services
@@ -13,7 +11,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
         .AddApplication()
         .AddInfrastructure(builder.Configuration);
 }
-// Add services to the container.
+
 
 builder.Services.AddControllers();
 
@@ -29,13 +27,21 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pet Service Management Web API v1");
+        c.InjectJavascript("/custom-swagger.js");
+    });
+
 }
+
+app.UseExceptionHandler("/Error");
 
 app.UseCors();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
