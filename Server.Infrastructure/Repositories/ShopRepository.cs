@@ -3,6 +3,7 @@ using Server.Application.Enum;
 using Server.Application.Interfaces;
 using Server.Application.Repositories;
 using Server.Domain.Entities;
+using Server.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

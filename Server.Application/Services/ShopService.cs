@@ -4,6 +4,7 @@ using Server.Application.Interfaces;
 using Server.Application.Repositories;
 using Server.Contracts.DTO.Email;
 using Server.Contracts.DTO.Shop;
+using Server.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,10 @@ namespace Server.Application.Services
             _emailService = emailService;
             _httpContextAccessor = httpContextAccessor;
         }
-
+        public async Task<ShopData> GetShopById(Guid id)
+        {
+            return await _shopRepository.GetShopByIdAsync(id);
+        }
         public async Task ApproveShopAsync(Guid userID)
         {
             var user = await _shopRepository.GetUserByIdAsync(userID);
@@ -47,7 +51,7 @@ namespace Server.Application.Services
             await _emailService.SendApprovalEmailAsync(user.Email);
         }
 
-        public async Task RejectInstructorAsync(ApproveRejectShopDTO rejectDto)
+        public async Task RejectShopAsync(ApproveRejectShopDTO rejectDto)
         {
             var user = await _shopRepository.GetUserByIdAsync(rejectDto.ShopId);
             if (user == null)

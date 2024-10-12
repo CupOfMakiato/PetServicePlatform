@@ -157,7 +157,7 @@ namespace Server.Application.Services
                             <p style='color: #555;'>We regret to inform you that your account registration has been rejected.</p>
                             <p style='color: #555;'>Reason: {reason}</p>
                             <p style='color: #555;'>If you have any questions or need further assistance, please contact our support team.</p>
-                            <p style='color: #555;'>Best regards,<br />Cursus Team</p>
+                            <p style='color: #555;'>Best regards,<br />Pet Setvice Platform</p>
                         </div>
                     </body>
                     </html>"
@@ -179,7 +179,7 @@ namespace Server.Application.Services
                             <h2 style='color: #333;'>Congratulations!</h2>
                             <p style='color: #555;'>Your account has been approved. You can now log in and start using the system.</p>
                             <p style='color: #555;'>Thank you for joining our system.</p>
-                            <p style='color: #555;'>Best regards,<br />Cursus Team</p>
+                            <p style='color: #555;'>Best regards,<br />Pet Setvice Platform</p>
                         </div>
                     </body>
                     </html>"

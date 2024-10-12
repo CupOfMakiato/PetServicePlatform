@@ -11,6 +11,7 @@ using Server.Application.Interfaces;
 using Server.Application.Repositories;
 using Server.Application.Utils;
 using Server.Contracts.DTO.Auth;
+using Server.Contracts.DTO.Shop;
 using Server.Contracts.DTO.User;
 using Server.Domain.Entities;
 using Server.Infrastructure.Services;
@@ -31,7 +32,7 @@ namespace Server.Application.Services
         private readonly ITemporaryStoreService _temporaryStoreService;
         private readonly IShopRepository _shopRepository;
 
-        public AuthService(IAuthRepository authRepository, TokenGenerators tokenGenerators, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor, IEmailService emailService, IConfiguration configuration, RedisService redisService, IOtpService otpService, IMapper mapper, IShopRepository shopRepository)
+        public AuthService(IAuthRepository authRepository, TokenGenerators tokenGenerators, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor, IEmailService emailService, IConfiguration configuration, RedisService redisService, IOtpService otpService, IMapper mapper, IShopRepository shopRepository, ITemporaryStoreService temporaryStoreService)
         {
             _authRepository = authRepository;
             _tokenGenerators = tokenGenerators;
@@ -43,6 +44,7 @@ namespace Server.Application.Services
             _otpService = otpService;
             _mapper = mapper;
             _shopRepository = shopRepository;
+            _temporaryStoreService = temporaryStoreService;
         }
 
         public async Task<Authenticator> LoginAsync(LoginDTO loginDTO)
@@ -91,6 +93,7 @@ namespace Server.Application.Services
             }
         }
 
+        //Register User Account
         public async Task RegisterUserAsync(UserRegistrationDTO userRegistrationDto)
         {
             try
@@ -135,6 +138,43 @@ namespace Server.Application.Services
                 // General exception handling
                 throw new ApplicationException("An error occurred while registering the user.", ex);
             }
+        }
+
+        //Register Shop Account
+        public async Task RegisterInstructorAsync(ShopRegisterDTO shopRegisterDTO)
+        {
+            var existingUser = await _userRepository.FindByEmail(shopRegisterDTO.Email);
+            if(existingUser != null)
+            {
+                if (existingUser.Status == UserStatus.Rejected && existingUser.IsVerified)
+                {
+                    var otp = GenerateOtp();
+                    existingUser.Otp = otp;
+                    existingUser.OtpExpiryTime = DateTime.UtcNow.AddMinutes(10);
+                    await _emailService.SendOtpEmailAsync(existingUser.Email, otp);
+                    await _otpService.StoreOtpAsync(existingUser.Id, otp, TimeSpan.FromMinutes(10));
+                    return;
+                }
+                else
+                {
+                    throw new Exception("User with this email already exists.");
+                }
+            }
+            var newOtp = GenerateOtp();
+            var user = new ApplicationUser
+            {
+                FullName = shopRegisterDTO.FullName,
+                Email = shopRegisterDTO.Email,
+                Status = UserStatus.Pending,
+                AvatarUrl = shopRegisterDTO.AvatarUrl,
+                Password = HashPassword(shopRegisterDTO.Password),
+                RoleCodeId = 3,
+                Otp = newOtp,
+                OtpExpiryTime = DateTime.UtcNow.AddMinutes(10)
+            };
+            await _userRepository.AddAsync(user);
+            await _emailService.SendOtpEmailAsync(user.Email, newOtp);
+            await _otpService.StoreOtpAsync(user.Id, newOtp, TimeSpan.FromMinutes(10));
         }
 
         public async Task<Authenticator> RefreshToken(string token)
@@ -296,7 +336,6 @@ namespace Server.Application.Services
                     await _shopRepository.AddAsync(shopData);
                 }
             }
-
             return true;
         }
     }

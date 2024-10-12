@@ -1,5 +1,6 @@
 ﻿using Server.Contracts.Abstractions.Shared;
 using Server.Contracts.DTO.Auth;
+using Server.Contracts.DTO.Shop;
 using Server.Contracts.DTO.User;
 using Server.Domain.Entities;
 using System;
@@ -22,6 +23,8 @@ namespace Server.Application.Interfaces
         Task<ApplicationUser> GetByVerificationToken(string token);
         Task<bool> VerifyOtpAsync(string email, string otp);
 
+        //REGISTER INSTRUCTOR
+        Task RegisterInstructorAsync(ShopRegisterDTO shopRegisterDTO);
         Task<bool> VerifyOtpAndCompleteRegistrationAsync(string email, string otp);
         //Google
         /*        Task<Result<object>> UserCompleteSignUpByGoogle(SignupGoogleRequest userRegistrationDto);*/

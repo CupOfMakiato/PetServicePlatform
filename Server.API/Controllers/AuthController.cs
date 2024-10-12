@@ -6,6 +6,7 @@ using Server.Contracts.Abstractions.Shared;
 using Server.Contracts.DTO.Auth;
 using Server.Contracts.DTO.Shop;
 using Server.Contracts.DTO.User;
+using Server.Contracts.Enum;
 using Server.Domain.Entities;
 
 namespace Server.API.Controllers
@@ -123,6 +124,24 @@ namespace Server.API.Controllers
         }
 
         //Register Shop
+        [HttpPost("user/register/shop")]
+        public async Task<IActionResult> RegisterInstructor([FromForm] ShopRegisterDTO shopRegisterDTO)
+        {
+            // Check if the user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                return BadRequest(new { message = "You are already logged in and cannot register again." });
+            }
+            try
+            {
+                await _authService.RegisterInstructorAsync(shopRegisterDTO);
+                return Ok(new { Message = "Registration successful. Please check your email for the OTP." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
 
         [HttpPost("user/otp/verify")]
         public async Task<IActionResult> VerifyOtp(OtpVerificationDTO otpVerificationDto)
@@ -160,6 +179,15 @@ namespace Server.API.Controllers
             {
                 return BadRequest(new { Message = ex.Message });
             }
+        }
+        [HttpGet("providers/cards")]
+        public IActionResult GetCardProviders()
+        {
+            var cardProviders = Enum.GetValues(typeof(CardProviderEnum))
+                                    .Cast<CardProviderEnum>()
+                                    .Select(e => new { Id = (int)e, Name = e.ToString() })
+                                    .ToList();
+            return Ok(cardProviders);
         }
     }
 }

@@ -7,6 +7,7 @@ using Server.Application;
 using Server.Infrastructure.Repositories;
 using Server.Infrastructure.Services;
 using Server.Application.Services;
+using Server.Infrastructure.Data;
 
 namespace Server.Infrastructure;
 

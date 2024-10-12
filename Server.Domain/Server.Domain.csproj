@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Server.Contracts\Server.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

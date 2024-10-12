@@ -12,7 +12,7 @@ public class ApplicationUser : BaseEntity
     public string? RefreshToken { get; set; }
     public UserStatus? Status { get; set; }
     public int RoleCodeId { get; set; }
-    public string Otp {  get; set; }
+    public string? Otp {  get; set; }
     public bool IsVerified { get; set; } = false;
     public DateTime? OtpExpiryTime { get; set; }
     public string? VerificationToken { get; set; }

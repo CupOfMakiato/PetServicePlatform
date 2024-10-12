@@ -14,7 +14,7 @@ public class TemporaryStoreService : ITemporaryStoreService
     {
         _cache = cache;
     }
-    public async Task StoreInstructorRegistrationAsync(Guid userId, ShopRegisterDTO registrationDto, TimeSpan expiration)
+    public async Task StoreShopRegistrationAsync(Guid userId, ShopRegisterDTO registrationDto, TimeSpan expiration)
     {
         _cache.Set(userId, registrationDto, expiration);
         await Task.CompletedTask;

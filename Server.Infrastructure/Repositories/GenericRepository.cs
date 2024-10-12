@@ -3,6 +3,7 @@ using Server.Application.Repositories;
 using Server.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Server.Application.Interfaces;
+using Server.Infrastructure.Data;
 
 namespace Server.Infrastructure.Repositories;
 

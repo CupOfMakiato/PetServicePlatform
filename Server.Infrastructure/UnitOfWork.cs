@@ -1,5 +1,6 @@
 ﻿using Server.Application;
 using Server.Application.Repositories;
+using Server.Infrastructure.Data;
 using Server.Infrastructure.Repositories;
 
 namespace Server.Infrastructure;

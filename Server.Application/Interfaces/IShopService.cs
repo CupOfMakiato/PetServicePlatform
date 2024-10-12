@@ -1,5 +1,6 @@
 ﻿using Server.Contracts.DTO.Email;
 using Server.Contracts.DTO.Shop;
+using Server.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,10 @@ namespace Server.Application.Interfaces
 {
     public interface IShopService
     {
+        Task<ShopData> GetShopById(Guid id);
         //APPROVE - REJECT SHOP
         Task ApproveShopAsync(Guid userID);
-        Task RejectInstructorAsync(ApproveRejectShopDTO rejectDto);
+        Task RejectShopAsync(ApproveRejectShopDTO rejectDto);
         //GET PENDING SHOP
         Task<List<PendingShopDTO>> GetPendingShopsAsync();
 
