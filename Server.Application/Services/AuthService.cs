@@ -338,5 +338,153 @@ namespace Server.Application.Services
             }
             return true;
         }
+
+        //PASSWORD
+        public async Task ChangePasswordAsync(string email, ChangePasswordDTO changePasswordDto)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserByEmail(email);
+
+                if (user == null || !BCrypt.Net.BCrypt.Verify(changePasswordDto.OldPassword, user.Password))
+                {
+                    throw new ArgumentException("Invalid old password.");
+                }
+
+                if (changePasswordDto.NewPassword == changePasswordDto.OldPassword)
+                {
+                    throw new InvalidOperationException("New password cannot be the same as the old password.");
+                }
+
+                if (!ValidatePassword(changePasswordDto.NewPassword))
+                {
+                    throw new ArgumentException("New password must contain at least one uppercase letter and one special character.");
+                }
+
+                user.Password = HashPassword(changePasswordDto.NewPassword);
+                await _userRepository.UpdateAsync(user);
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle cases where the provided password details are invalid
+                throw new ApplicationException("Password change failed due to invalid input.", ex);
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Handle cases where the new password is the same as the old password
+                throw new ApplicationException("Password change failed due to operational constraints.", ex);
+            }
+            catch (Exception ex)
+            {
+                // General exception handling
+                throw new ApplicationException("An error occurred while changing the password.", ex);
+            }
+        }
+        private bool ValidatePassword(string password)
+        {
+            bool hasUpperCase = password.Any(char.IsUpper);
+            bool hasSpecialChar = password.Any(ch => !char.IsLetterOrDigit(ch));
+            bool isValidLength = password.Length >= 6;
+
+            return hasUpperCase && hasSpecialChar && isValidLength;
+        }
+
+        public async Task RequestPasswordResetAsync(ForgotPasswordRequestDTO forgotPasswordRequestDto)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserByEmail(forgotPasswordRequestDto.EmailOrPhoneNumber);
+
+                if (user == null || !user.IsVerified)
+                {
+                    throw new KeyNotFoundException("User not found or not activated.");
+                }
+
+                var token = GenerateResetToken();
+                user.ResetToken = token;
+                user.ResetTokenExpiry = DateTime.UtcNow.AddHours(1);
+
+                await _userRepository.UpdateAsync(user);
+
+                //var resetLink = $"{_configuration["AppSettings:FrontendUrl"]}/reset-password?token={token}"; -- FRONT-END ONLY
+
+                await _emailService.SendEmailAsync(new EmailDTO
+                {
+                    To = user.Email,
+                    Subject = "Password Reset Request",
+                    //Body = $"Please reset your password by clicking on the following link: <a href='{resetLink}'>Reset Password</a>" -- FRONT-END ONLY
+
+                    Body = @$"Your token for resetting password is: {token}"
+                });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                // Handle cases where the user is not found or not activated
+                throw new ApplicationException("Password reset request failed due to user not found or not activated.", ex);
+            }
+            catch (Exception ex)
+            {
+                // General exception handling
+                throw new ApplicationException("An error occurred while requesting the password reset.", ex);
+            }
+        }
+        public async Task ResetPasswordAsync(ResetPasswordDTO resetPasswordDto)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserByResetToken(resetPasswordDto.Token);
+
+                if (user == null || user.ResetTokenExpiry < DateTime.UtcNow)
+                {
+                    throw new ArgumentException("Invalid or expired token.");
+                }
+
+                if (!ValidatePassword(resetPasswordDto.NewPassword))
+                {
+                    throw new ArgumentException("New password must contain at least one uppercase letter, one special character, and be at least 6 characters long.");
+                }
+
+                user.Password = HashPassword(resetPasswordDto.NewPassword);
+                user.ResetToken = null;
+                user.ResetTokenExpiry = null;
+
+                await _userRepository.UpdateAsync(user);
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle cases where the token is invalid or the new password does not meet requirements
+                throw new ApplicationException("Password reset failed due to invalid input.", ex);
+            }
+            catch (Exception ex)
+            {
+                // General exception handling
+                throw new ApplicationException("An error occurred while resetting the password.", ex);
+            }
+        }
+        public async Task<string> GetIdFromToken()
+        {
+            var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            if (token == null)
+                throw new Exception("Token not found");
+
+            var jwtToken = new JwtSecurityTokenHandler().ReadToken(token) as JwtSecurityToken;
+
+            if (jwtToken == null)
+                throw new Exception("Invalid token");
+
+            var userId = jwtToken.Claims.First(claim => claim.Type == "id").Value;
+
+            return userId;
+        }
+        private string GenerateResetToken()
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                var byteArray = new byte[32];
+                rng.GetBytes(byteArray);
+                return Convert.ToBase64String(byteArray);
+            }
+        }
     }
 }

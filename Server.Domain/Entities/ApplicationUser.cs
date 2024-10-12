@@ -16,6 +16,8 @@ public class ApplicationUser : BaseEntity
     public bool IsVerified { get; set; } = false;
     public DateTime? OtpExpiryTime { get; set; }
     public string? VerificationToken { get; set; }
+    public string? ResetToken { get; set; }
+    public DateTime? ResetTokenExpiry { get; set; }
     public bool? IsStaff { get; set; }
     //public string? Type { get; set; }
     [ForeignKey("RoleCodeId")]

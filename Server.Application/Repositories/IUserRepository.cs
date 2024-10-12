@@ -19,5 +19,8 @@ namespace Server.Application.Repositories
         Task<ApplicationUser> GetAllUserById(Guid id);
         Task<List<ApplicationUser>> GetUsersByRole(int role);
         Task<ApplicationUser> GetUserByVerificationToken(string token);
+
+        //Forget Password
+        Task<ApplicationUser> GetUserByResetToken(string resetToken);
     }
 }

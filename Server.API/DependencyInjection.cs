@@ -69,6 +69,7 @@ public static class DependencyInjection
                 }
             });
         });
+
         services.AddAuthorization(options =>
         {
             options.AddPolicy("UserPolicy", policy =>

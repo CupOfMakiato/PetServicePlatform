@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Application.Enum;
 using Server.Application.Interfaces;
@@ -8,6 +9,7 @@ using Server.Contracts.DTO.Shop;
 using Server.Contracts.DTO.User;
 using Server.Contracts.Enum;
 using Server.Domain.Entities;
+using System.Security.Claims;
 
 namespace Server.API.Controllers
 {
@@ -180,6 +182,65 @@ namespace Server.API.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Changes the user's password.
+        /// </summary>
+        [HttpPost("user/password/change")]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword([FromForm] ChangePasswordDTO changePasswordDto)
+        {
+            try
+            {
+                var email = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (email == null)
+                {
+                    return Unauthorized(new { Message = "Invalid token." });
+                }
+
+                await _authService.ChangePasswordAsync(email, changePasswordDto);
+                return Ok(new { Message = "Password changed successfully. Please log in again." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Requests a password reset link to be sent to the user's email.
+        /// </summary>
+        [HttpPost("user/password/forgot")]
+        public async Task<IActionResult> ForgotPassword([FromForm] ForgotPasswordRequestDTO forgotPasswordRequestDto)
+        {
+            try
+            {
+                await _authService.RequestPasswordResetAsync(forgotPasswordRequestDto);
+                return Ok(new { Message = "Password reset link sent successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Resets the user's password.
+        /// </summary>
+        [HttpPost("user/password/reset")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO resetPasswordDto)
+        {
+            try
+            {
+                await _authService.ResetPasswordAsync(resetPasswordDto);
+                return Ok(new { Message = "Password reset successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
         [HttpGet("providers/cards")]
         public IActionResult GetCardProviders()
         {

@@ -13,6 +13,7 @@ namespace Server.Application.Interfaces
 {
     public interface IAuthService
     {
+        Task<string> GetIdFromToken();
         //LOGIN
         Task<Authenticator> LoginAsync(LoginDTO loginDTO);
         Task<Authenticator> RefreshToken(string token);
@@ -29,10 +30,10 @@ namespace Server.Application.Interfaces
         //Google
         /*        Task<Result<object>> UserCompleteSignUpByGoogle(SignupGoogleRequest userRegistrationDto);*/
         //CHANGE PASSWORD 
-        /*        Task ChangePasswordAsync(string email, ChangePasswordDTO changePasswordDto);*/
+        Task ChangePasswordAsync(string email, ChangePasswordDTO changePasswordDto);
 
         //FORGOT PASSWORD
-        /*        Task RequestPasswordResetAsync(ForgotPasswordRequestDTO forgotPasswordRequestDto);
-                Task ResetPasswordAsync(ResetPasswordDTO resetPasswordDto);*/
+        Task RequestPasswordResetAsync(ForgotPasswordRequestDTO forgotPasswordRequestDto);
+        Task ResetPasswordAsync(ResetPasswordDTO resetPasswordDto);
     }
 }

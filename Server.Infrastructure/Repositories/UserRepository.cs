@@ -74,5 +74,9 @@ namespace Server.Infrastructure.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.VerificationToken == token);
         }
+        public async Task<ApplicationUser> GetUserByResetToken(string resetToken)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.ResetToken == resetToken);
+        }
     }
 }

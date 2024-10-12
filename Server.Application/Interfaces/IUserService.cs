@@ -14,5 +14,6 @@ namespace Server.Application.Interfaces
         Task UpdateUserAsync(ApplicationUser user);
 
         Task<UserDTO> GetUserById(Guid id);
+        Task<ApplicationUser> GetCurrentUserById();
     }
 }
