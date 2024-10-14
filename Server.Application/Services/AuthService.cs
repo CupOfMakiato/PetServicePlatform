@@ -100,10 +100,10 @@ namespace Server.Application.Services
                     Email = userRegistrationDto.Email,
                     Password = HashPassword(userRegistrationDto.Password),
                     Balance = 0,
-                    AvatarUrl = null,
+                    AvatarUrl = "",
                     Introduction = userRegistrationDto.Introduction,
                     Active = false,
-                    //IsStaff = false,
+                    IsStaff = false,
                     RoleCodeId = 2, 
                     CreationDate = DateTime.Now,
                     
