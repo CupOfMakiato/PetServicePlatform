@@ -26,19 +26,23 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+
+    app.UseSwaggerUI();
+}
+else
+{
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pet Service Management Web API v1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
         c.InjectJavascript("/custom-swagger.js");
+        c.RoutePrefix = string.Empty;
     });
-
 }
 
 app.UseExceptionHandler("/Error");
 
 app.UseCors();
-
+app.UseSwagger();   
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
