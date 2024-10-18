@@ -1,5 +1,78 @@
 [
   {
+    "ContainingType": "Server.API.Controllers.AdminController",
+    "Method": "ApproveInstructor",
+    "RelativePath": "api/Admin/shops/{id}/approve",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AdminController",
+    "Method": "ChangeStatusInstructor",
+    "RelativePath": "api/Admin/shops/{id}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AdminController",
+    "Method": "GetPendingInstructors",
+    "RelativePath": "api/Admin/shops/pending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AdminController",
+    "Method": "RejectInstructor",
+    "RelativePath": "api/Admin/shops/reject",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rejectDto",
+        "Type": "Server.Contracts.DTO.Shop.ApproveRejectShopDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AuthController",
+    "Method": "GetCardProviders",
+    "RelativePath": "api/Auth/providers/cards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Server.API.Controllers.AuthController",
     "Method": "RefreshToken",
     "RelativePath": "api/Auth/token/refresh",
@@ -49,6 +122,131 @@
   },
   {
     "ContainingType": "Server.API.Controllers.AuthController",
+    "Method": "VerifyOtp",
+    "RelativePath": "api/Auth/user/otp/verify",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "otpVerificationDto",
+        "Type": "Server.Contracts.DTO.Auth.OtpVerificationDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AuthController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Auth/user/password/change",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "OldPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NewPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AuthController",
+    "Method": "ForgotPassword",
+    "RelativePath": "api/Auth/user/password/forgot",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmailOrPhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AuthController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Auth/user/password/reset",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPasswordDto",
+        "Type": "Server.Contracts.DTO.User.ResetPasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AuthController",
+    "Method": "RegisterInstructor",
+    "RelativePath": "api/Auth/user/register/shop",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TaxNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CardNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CardName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CardProvider",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvatarUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Introduction",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.API.Controllers.AuthController",
     "Method": "RegisterUser",
     "RelativePath": "api/Auth/user/register/user",
     "HttpMethod": "POST",
@@ -62,6 +260,11 @@
       },
       {
         "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvatarUrl",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -549,6 +752,16 @@
         "StatusCode": 404
       }
     ]
+  },
+  {
+    "ContainingType": "Server.API.Controllers.UserController",
+    "Method": "GetCurrentUserById",
+    "RelativePath": "api/User/get-current-user",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Server.API.Controllers.WeatherForecastController",

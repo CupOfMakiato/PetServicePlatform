@@ -3,6 +3,7 @@ using Server.Application;
 using Server.Application.Interfaces;
 using Server.Application.Repositories;
 using Server.Application.Services;
+using Server.Contracts.Enum;
 using Server.Infrastructure;
 using Server.Infrastructure.Repositories;
 
@@ -12,16 +13,25 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApi(this IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler =
+                    System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.DefaultIgnoreCondition =
+                    System.Text.Json.Serialization.JsonIgnoreCondition.Never;
+                options.JsonSerializerOptions.Converters.Add(
+                    new System.Text.Json.Serialization.JsonStringEnumConverter()); // Add this line to handle enums as strings in JSON
+            });
         services.AddSignalR();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddScoped<IClaimsService, ClaimsService>();
         services.AddHttpContextAccessor();
-
+        services.AddControllersWithViews();
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Cursus Web API", Version = "v1" });
+            c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Pet Service Platform Web App API", Version = "v1" });
 
             c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
             {
@@ -46,6 +56,28 @@ public static class DependencyInjection
                 }
             });
 
+
+            c.MapType<CardProviderEnum>(() => new Microsoft.OpenApi.Models.OpenApiSchema
+            {
+                Type = "string",
+                Enum = new List<Microsoft.OpenApi.Any.IOpenApiAny>
+                {
+                    new Microsoft.OpenApi.Any.OpenApiString(CardProviderEnum.Visa.ToString()),
+                    new Microsoft.OpenApi.Any.OpenApiString(CardProviderEnum.MasterCard.ToString()),
+                    new Microsoft.OpenApi.Any.OpenApiString(CardProviderEnum.AmericanExpress.ToString()),
+                    new Microsoft.OpenApi.Any.OpenApiString(CardProviderEnum.Discover.ToString())
+                }
+            });
+        });
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("UserPolicy", policy =>
+                policy.RequireClaim(System.Security.Claims.ClaimTypes.Role, "User"));
+            options.AddPolicy("AdminPolicy", policy =>
+                policy.RequireClaim(System.Security.Claims.ClaimTypes.Role, "Admin"));
+            options.AddPolicy("ShopPolicy", policy =>
+                policy.RequireClaim(System.Security.Claims.ClaimTypes.Role, "Shop"));
         });
 
         return services;

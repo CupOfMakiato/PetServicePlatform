@@ -8,6 +8,7 @@ public class UserRegistrationDTO
     [Required]
     [EmailAddress(ErrorMessage = "Invalid email address.")]
     public string Email { get; set; }
+    public string AvatarUrl { get; set; }
     [Required]
     [PasswordValidation]
     public string Password { get; set; }

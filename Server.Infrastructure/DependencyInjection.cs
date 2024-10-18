@@ -7,6 +7,7 @@ using Server.Application;
 using Server.Infrastructure.Repositories;
 using Server.Infrastructure.Services;
 using Server.Application.Services;
+using Server.Infrastructure.Data;
 
 namespace Server.Infrastructure;
 
@@ -24,10 +25,14 @@ public static class DependencyInjection
         services.AddScoped<IFeedbackService, FeedbackService>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IOtpService, OtpService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ITemporaryStoreService, TemporaryStoreService>();
+        services.AddScoped<IShopService, ShopService>();
         services.AddScoped<PasswordService>();
         services.AddScoped<RedisService>();
         services.AddScoped<OtpService>();
         services.AddScoped<EmailService>();
+        services.AddMemoryCache();
 
         // Repo
         services.AddScoped<IUserRepository, UserRepository>();
@@ -35,6 +40,7 @@ public static class DependencyInjection
         services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+        services.AddScoped<IShopRepository, ShopRepository>();
 
 
         #region Configuration

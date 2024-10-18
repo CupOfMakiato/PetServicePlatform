@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj": {}
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\Server.Application.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
         "projectName": "Server.Application",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,11 +33,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
               },
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj"
               }
             }
           }
@@ -61,17 +65,29 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
-            "FluentValidation": {
+            "FirebaseAdmin": {
               "target": "Package",
-              "version": "[11.10.0, )"
+              "version": "[3.0.1, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
+            },
+            "Google.Cloud.Storage.V1": {
+              "target": "Package",
+              "version": "[4.10.0, )"
             },
             "MailKit": {
               "target": "Package",
               "version": "[4.8.0, )"
             },
-            "Microsoft.AspNetCore.Http.Abstractions": {
+            "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -96,10 +112,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.8, )"
-            },
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[8.0.2, )"
             },
             "MimeKit": {
               "target": "Package",
@@ -130,17 +142,21 @@
         }
       }
     },
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj",
         "projectName": "Server.Contracts",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -203,17 +219,21 @@
         }
       }
     },
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj",
         "projectName": "Server.Domain",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -227,7 +247,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -272,17 +296,21 @@
         }
       }
     },
-    "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj": {
+    "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj",
         "projectName": "Server.Infrastructure",
-        "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Infrastructure\\obj\\",
+        "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\Server.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
+        "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -297,14 +325,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\Server.Application.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\Server.Application.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj"
               },
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
-              },
-              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
-                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj"
+              "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
+                "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
               }
             }
           }

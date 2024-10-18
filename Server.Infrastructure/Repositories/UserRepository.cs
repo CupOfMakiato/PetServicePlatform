@@ -2,6 +2,7 @@
 using Server.Application.Interfaces;
 using Server.Application.Repositories;
 using Server.Domain.Entities;
+using Server.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,9 +60,9 @@ namespace Server.Infrastructure.Repositories
             return await _context.Users.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public Task<ApplicationUser> GetUserById(Guid userId)
+        public async Task<ApplicationUser> GetUserById(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<List<ApplicationUser>> GetUsersByRole(int role)
@@ -72,6 +73,14 @@ namespace Server.Infrastructure.Repositories
         public Task<ApplicationUser> GetUserByIdWithServiceUsed(Guid userId)
         {
             return _context.Users.Include(u => u.UserSerive).FirstOrDefaultAsync(u => u.Id == userId);
+        }
+        public async Task<ApplicationUser> GetUserByVerificationToken(string token)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.VerificationToken == token);
+        }
+        public async Task<ApplicationUser> GetUserByResetToken(string resetToken)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.ResetToken == resetToken);
         }
     }
 }
