@@ -418,3 +418,35 @@ CoverageReport/
 /.vs/ProjectEvaluation/
 
 
+/Server.Infrastructure/obj/Release/net8.0/Server.Infrastructure.AssemblyInfo.cs
+/Server.API/obj/Release/net8.0/Server.API.AssemblyInfo.cs
+/Server.Application/obj/Release/net8.0/Server.Application.AssemblyInfo.cs
+/Server.Infrastructure/bin/Debug/net8.0/Server.Contracts.pdb
+/Server.Domain/bin/Debug/net8.0/Server.Contracts.dll
+/Server.Domain/bin/Debug/net8.0/Server.Contracts.pdb
+/Server.Contracts/obj/Release/net8.0/Server.Contracts.AssemblyInfo.cs
+/Server.Contracts/obj/Release/net8.0/Server.Contracts.AssemblyInfoInputs.cache
+/Server.Contracts/obj/Debug/net8.0/refint/Server.Contracts.dll
+/Server.Contracts/obj/Debug/net8.0/ref/Server.Contracts.dll
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.dll
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.pdb
+/Server.Contracts/bin/Debug/net8.0/Server.Contracts.dll
+/Server.Contracts/bin/Debug/net8.0/Server.Contracts.pdb
+/Server.Application/obj/Release/net8.0/Server.Application.assets.cache
+/Server.Application/obj/Release/net8.0/Server.Application.csproj.AssemblyReference.cache
+/Server.Application/obj/Release/net8.0/Server.Application.sourcelink.json
+/Server.Application/obj/Release/net8.0/Server.Application.AssemblyInfoInputs.cache
+/Server.Application/obj/Release/net8.0/Server.Application.csproj.CoreCompileInputs.cache
+/Server.Domain/obj/Release/net8.0/Server.Domain.AssemblyInfo.cs
+/Server.API/obj/Release/net8.0/Server.API.csproj.CoreCompileInputs.cache
+/Server.API/obj/Release/net8.0/Server.API.sourcelink.json
+/Server.API/obj/Release/net8.0/Server.API.assets.cache
+/Server.Application/bin/Debug/net8.0/Server.Contracts.dll
+/Server.Domain/obj/Release/net8.0/Server.Domain.AssemblyInfoInputs.cache
+/Server.Domain/obj/Release/net8.0/Server.Domain.csproj.CoreCompileInputs.cache
+/Server.Domain/obj/Release/net8.0/Server.Domain.csproj.FileListAbsolute.txt
+/Server.Infrastructure/bin/Debug/net8.0/Server.Contracts.dll
+/Server.Application/bin/Debug/net8.0/Server.Contracts.pdb
+/Server.Domain/obj/Release/net8.0/Server.Domain.sourcelink.json
+/Server.API/obj/Release/net8.0/Server.API.AssemblyInfoInputs.cache
+/Server.API/obj/Release/net8.0/Server.API.csproj.AssemblyReference.cache
