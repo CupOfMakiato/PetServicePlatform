@@ -61,17 +61,33 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.10.0, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.68.0, )"
+            },
+            "Google.Cloud.Storage.V1": {
+              "target": "Package",
+              "version": "[4.10.0, )"
             },
             "MailKit": {
               "target": "Package",
               "version": "[4.8.0, )"
             },
-            "Microsoft.AspNetCore.Http.Abstractions": {
+            "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -96,10 +112,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.8, )"
-            },
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[8.0.2, )"
             },
             "MimeKit": {
               "target": "Package",
@@ -227,7 +239,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
+                "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

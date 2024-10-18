@@ -8,7 +8,7 @@ namespace Server.Application.Interfaces
 {
     public interface IOtpService
     {
-        Task StoreOtpAsync(int userId, string otp, TimeSpan expiration);
-        Task<bool> ValidateOtpAsync(int userId, string otp);
+        Task StoreOtpAsync(Guid userId, string otp, TimeSpan expiration);
+        Task<bool> ValidateOtpAsync(Guid userId, string otp);
     }
 }

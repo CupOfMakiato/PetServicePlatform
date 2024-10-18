@@ -53,3 +53,7 @@ D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Dom
 D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.pdb
 D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.genruntimeconfig.cache
 D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\ref\Server.Domain.dll
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Contracts.dll
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\bin\Debug\net8.0\Server.Contracts.pdb
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.Domain.csproj.AssemblyReference.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.Domain\obj\Debug\net8.0\Server.D.83D9AE4D.Up2Date

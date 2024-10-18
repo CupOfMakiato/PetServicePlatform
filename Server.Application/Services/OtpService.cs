@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 public class OtpService : IOtpService
 {
-    private readonly ConcurrentDictionary<int, OtpEntry> _otpStore = new ConcurrentDictionary<int, OtpEntry>();
+    private readonly ConcurrentDictionary<Guid, OtpEntry> _otpStore = new ConcurrentDictionary<Guid, OtpEntry>();
 
-    public async Task StoreOtpAsync(int userId, string otp, TimeSpan expiration)
+    public async Task StoreOtpAsync(Guid userId, string otp, TimeSpan expiration)
     {
         var otpEntry = new OtpEntry
         {
@@ -23,7 +23,7 @@ public class OtpService : IOtpService
         await Task.CompletedTask;
     }
 
-    public async Task<bool> ValidateOtpAsync(int userId, string otp)
+    public async Task<bool> ValidateOtpAsync(Guid userId, string otp)
     {
         if (_otpStore.TryGetValue(userId, out var otpEntry))
         {

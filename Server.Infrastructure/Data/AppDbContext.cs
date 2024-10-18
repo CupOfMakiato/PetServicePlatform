@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Server.Application.Enum;
+using Server.Contracts.Enum;
 using Server.Domain.Entities;
 
-namespace Server.Infrastructure;
+namespace Server.Infrastructure.Data;
 
 public class AppDbContext : DbContext
 {
@@ -23,6 +25,7 @@ public class AppDbContext : DbContext
     public DbSet<BillDetail> BillDetail { get; set; }
     public DbSet<UserService> UserService { get; set; }
     public DbSet<ApplicationUser> Users { get; set; }
+    public DbSet<ShopData> ShopDatas { get; set; }
 
     #endregion
 
@@ -102,6 +105,25 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
         modelBuilder.Entity<UserService>()
             .HasKey(r => new { r.UserId, r.ServiceId });
+
+        // ShopData
+        // User and InstructorData relationship
+        modelBuilder.Entity<ShopData>()
+            .HasOne(i => i.User)
+            .WithOne(u => u.ShopData)
+            .HasForeignKey<ShopData>(i => i.UserId);
+
+        modelBuilder.Entity<ShopData>()
+            .Property(s => s.CardProvider)
+            .HasConversion(v => v.ToString(), v => (CardProviderEnum)Enum.Parse(typeof(CardProviderEnum), v));
+
+        //User
+        modelBuilder.Entity<ApplicationUser>()
+        .Property(u => u.Status)
+        .HasConversion(
+            v => v.ToString(),            // Convert enum to string when saving to DB
+            v => (UserStatus)Enum.Parse(typeof(UserStatus), v) // Convert string to enum when reading from DB
+        );
     }
 
 }
