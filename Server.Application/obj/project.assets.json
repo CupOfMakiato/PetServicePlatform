@@ -106,6 +106,19 @@
           }
         }
       },
+      "FluentValidation/11.10.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Google.Api.Gax/4.8.0": {
         "type": "package",
         "dependencies": {
@@ -1966,6 +1979,31 @@
         "lib/net6.0/FirebaseAdmin.xml",
         "lib/netstandard2.0/FirebaseAdmin.dll",
         "lib/netstandard2.0/FirebaseAdmin.xml"
+      ]
+    },
+    "FluentValidation/11.10.0": {
+      "sha512": "qsJGSJDdZ8qiG+lVJ70PZfJHcEdq8UQZ/tZDXoj78/iHKG6lVKtMJsD11zyyv/IPc7rwqGqnFoFLTNzpo3IPYg==",
+      "type": "package",
+      "path": "fluentvalidation/11.10.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fluent-validation-icon.png",
+        "fluentvalidation.11.10.0.nupkg.sha512",
+        "fluentvalidation.nuspec",
+        "lib/net5.0/FluentValidation.dll",
+        "lib/net5.0/FluentValidation.xml",
+        "lib/net6.0/FluentValidation.dll",
+        "lib/net6.0/FluentValidation.xml",
+        "lib/net7.0/FluentValidation.dll",
+        "lib/net7.0/FluentValidation.xml",
+        "lib/net8.0/FluentValidation.dll",
+        "lib/net8.0/FluentValidation.xml",
+        "lib/netstandard2.0/FluentValidation.dll",
+        "lib/netstandard2.0/FluentValidation.xml",
+        "lib/netstandard2.1/FluentValidation.dll",
+        "lib/netstandard2.1/FluentValidation.xml"
       ]
     },
     "Google.Api.Gax/4.8.0": {
@@ -4716,6 +4754,7 @@
       "AutoMapper >= 13.0.1",
       "BCrypt.Net-Next >= 4.0.3",
       "FirebaseAdmin >= 3.0.1",
+      "FluentValidation >= 11.10.0",
       "Google.Apis.Auth >= 1.68.0",
       "Google.Cloud.Storage.V1 >= 4.10.0",
       "MailKit >= 4.8.0",
@@ -4733,24 +4772,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ungca\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\nguye\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
+      "projectUniqueName": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
       "projectName": "Server.Application",
-      "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
-      "packagesPath": "C:\\Users\\ungca\\.nuget\\packages\\",
-      "outputPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Application\\obj\\",
+      "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\Server.Application.csproj",
+      "packagesPath": "C:\\Users\\nguye\\.nuget\\packages\\",
+      "outputPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Application\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ungca\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\nguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4765,11 +4799,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
-              "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
+            "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj": {
+              "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Contracts\\Server.Contracts.csproj"
             },
-            "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
-              "projectPath": "C:\\Learning\\SWD392\\Project\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj"
+            "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj": {
+              "projectPath": "D:\\SWD392\\Projects\\PetServiceManagementSystem\\main\\PetServicePlatform\\Server.Domain\\Server.Domain.csproj"
             }
           }
         }
@@ -4800,6 +4834,10 @@
           "FirebaseAdmin": {
             "target": "Package",
             "version": "[3.0.1, )"
+          },
+          "FluentValidation": {
+            "target": "Package",
+            "version": "[11.10.0, )"
           },
           "Google.Apis.Auth": {
             "target": "Package",

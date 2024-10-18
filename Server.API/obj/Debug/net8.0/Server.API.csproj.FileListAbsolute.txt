@@ -1,0 +1,9 @@
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.csproj.AssemblyReference.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.AssemblyInfoInputs.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.AssemblyInfo.cs
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.csproj.CoreCompileInputs.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.MvcApplicationPartsAssemblyInfo.cs
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.MvcApplicationPartsAssemblyInfo.cache
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.sourcelink.json
+D:\SWD392\Projects\PetServiceManagementSystem\main\PetServicePlatform\Server.API\obj\Debug\net8.0\Server.API.pdb

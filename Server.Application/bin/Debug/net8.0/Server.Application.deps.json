@@ -11,6 +11,7 @@
           "AutoMapper": "13.0.1",
           "BCrypt.Net-Next": "4.0.3",
           "FirebaseAdmin": "3.0.1",
+          "FluentValidation": "11.10.0",
           "Google.Apis.Auth": "1.68.0",
           "Google.Cloud.Storage.V1": "4.10.0",
           "MailKit": "4.8.0",
@@ -101,6 +102,14 @@
           "lib/net6.0/FirebaseAdmin.dll": {
             "assemblyVersion": "3.0.1.0",
             "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "FluentValidation/11.10.0": {
+        "runtime": {
+          "lib/net8.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.10.0.0"
           }
         }
       },
@@ -1146,6 +1155,13 @@
       "sha512": "sha512-CvWwqFE0mIQBHFDrV9A0YXcwGNKbCH4q2JWkm/4HQ+huU/Kkj9VIrmjcXiqg7l2KydZQu3Pfeobo7L81BtQMdA==",
       "path": "firebaseadmin/3.0.1",
       "hashPath": "firebaseadmin.3.0.1.nupkg.sha512"
+    },
+    "FluentValidation/11.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qsJGSJDdZ8qiG+lVJ70PZfJHcEdq8UQZ/tZDXoj78/iHKG6lVKtMJsD11zyyv/IPc7rwqGqnFoFLTNzpo3IPYg==",
+      "path": "fluentvalidation/11.10.0",
+      "hashPath": "fluentvalidation.11.10.0.nupkg.sha512"
     },
     "Google.Api.Gax/4.8.0": {
       "type": "package",
