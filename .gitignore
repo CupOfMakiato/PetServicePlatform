@@ -49,3 +49,11 @@
 /Release/
 /bin/
 /obj/
+/Server.API/bin/Release/net8.0/swagger.json
+/Server.Domain/obj/Release/net8.0/Server.D.83D9AE4D.Up2Date
+
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.AssemblyInfo.cs
+/Server.Application/obj/Debug/net8.0/Server.Application.AssemblyInfo.cs
+/Server.Domain/obj/Debug/net8.0/Server.Domain.AssemblyInfo.cs
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.sourcelink.json
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.AssemblyInfo.cs
