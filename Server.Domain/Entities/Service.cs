@@ -17,7 +17,7 @@ namespace Server.Domain.Entities
         public ICollection<UserService> UserService { get; set; }
         public bool isVerified { get; set; }
         public Guid CreatedByUserId { get; set; }
-        public ApplicationUser CreatedByUser { get; set; }
+        //public ApplicationUser CreatedByUser { get; set; }
 
         public List<Transaction> Transaction { get; set; }
         public List<BillDetail> BillDetail { get; set; }

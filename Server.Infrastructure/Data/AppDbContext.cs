@@ -86,11 +86,11 @@ public class AppDbContext : DbContext
            new Role { Id = 2, RoleName = "User" },
            new Role { Id = 3, RoleName = "Staff" }
         );
-        modelBuilder.Entity<Service>()
-           .HasOne(c => c.CreatedByUser)
-           .WithMany(u => u.ServiceCreated)
-           .HasForeignKey(c => c.CreatedByUserId)
-           .OnDelete(DeleteBehavior.Restrict);
+        //modelBuilder.Entity<Service>()
+        //   .HasOne(c => c.CreatedByUser)
+        //   .WithMany(u => u.ServiceCreated)
+        //   .HasForeignKey(c => c.CreatedByUserId)
+        //   .OnDelete(DeleteBehavior.Restrict);
         // Feedback
         modelBuilder.Entity<Feedback>()
             .HasOne(r => r.User)
