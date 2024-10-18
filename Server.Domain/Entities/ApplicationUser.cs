@@ -25,12 +25,12 @@ public class ApplicationUser : BaseEntity
     //public ICollection<Message> SentMessages { get; set; }
     //public ICollection<Message> ReceivedMessages { get; set; }
     public ICollection<UserService> UserSerive { get; set; }
-    public ICollection<Service> ServiceCreated { get; set; }
+    //public ICollection<Service> ServiceCreated { get; set; }
     //public virtual ICollection<Notification> Notifications { get; set; }
     public List<Payment> Payment { get; set; }
     public List<Transaction> Transaction { get; set; }
     public virtual ShopData? ShopData { get; set; }
-    public string AvatarUrl { get; set; }
-    public string? AvatarId { get; set; }
-    public string? Introduction { get; set; }
+    //public string AvatarUrl { get; set; }
+    //public string? AvatarId { get; set; }
+    public string PhoneNumber { get; set; }
 }

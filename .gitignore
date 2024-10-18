@@ -415,3 +415,6 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,dotnetcore
 CoverageReport/
 /docker
+/.vs/ProjectEvaluation/
+
+
