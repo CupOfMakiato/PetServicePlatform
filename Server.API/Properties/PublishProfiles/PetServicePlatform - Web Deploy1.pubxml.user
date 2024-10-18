@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA23yvKqle/0uxUyc5nCnprAAAAAACAAAAAAAQZgAAAAEAACAAAADAA9OQymG1861RRFSdz4BfAjz7YSyk14BmbWDDvaYA+gAAAAAOgAAAAAIAACAAAAB9oHJe8sYXPDQXWfuohwC4Ep+WRP5OXsKzjjG8GpEb3oAAAABbVoLDPcCfpHtIHWf3oiTbRRIC8Onr6oYkdgaZ7Pb4rwrKOQwxlKvwPcTKec3AYrJh5LxxqEFF07C2D/Jv694yoFnWpaiZSl+4NrvEOHWyt+cOW+uNrq1wVzVawzjIDphim367tIPznmugwN3j33uqfLgJsFeLGMqQR3m6iQOcAkAAAAC5GG78CM6QaTUTRrEBbm3V3Q3RPrPvk8fQNTwrF0zfJKqwOM3ADRfWZUJVH+CN9t/M2kPC7es1GFXL1oxSnDr3</EncryptedPassword>
+    <History>True|2024-10-18T03:12:44.3024357Z||;True|2024-10-18T10:08:28.0237899+07:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=petservicedb.database.windows.net%3bInitial Catalog=PetServiceManagementSystem%3bUid=SQLAdmin%3bPwd=%40Nguyen0908%3bConnect Timeout=30%3bEncrypt=True%3bTrust Server Certificate=True%3bApplication Intent=ReadWrite%3bMulti Subnet Failover=False</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

@@ -45,3 +45,7 @@
 /Server.API/obj/Release/net8.0/PubTmp/Server.API.SourceManifest.xml
 /Server.API/obj/Release/net8.0/staticwebassets
 /Server.API/obj
+# Ignore build output folders
+/Release/
+/bin/
+/obj/
