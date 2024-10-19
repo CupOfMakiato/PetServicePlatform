@@ -10,4 +10,5 @@ public interface IUnitOfWork
     IFeedbackRepository feedbackRepository { get; }
     IAuthRepository authRepository { get; }
     IUserRepository userRepository { get; }
+    IServiceRepository serviceRepository { get; }
 }

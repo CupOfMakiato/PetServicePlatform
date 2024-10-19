@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Server.Contracts.Enum;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,11 @@ namespace Server.Domain.Entities
         public double Price { get; set; }
         public ICollection<UserService> UserService { get; set; }
         public bool isVerified { get; set; }
-        public Guid CreatedByUserId { get; set; }
+        [Required]
+        public ServiceType? Type { get; set; }
+
+        public string? Reason { get; set; }
+        //public Guid CreatedByUserId { get; set; }
         //public ApplicationUser CreatedByUser { get; set; }
 
         public List<Transaction> Transaction { get; set; }

@@ -28,10 +28,13 @@ public static class DependencyInjection
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<ITemporaryStoreService, TemporaryStoreService>();
         services.AddScoped<IShopService, ShopService>();
+        services.AddScoped<IServiceService, ServiceService>();
         services.AddScoped<PasswordService>();
         services.AddScoped<RedisService>();
         services.AddScoped<OtpService>();
         services.AddScoped<EmailService>();
+        services.AddScoped<ServiceService>();
+        services.AddScoped<ICloudinaryService, CloudinaryService>();
         services.AddMemoryCache();
 
         // Repo
@@ -41,6 +44,7 @@ public static class DependencyInjection
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IFeedbackRepository, FeedbackRepository>();
         services.AddScoped<IShopRepository, ShopRepository>();
+        services.AddScoped<IServiceRepository, ServiceRepository>();
 
 
         #region Configuration
