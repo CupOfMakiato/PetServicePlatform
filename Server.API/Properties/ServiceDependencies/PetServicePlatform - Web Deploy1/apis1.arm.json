@@ -97,11 +97,11 @@
               "type": "Microsoft.ApiManagement/service/apis",
               "name": "petserviceplatformapi/ServerAPI",
               "properties": {
-                "displayName": "Cursus Web API",
+                "displayName": "Pet Service Platform Web App API",
                 "apiRevision": "1",
                 "description": null,
                 "subscriptionRequired": true,
-                "serviceUrl": "https://perserviceplatform-gsfegwf3feeze4f6.southeastasia-01.azurewebsites.net",
+                "serviceUrl": "https://petserviceplatform-dpgyc0c3fcg9dtc7.southeastasia-01.azurewebsites.net",
                 "path": "Api",
                 "protocols": [
                   "https"
