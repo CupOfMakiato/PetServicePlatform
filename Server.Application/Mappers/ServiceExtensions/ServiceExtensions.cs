@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Server.Contracts.DTO.Service;
 using CloudinaryDotNet;
 using Server.Contracts.Abstractions.RequestAndResponse.Service;
+using Server.Contracts.Enum;
 
 namespace Server.Application.Mappers.ServiceExtensions
 {
@@ -30,6 +31,7 @@ namespace Server.Application.Mappers.ServiceExtensions
         }
         public static Service ToService(this CreateServiceDTO createServiceDTO)
         {
+
             return new Service
             {
                 Title = createServiceDTO.Title,
@@ -40,6 +42,7 @@ namespace Server.Application.Mappers.ServiceExtensions
                 ThumbNailId = createServiceDTO.ThumbNailId,
                 SubCategoryId = createServiceDTO.SubCategoryId,
                 Type = createServiceDTO.Type,
+                //Type = serviceType, // Assign the parsed enum
                 CreatedBy = createServiceDTO.UserId,
             };
         }
@@ -62,7 +65,7 @@ namespace Server.Application.Mappers.ServiceExtensions
         {
             return new UpdateServiceDTO
             {
-                Id = (Guid)updateServiceRequest.Id,
+                Id = (Guid)updateServiceRequest.ServiceId,
                 Title = updateServiceRequest.Title,
                 Description = updateServiceRequest.Description,
                 ThumbNail = updateServiceRequest.ThumbNail,

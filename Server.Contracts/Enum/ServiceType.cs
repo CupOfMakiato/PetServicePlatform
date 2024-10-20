@@ -9,7 +9,7 @@ namespace Server.Contracts.Enum
 {
     public enum ServiceType
     {
-        Cat,
-        Dog
+        Cat = 1,
+        Dog = 2,
     }
 }

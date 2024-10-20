@@ -2,6 +2,7 @@
 using CloudinaryDotNet;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Server.Application.Interfaces;
 using Server.Contracts.Abstractions.CloudinaryService;
 using Server.Contracts.Settings;
 using System;
@@ -9,9 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Server.Application.Interfaces;
 
-namespace Server.Application.Services
+namespace Server.Infrastructure.Services
 {
     public class CloudinaryService : ICloudinaryService
     {

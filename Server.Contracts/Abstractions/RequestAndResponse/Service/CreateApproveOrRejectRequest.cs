@@ -8,7 +8,7 @@ namespace Server.Contracts.Abstractions.RequestAndResponse.Service
 {
     public class CreateApproveOrRejectRequest
     {
-        public Guid Id { get; set; }
+        public Guid ServiceId { get; set; }
         public bool IsApproved { get; set; }
         public string? Reason { get; set; }
     }

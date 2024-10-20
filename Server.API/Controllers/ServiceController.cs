@@ -43,6 +43,7 @@ namespace Server.API.Controllers
                 });
             }
 
+
             req.Id = Guid.NewGuid();
 
             var serviceMapper = req.ToCreateServiceDTO();
@@ -113,7 +114,7 @@ namespace Server.API.Controllers
         [HttpPost("ApproveOrReject")]
         [ProducesResponseType(200, Type = typeof(Result<object>))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> ApproveOrReject([FromBody] CreateApproveOrRejectRequest req)
+        public async Task<IActionResult> ApproveOrReject([FromForm] CreateApproveOrRejectRequest req)
         {
             var validator = new CreateApproveOrRejectValidator();
             var validatorResult = validator.Validate(req);
@@ -126,7 +127,7 @@ namespace Server.API.Controllers
                     Data = validatorResult.Errors.Select(x => x.ErrorMessage),
                 });
             }
-            var result = await _serviceService.ApproveOrReject(req.Id, req.IsApproved, req.Reason);
+            var result = await _serviceService.ApproveOrReject(req.ServiceId, req.IsApproved, req.Reason);
 
             if (result.Error == 1)
             {
@@ -173,9 +174,9 @@ namespace Server.API.Controllers
         [HttpGet("ViewUserRegistered")]
         [ProducesResponseType(200, Type = typeof(Result<List<Service>>))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> ViewEnrolledCourses(Guid courseId)
+        public async Task<IActionResult> ViewUserRegistered(Guid serviceId)
         {
-            var result = await _serviceService.ViewUserRegistered(courseId);
+            var result = await _serviceService.ViewUserRegistered(serviceId);
             return Ok(result);
         }
     }

@@ -77,6 +77,7 @@ namespace Server.Application.Services
                 };
             }
 
+
             serviceDto.ThumbNailUrl = cloudinaryResult.ImageUrl; ;
             serviceDto.ThumbNailId = cloudinaryResult.PublicImageId;
 
@@ -88,7 +89,7 @@ namespace Server.Application.Services
             return new Result<object>
             {
                 Error = result > 0 ? 0 : 1,
-                Message = result > 0 ? "Create course successfully" : "Create course fail",
+                Message = result > 0 ? "Create service successfully" : "Create service fail",
                 Data = null
             };
         }
@@ -100,7 +101,7 @@ namespace Server.Application.Services
                 return new Result<object>
                 {
                     Error = 1,
-                    Message = "Course not found",
+                    Message = "Service not found",
                     Data = null
                 };
             }

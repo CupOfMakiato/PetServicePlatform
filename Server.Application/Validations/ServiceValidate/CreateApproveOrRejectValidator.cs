@@ -13,7 +13,7 @@ namespace Server.Application.Validations.ServiceValidate
     {
         public CreateApproveOrRejectValidator()
         {
-            RuleFor(x => x.Id).NotEmpty().WithMessage("Id can not be blanked!.");
+            RuleFor(x => x.ServiceId).NotEmpty().WithMessage("Id can not be blanked!.");
         }
     }
 }

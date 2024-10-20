@@ -13,7 +13,7 @@ namespace Server.Application.Validations.ServiceValidate
     {
         public UpdateServiceRequestValidator()
         {
-            RuleFor(x => x.Id).NotEmpty().WithMessage("ServiceId is required");
+            RuleFor(x => x.ServiceId).NotEmpty().WithMessage("ServiceId is required");
             RuleFor(x => x.Title)
                 .NotEmpty().WithMessage("Title is required.");
             RuleFor(x => x.Price)

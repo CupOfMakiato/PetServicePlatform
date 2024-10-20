@@ -8,6 +8,8 @@ using Server.Infrastructure.Repositories;
 using Server.Infrastructure.Services;
 using Server.Application.Services;
 using Server.Infrastructure.Data;
+using Server.Contracts.Settings;
+using FluentAssertions.Common;
 
 namespace Server.Infrastructure;
 
@@ -46,6 +48,8 @@ public static class DependencyInjection
         services.AddScoped<IShopRepository, ShopRepository>();
         services.AddScoped<IServiceRepository, ServiceRepository>();
 
+        //
+        services.Configure<CloudinarySetting>(configuration.GetSection("CloudinarySetting"));
 
         #region Configuration
 

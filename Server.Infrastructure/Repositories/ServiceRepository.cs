@@ -85,7 +85,8 @@ namespace Server.Infrastructure.Repositories
             return await _context.Service
                                     .Skip(pageIndex * pageSize)
                                     .Take(pageSize)
-                                    .Include(c => c.CreatedBy)
+                                    .Include(s => s.UserService) // Include UserService to access users
+                                    .ThenInclude(us => us.User) // Then include the User
                                     .ToListAsync();
         }
 
