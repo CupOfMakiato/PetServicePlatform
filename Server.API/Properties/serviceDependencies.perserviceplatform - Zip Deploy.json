@@ -7,11 +7,6 @@
       "type": "mssql.azure",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "dynamicId": null
-    },
-    "apis1": {
-      "apiEndpoint": "https://petserviceplatformapi.azure-api.net/Api",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/petserviceplatformapi/apis/ServerAPI",
-      "type": "apis.azure"
     }
   }
 }
