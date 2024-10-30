@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FixTable : Migration
+    public partial class FixServiceUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,7 @@ namespace Server.Infrastructure.Migrations
                     CategoryStatus = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -56,6 +57,7 @@ namespace Server.Infrastructure.Migrations
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -92,11 +94,10 @@ namespace Server.Infrastructure.Migrations
                     ResetToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ResetTokenExpiry = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsStaff = table.Column<bool>(type: "bit", nullable: true),
-                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AvatarId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Introduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -115,6 +116,34 @@ namespace Server.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Payment",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TotalAmount = table.Column<double>(type: "float", nullable: false),
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payment_Users_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Service",
                 columns: table => new
                 {
@@ -125,6 +154,8 @@ namespace Server.Infrastructure.Migrations
                     ThumbNailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     isVerified = table.Column<bool>(type: "bit", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SubCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -144,33 +175,12 @@ namespace Server.Infrastructure.Migrations
                         principalTable: "SubCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payment",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TotalAmount = table.Column<double>(type: "float", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payment_Users_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_Service_Users_CreatedByUserId",
+                        column: x => x.CreatedByUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,6 +195,7 @@ namespace Server.Infrastructure.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -203,6 +214,41 @@ namespace Server.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BillDetail",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BillDetail_Payment_PaymentId",
+                        column: x => x.PaymentId,
+                        principalTable: "Payment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BillDetail_Service_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Service",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Booking",
                 columns: table => new
                 {
@@ -211,6 +257,7 @@ namespace Server.Infrastructure.Migrations
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -246,6 +293,7 @@ namespace Server.Infrastructure.Migrations
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -280,6 +328,7 @@ namespace Server.Infrastructure.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -322,40 +371,6 @@ namespace Server.Infrastructure.Migrations
                         name: "FK_UserService_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BillDetail",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BillDetail", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BillDetail_Payment_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payment",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BillDetail_Service_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Service",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -404,6 +419,11 @@ namespace Server.Infrastructure.Migrations
                 name: "IX_Payment_ApplicationUserId",
                 table: "Payment",
                 column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Service_CreatedByUserId",
+                table: "Service",
+                column: "CreatedByUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Service_SubCategoryId",
@@ -470,16 +490,16 @@ namespace Server.Infrastructure.Migrations
                 name: "Service");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "SubCategory");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Role");
         }
     }
 }

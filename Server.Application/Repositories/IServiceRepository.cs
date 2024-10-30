@@ -19,7 +19,8 @@ namespace Server.Application.Repositories
         Task<List<ServiceIdTitleDTO>> GetListServicesTitleByUserId(Guid userId);
         Task<int> GetTotalServiceCount();
         Task<List<Service>> GetPagedServices(int pageIndex, int pageSize);
-        Task<Pagination<ViewServiceDTO>> SearchServicePagination(string textSearch, int pageIndex = 0, int pageSize = 5);
+        Task<Pagination<ViewServiceDTO>> SearchServiceTitlePagination(string textSearch, int pageIndex = 0, int pageSize = 5);
         Task<List<Service>> GetListServicesByCategoryId(Guid? categoryId = null, Guid? subCategoryId = null);
+        Task<List<ServiceListDTO>> GetListServicesByUserId(Guid userId);
     }
 }

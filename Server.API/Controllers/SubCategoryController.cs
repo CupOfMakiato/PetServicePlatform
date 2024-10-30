@@ -37,7 +37,7 @@ namespace Server.API.Controllers
         [HttpPost("CreateSubCategory")]
         [ProducesResponseType(204, Type = typeof(Result<object>))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> CreateSubCategory([FromBody] CreateSubCategoryDTO CategorySubCreate, string CategoryId)
+        public async Task<IActionResult> CreateSubCategory([FromForm] CreateSubCategoryDTO CategorySubCreate, string CategoryId)
         {
             if (CategorySubCreate == null)
                 return BadRequest(ModelState);

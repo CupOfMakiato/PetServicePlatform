@@ -22,8 +22,8 @@ namespace Server.Domain.Entities
         public ServiceType? Type { get; set; }
 
         public string? Reason { get; set; }
-        //public Guid CreatedByUserId { get; set; }
-        //public ApplicationUser CreatedByUser { get; set; }
+        public Guid CreatedByUserId { get; set; }
+        public ApplicationUser CreatedByUser { get; set; }
 
         public List<Transaction> Transaction { get; set; }
         public List<BillDetail> BillDetail { get; set; }

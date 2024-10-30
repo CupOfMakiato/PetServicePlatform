@@ -43,7 +43,7 @@ namespace Server.Application.Mappers.ServiceExtensions
                 SubCategoryId = createServiceDTO.SubCategoryId,
                 Type = createServiceDTO.Type,
                 //Type = serviceType, // Assign the parsed enum
-                CreatedBy = createServiceDTO.UserId,
+                CreatedByUserId = createServiceDTO.UserId,
             };
         }
         public static CreateServiceDTO ToCreateServiceDTO(this CreateServiceRequest createServiceRequest)

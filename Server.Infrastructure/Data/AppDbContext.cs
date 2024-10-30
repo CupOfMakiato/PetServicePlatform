@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Application.Enum;
 using Server.Contracts.Enum;
 using Server.Domain.Entities;
@@ -86,11 +87,17 @@ public class AppDbContext : DbContext
            new Role { Id = 2, RoleName = "User" },
            new Role { Id = 3, RoleName = "Staff" }
         );
-        //modelBuilder.Entity<Service>()
-        //   .HasOne(c => c.CreatedByUser)
-        //   .WithMany(u => u.ServiceCreated)
-        //   .HasForeignKey(c => c.CreatedByUserId)
-        //   .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Service>()
+           .HasOne(c => c.CreatedByUser)
+           .WithMany(u => u.ServiceCreated)
+           .HasForeignKey(c => c.CreatedByUserId)
+           .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Service>()
+            .Property(s => s.Type)
+            .HasConversion(v => v.ToString(), v => (ServiceType)Enum.Parse(typeof(ServiceType), v)
+            );
         // Feedback
         modelBuilder.Entity<Feedback>()
             .HasOne(r => r.User)

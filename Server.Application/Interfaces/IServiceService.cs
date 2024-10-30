@@ -12,7 +12,7 @@ namespace Server.Application.Interfaces
 {
     public interface IServiceService
     {
-        Task<Pagination<ViewServiceDTO>> ViewCourses(int pageIndex, int pageSize);
+        Task<Pagination<ViewServiceDTO>> ViewServices(int pageIndex, int pageSize);
         Task<Result<object>> ViewListServicesTitleByUserId(Guid userId);
         Task<Result<object>> CreateService(CreateServiceDTO serviceDto);
         Task<Result<object>> UpdateService(UpdateServiceDTO serviceDto);
@@ -21,5 +21,6 @@ namespace Server.Application.Interfaces
         Task<Result<object>> ViewUserRegistered(Guid serviceId);
         Task<List<Service>> ViewListServicesForCategory(Guid? categoryId = null, Guid? subCategoryId = null);
         Task<Pagination<ViewUserRegitered>> GetListUserFromService(Guid serviceId, int pageIndex = 0, int pageSize = 10);
+        Task<Result<object>> ViewListServicesByUserId(Guid userId);
     }
 }

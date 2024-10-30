@@ -12,8 +12,8 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241019161208_FixUserAvatar")]
-    partial class FixUserAvatar
+    [Migration("20241029164309_FixServiceUser")]
+    partial class FixServiceUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -119,6 +122,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -162,6 +168,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -215,6 +224,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -247,6 +259,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -302,6 +317,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -378,6 +396,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -421,13 +442,16 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isVerified")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -451,6 +475,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -498,6 +525,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -543,6 +573,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -678,11 +711,19 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Service", b =>
                 {
+                    b.HasOne("ApplicationUser", "CreatedByUser")
+                        .WithMany("ServiceCreated")
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Server.Domain.Entities.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CreatedByUser");
 
                     b.Navigation("SubCategory");
                 });
@@ -749,6 +790,8 @@ namespace Server.Infrastructure.Migrations
             modelBuilder.Entity("ApplicationUser", b =>
                 {
                     b.Navigation("Payment");
+
+                    b.Navigation("ServiceCreated");
 
                     b.Navigation("ShopData");
 

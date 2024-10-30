@@ -10,6 +10,8 @@ using Server.Contracts.Abstractions.Shared;
 using Server.Application.Mappers.ServiceExtensions;
 using Server.Contracts.DTO.Service;
 using Server.Domain.Entities;
+using FluentAssertions.Common;
+using Server.Application.Services;
 
 namespace Server.API.Controllers
 {
@@ -52,16 +54,37 @@ namespace Server.API.Controllers
             return Ok(result);
         }
 
+        //[HttpGet("SearchServicePagination")]
+        //[ProducesResponseType(200, Type = typeof(ViewServiceDTO))]
+        //[ProducesResponseType(400, Type = typeof(Result<object>))]
+        //public async Task<IActionResult> SearchServicePagination([FromQuery] string ServiceName, int pageIndex = 1, int pageSize = 10)
+        //{
 
-        [HttpGet("ViewListServicesTitleByUserId")]
+        //    var result = await _serviceService.SearchServicePagination(ServiceName, pageIndex, pageSize);
+
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+
+        //    return Ok(result);
+        //}
+
+        //[HttpGet("ViewListServicesTitleByUserId")]
+        //[ProducesResponseType(200, Type = typeof(Result<object>))]
+        //[ProducesResponseType(400, Type = typeof(Result<object>))]
+        //public async Task<IActionResult> ViewListServicesTitleByUserId([FromQuery] Guid userId)
+        //{
+        //    var result = await _serviceService.ViewListServicesTitleByUserId(userId);
+        //    return Ok(result);
+        //}
+
+        [HttpGet("ViewListServicesByUserId")]
         [ProducesResponseType(200, Type = typeof(Result<object>))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> ViewListServicesTitleByUserId([FromQuery] Guid userId)
+        public async Task<IActionResult> ViewListServicesByUserId([FromQuery] Guid userId)
         {
-            var result = await _serviceService.ViewListServicesTitleByUserId(userId);
+            var result = await _serviceService.ViewListServicesByUserId(userId);
             return Ok(result);
         }
-
 
         [HttpPost("UpdateService")]
         [ProducesResponseType(200, Type = typeof(Result<object>))]
@@ -92,7 +115,7 @@ namespace Server.API.Controllers
         [ProducesResponseType(400, Type = typeof(Result<object>))]
         public async Task<IActionResult> GetListServices(int pageIndex = 0, int pageSize = 10)
         {
-            var pagedCourses = await _serviceService.ViewCourses(pageIndex, pageSize);
+            var pagedCourses = await _serviceService.ViewServices(pageIndex, pageSize);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -102,9 +125,9 @@ namespace Server.API.Controllers
         [HttpGet("GetListUserFromService")]
         [ProducesResponseType(200, Type = typeof(ViewServiceDTO))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> GetListUserFromService(Guid courseId, int pageIndex = 0, int pageSize = 10)
+        public async Task<IActionResult> GetListUserFromService(Guid serviceId, int pageIndex = 0, int pageSize = 10)
         {
-            var pagedCourses = await _serviceService.GetListUserFromService(courseId, pageIndex, pageSize);
+            var pagedCourses = await _serviceService.GetListUserFromService(serviceId, pageIndex, pageSize);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

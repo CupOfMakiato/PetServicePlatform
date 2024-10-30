@@ -85,17 +85,16 @@ namespace Server.Infrastructure.Repositories
             return await _context.Service
                                     .Skip(pageIndex * pageSize)
                                     .Take(pageSize)
-                                    .Include(s => s.UserService) // Include UserService to access users
-                                    .ThenInclude(us => us.User) // Then include the User
+                                    .Include(s => s.CreatedByUser)
                                     .ToListAsync();
         }
 
-        public async Task<Pagination<ViewServiceDTO>> SearchServicePagination(string textSearch, int pageIndex = 0, int pageSize = 5)
+        public async Task<Pagination<ViewServiceDTO>> SearchServiceTitlePagination(string textSearch, int pageIndex = 0, int pageSize = 5)
         {
             var itemCount = await _context.Service.CountAsync(t => t.Title.Contains(textSearch));
             var items = await _context.Service.Where(t => t.Title.Contains(textSearch))
                                     .Skip(pageIndex * pageSize)
-                                    .Include(c => c.UserService) // Include UserService to access related users
+                                    .Include(c => c.CreatedByUser)
                                     .Take(pageSize)
                                     .AsNoTracking()
                                     .ToListAsync();
@@ -145,6 +144,10 @@ namespace Server.Infrastructure.Repositories
         public async Task<List<ServiceIdTitleDTO>> GetListServicesTitleByUserId(Guid userId)
         {
             return await _context.Service.Where(c => c.CreatedBy == userId).ProjectTo<ServiceIdTitleDTO>(_mapper.ConfigurationProvider).ToListAsync();
+        }
+        public async Task<List<ServiceListDTO>> GetListServicesByUserId(Guid userId)
+        {
+            return await _context.Service.Where(c => c.CreatedBy == userId).ProjectTo<ServiceListDTO>(_mapper.ConfigurationProvider).ToListAsync();
         }
     }
 }
