@@ -571,3 +571,13 @@ CoverageReport/
 /Server.Contracts/obj/Release/net8.0/Server.Contracts.pdb
 /Server.Contracts/obj/Release/net8.0/Server.Contracts.sourcelink.json
 /note.txt
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.csproj.FileListAbsolute.txt
+/Server.Application/obj/Debug/net8.0/Server.Application.csproj.FileListAbsolute.txt
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.csproj.FileListAbsolute.txt
+/Server.Domain/obj/Debug/net8.0/Server.Domain.csproj.FileListAbsolute.txt
+/Server.Domain/obj/Release/net8.0/Server.Domain.assets.cache
+/Server.Application/obj/Debug/net8.0/Server.Application.csproj.FileListAbsolute.txt
+/Server.Contracts/obj/Debug/net8.0/Server.Contracts.csproj.FileListAbsolute.txt
+/Server.Domain/obj/Debug/net8.0/Server.Domain.csproj.FileListAbsolute.txt
+/Server.Domain/obj/Release/net8.0/Server.Domain.assets.cache
+/Server.Infrastructure/obj/Debug/net8.0/Server.Infrastructure.csproj.FileListAbsolute.txt
