@@ -50,7 +50,7 @@ namespace Server.API.Controllers
                     Data = new
                     {
                         TokenType = "Bearer",
-                        AccessToken = token.AccessToken
+                        AccessToken = token.AccessToken,
                     }
                 });
             }

@@ -37,6 +37,7 @@ public static class DependencyInjection
         services.AddScoped<EmailService>();
         services.AddScoped<ISearchService, SearchService>();
         services.AddScoped<ICloudinaryService, CloudinaryService>();
+        services.AddScoped<IBookingService, BookingService>();
         services.AddMemoryCache();
 
         // Repo
@@ -48,6 +49,7 @@ public static class DependencyInjection
         services.AddScoped<IShopRepository, ShopRepository>();
         services.AddScoped<IServiceRepository, ServiceRepository>();
         services.AddScoped<ISearchRepository, SearchRepository>();
+        services.AddScoped<IBookingRepository, BookingRepository>();
 
         //
         services.Configure<CloudinarySetting>(configuration.GetSection("CloudinarySetting"));

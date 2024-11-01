@@ -130,6 +130,7 @@ public class AppDbContext : DbContext
             v => v.ToString(),            // Convert enum to string when saving to DB
             v => (UserStatus)Enum.Parse(typeof(UserStatus), v) // Convert string to enum when reading from DB
         );
+
     }
 
 }
