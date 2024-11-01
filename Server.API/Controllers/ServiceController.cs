@@ -185,10 +185,10 @@ namespace Server.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetListservicesByCategory")]
+        [HttpGet("GetListServicesByCategory")]
         [ProducesResponseType(200, Type = typeof(ViewServiceDTO))]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetListservicesByCategory([FromQuery] Guid? categoryId, [FromQuery] Guid? subCategoryId)
+        public async Task<IActionResult> GetListServicesByCategory([FromQuery] Guid? categoryId, [FromQuery] Guid? subCategoryId)
         {
             var courses = await _serviceService.ViewListServicesForCategory(categoryId, subCategoryId);
             return Ok(courses);

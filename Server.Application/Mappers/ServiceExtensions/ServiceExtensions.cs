@@ -15,7 +15,7 @@ namespace Server.Application.Mappers.ServiceExtensions
 {
     public static class ServiceExtensions
     {
-        public static ViewServiceDTO ToViewServiceDTO(this Service service, ApplicationUser createdByUser)
+        public static ViewServiceDTO ToViewServiceDTO(this Service service)
         {
             return new ViewServiceDTO
             {
@@ -26,7 +26,21 @@ namespace Server.Application.Mappers.ServiceExtensions
                 Price = service.Price,
                 SubCategoryId = service.SubCategoryId,
                 Type = (Contracts.Enum.ServiceType)service.Type,
-                CreatedByUser = createdByUser.ToUserDTO(), // Assuming createdByUser is the user who created the service
+                CreatedByUser = service.CreatedByUser.ToUserDTO()
+            };
+        }
+        public static ViewSearchServiceUserDTO ToViewSearchServiceDTO(this Service service)
+        {
+            return new ViewSearchServiceUserDTO
+            {
+                Id = service.Id,
+                Title = service.Title,
+                Description = service.Description,
+                ThumbNail = service.ThumbNail,
+                Price = service.Price,
+                SubCategoryId = service.SubCategoryId,
+                Type = (Contracts.Enum.ServiceType)service.Type,
+                CreatedByUser = service.CreatedByUser.ToSearchUserDTO()
             };
         }
         public static Service ToService(this CreateServiceDTO createServiceDTO)

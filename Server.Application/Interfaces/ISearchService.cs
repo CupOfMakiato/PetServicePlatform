@@ -11,6 +11,6 @@ namespace Server.Application.Interfaces
 {
     public interface ISearchService
     {
-        Task<Pagination<ViewServiceDTO>> SearchServicePagination(string searchQuery, int pageIndex, int pageSize);
+        Task<Result<object>> SearchServicePagin(int pageIndex, int pageSize, string name);
     }
 }

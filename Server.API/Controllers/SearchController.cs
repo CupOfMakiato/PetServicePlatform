@@ -18,17 +18,12 @@ namespace Server.API.Controllers
             _searchService = searchService;
         }
 
-        [HttpGet("SearchServicePagination")]
-        [ProducesResponseType(200, Type = typeof(ViewServiceDTO))]
+        [HttpGet("SearchService")]
+        [ProducesResponseType(200, Type = typeof(Result<object>))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> SearchServicePagination([FromQuery] string ServiceName, int pageIndex = 1, int pageSize = 10)
+        public async Task<IActionResult> SearchService([FromQuery] string? name, int pageIndex = 0, int pageSize = 10)
         {
-
-            var result = await _searchService.SearchServicePagination(ServiceName, pageIndex, pageSize);
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
+            var result = await _searchService.SearchServicePagin(pageIndex, pageSize, name);
             return Ok(result);
         }
 

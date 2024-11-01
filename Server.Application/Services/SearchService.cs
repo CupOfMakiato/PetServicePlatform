@@ -22,25 +22,14 @@ namespace Server.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<Pagination<ViewServiceDTO>> SearchServicePagination(string searchQuery, int pageIndex, int pageSize)
+        public async Task<Result<object>> SearchServicePagin(int pageIndex, int pageSize, string name)
         {
-
-            // Filter and get the total count of matching services
-            var totalItemsCount = await _unitOfWork.searchRepository.GetTotalServiceCount(searchQuery);
-
-            // Get paginated and filtered services based on the search query
-            var services = await _unitOfWork.searchRepository.GetPagedServices(searchQuery, pageIndex, pageSize);
-
-            // Map the services to the DTO
-            var mappedServices = _mapper.Map<List<ViewServiceDTO>>(services);
-
-            // Return the paginated result with the search filter applied
-            return new Pagination<ViewServiceDTO>
+            var resultData = await _unitOfWork.serviceRepository.SearchServicePagination(name, pageIndex, pageSize);
+            return new Result<object>
             {
-                TotalItemsCount = totalItemsCount,
-                PageSize = pageSize,
-                PageIndex = pageIndex,
-                Items = mappedServices
+                Error = 0,
+                Message = "Successfully",
+                Data = resultData
             };
         }
     }

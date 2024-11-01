@@ -24,7 +24,6 @@ public class AppDbContext : DbContext
     public DbSet<Transaction> Transaction { get; set; }
     public DbSet<Payment> Payment { get; set; }
     public DbSet<BillDetail> BillDetail { get; set; }
-    public DbSet<UserService> UserService { get; set; }
     public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<ShopData> ShopDatas { get; set; }
 
@@ -110,7 +109,7 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(r => r.ServiceId)
             .OnDelete(DeleteBehavior.Restrict);
-        modelBuilder.Entity<UserService>()
+        modelBuilder.Entity<Booking>()
             .HasKey(r => new { r.UserId, r.ServiceId });
 
         // ShopData

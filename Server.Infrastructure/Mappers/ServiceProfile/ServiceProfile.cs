@@ -27,7 +27,7 @@ namespace Server.Infrastructure.Mappers.ServiceProfile
             CreateMap<Service, UserServiceDTO>();
             CreateMap<Service, ViewServiceDTO>();
             //.ForMember(dest => dest.CreatedByUser, opt => opt.MapFrom(src => src.UserService));
-            CreateMap<UserService, ViewUserRegitered>()
+            CreateMap<Booking, ViewUserRegitered>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.User.FullName))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
         }
