@@ -110,7 +110,7 @@ namespace Server.Application.Services
                     Password = HashPassword(userRegistrationDto.Password),
                     Balance = 0,
                     //AvatarUrl = "",
-                    //Introduction = userRegistrationDto.Introduction,
+                    PhoneNumber = userRegistrationDto.PhoneNo,
                     Status = UserStatus.Pending,
                     Otp = otp,
                     IsStaff = false,
@@ -166,7 +166,6 @@ namespace Server.Application.Services
                 FullName = shopRegisterDTO.FullName,
                 Email = shopRegisterDTO.Email,
                 Status = UserStatus.Pending,
-                //AvatarUrl = shopRegisterDTO.AvatarUrl,
                 Password = HashPassword(shopRegisterDTO.Password),
                 RoleCodeId = 3,
                 Otp = newOtp,
@@ -225,6 +224,7 @@ namespace Server.Application.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("id", user.Id.ToString()), // Ensuring UserId claim is added
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.RoleCode?.RoleName),
             };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

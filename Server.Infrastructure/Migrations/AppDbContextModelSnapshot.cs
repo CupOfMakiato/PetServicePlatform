@@ -182,12 +182,17 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ShopId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceId");
+
+                    b.HasIndex("ShopId");
 
                     b.HasIndex("UserId");
 
@@ -632,6 +637,12 @@ namespace Server.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.Domain.Entities.ShopData", "ShopData")
+                        .WithMany("Bookings")
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -639,6 +650,8 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Service");
+
+                    b.Navigation("ShopData");
 
                     b.Navigation("User");
                 });
@@ -776,6 +789,11 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("Transaction");
 
                     b.Navigation("UserService");
+                });
+
+            modelBuilder.Entity("Server.Domain.Entities.ShopData", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }
