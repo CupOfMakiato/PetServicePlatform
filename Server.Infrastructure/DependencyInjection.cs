@@ -35,7 +35,7 @@ public static class DependencyInjection
         services.AddScoped<RedisService>();
         services.AddScoped<OtpService>();
         services.AddScoped<EmailService>();
-        services.AddScoped<ServiceService>();
+        services.AddScoped<ISearchService, SearchService>();
         services.AddScoped<ICloudinaryService, CloudinaryService>();
         services.AddScoped<IBookingService, BookingService>();
         services.AddMemoryCache();
@@ -48,6 +48,7 @@ public static class DependencyInjection
         services.AddScoped<IFeedbackRepository, FeedbackRepository>();
         services.AddScoped<IShopRepository, ShopRepository>();
         services.AddScoped<IServiceRepository, ServiceRepository>();
+        services.AddScoped<ISearchRepository, SearchRepository>();
         services.AddScoped<IBookingRepository, BookingRepository>();
 
         //

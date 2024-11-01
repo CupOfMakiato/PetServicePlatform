@@ -27,18 +27,18 @@ namespace Server.Application.Services
             _cloudinaryService = cloudinaryService;
         }
 
-        public async Task<Pagination<ViewServiceDTO>> ViewCourses(int pageIndex, int pageSize)
+        public async Task<Pagination<ViewServiceDTO>> ViewServices(int pageIndex, int pageSize)
         {
             var totalItemsCount = await _unitOfWork.serviceRepository.GetTotalServiceCount();
-            var courses = await _unitOfWork.serviceRepository.GetPagedServices(pageIndex, pageSize);
-            var mappedCourses = _mapper.Map<List<ViewServiceDTO>>(courses);
+            var services = await _unitOfWork.serviceRepository.GetPagedServices(pageIndex, pageSize);
+            var mappedServices = _mapper.Map<List<ViewServiceDTO>>(services);
 
             return new Pagination<ViewServiceDTO>
             {
                 TotalItemsCount = totalItemsCount,
                 PageSize = pageSize,
                 PageIndex = pageIndex,
-                Items = mappedCourses
+                Items = mappedServices
             };
         }
         public async Task<Result<object>> ViewListServicesTitleByUserId(Guid userId)
@@ -217,6 +217,16 @@ namespace Server.Application.Services
             var result = await _unitOfWork.serviceRepository.GetListUserByServiceId(serviceId, pageIndex, pageSize);
 
             return result;
+        }
+        public async Task<Result<object>> ViewListServicesByUserId(Guid userId)
+        {
+            var result = await _unitOfWork.serviceRepository.GetListServicesByUserId(userId);
+            return new Result<object>
+            {
+                Error = result != null ? 0 : 1,
+                Message = result != null ? "Get list service successfully" : "Get list service failed",
+                Data = result
+            };
         }
 
     }

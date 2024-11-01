@@ -32,7 +32,7 @@ namespace Server.API.Controllers
         [HttpPost("CreateCategory")]
         [ProducesResponseType(204, Type = typeof(Result<object>))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDTO CategoryCreate)
+        public async Task<IActionResult> CreateCategory([FromForm] CreateCategoryDTO CategoryCreate)
         {
             if (CategoryCreate == null)
                 return BadRequest(ModelState);

@@ -14,9 +14,12 @@ public class UnitOfWork : IUnitOfWork
     private readonly IAuthRepository _authRepository;
     private readonly IUserRepository _userRepository;
     private readonly IServiceRepository _serviceRepository;
+    private readonly ISearchRepository _searchRepository;
     private readonly IBookingRepository _bookingRepository;
 
 
+    public UnitOfWork(AppDbContext dbContext, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository, 
+        IAuthRepository authRepository, IUserRepository userRepository, IFeedbackRepository feedbackRepository, IServiceRepository serviceRepository, ISearchRepository searchRepository)
     public UnitOfWork(AppDbContext dbContext, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository,
         IAuthRepository authRepository, IUserRepository userRepository, IFeedbackRepository feedbackRepository, IServiceRepository serviceRepository, IBookingRepository bookingRepository)
     {
@@ -27,6 +30,8 @@ public class UnitOfWork : IUnitOfWork
         _userRepository = userRepository;
         _feedbackRepository = feedbackRepository;
         _serviceRepository = serviceRepository;
+        _searchRepository = searchRepository;
+           
         _bookingRepository = bookingRepository;
     }
 
@@ -37,6 +42,7 @@ public class UnitOfWork : IUnitOfWork
     public IUserRepository userRepository => _userRepository;
     public IFeedbackRepository feedbackRepository => _feedbackRepository;
     public IServiceRepository serviceRepository => _serviceRepository;
+    public ISearchRepository searchRepository => _searchRepository;
     public IBookingRepository bookingRepository => _bookingRepository;
 
     public async Task<int> SaveChangeAsync()

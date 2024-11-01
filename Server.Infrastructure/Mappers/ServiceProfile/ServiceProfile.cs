@@ -16,16 +16,18 @@ namespace Server.Infrastructure.Mappers.ServiceProfile
         {
             CreateMap<CreateServiceDTO, Service>()
             .ForMember(dest => dest.ThumbNail, opt => opt.MapFrom(src => src.ThumbNailUrl))
-            .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.CreatedByUserId, opt => opt.MapFrom(src => src.UserId))
             .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.UserId));
 
             CreateMap<Service, ServiceIdTitleDTO>();
+            CreateMap<Service, ServiceListDTO>();
 
             CreateMap<Service, ServiceDTO>();
 
             CreateMap<Service, UserServiceDTO>();
             CreateMap<Service, ViewServiceDTO>();
-            CreateMap<UserService, ViewUserRegitered>()
+            //.ForMember(dest => dest.CreatedByUser, opt => opt.MapFrom(src => src.UserService));
+            CreateMap<Booking, ViewUserRegitered>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.User.FullName))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
         }

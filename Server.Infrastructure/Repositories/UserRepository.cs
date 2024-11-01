@@ -72,7 +72,7 @@ namespace Server.Infrastructure.Repositories
 
         public Task<ApplicationUser> GetUserByIdWithServiceUsed(Guid userId)
         {
-            return _context.Users.Include(u => u.UserSerive).FirstOrDefaultAsync(u => u.Id == userId);
+            return _context.Users.Include(u => u.Booking).FirstOrDefaultAsync(u => u.Id == userId);
         }
         public async Task<ApplicationUser> GetUserByVerificationToken(string token)
         {

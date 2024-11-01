@@ -133,7 +133,7 @@ namespace Server.Application.Services
             }
 
             // Check if the user has used in the service they are trying to review.
-            var isUsed = user.UserSerive.Any(uec => uec.ServiceId == feedbackDto.ServiceId);
+            var isUsed = user.Booking.Any(uec => uec.ServiceId == feedbackDto.ServiceId);
             if (!isUsed)
             {
                 return new Result<object>

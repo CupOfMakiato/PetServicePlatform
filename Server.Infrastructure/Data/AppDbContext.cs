@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Application.Enum;
 using Server.Contracts.Enum;
 using Server.Domain.Entities;
@@ -23,7 +24,6 @@ public class AppDbContext : DbContext
     public DbSet<Transaction> Transaction { get; set; }
     public DbSet<Payment> Payment { get; set; }
     public DbSet<BillDetail> BillDetail { get; set; }
-    public DbSet<UserService> UserService { get; set; }
     public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<ShopData> ShopDatas { get; set; }
 
@@ -86,11 +86,17 @@ public class AppDbContext : DbContext
            new Role { Id = 2, RoleName = "User" },
            new Role { Id = 3, RoleName = "Staff" }
         );
-        //modelBuilder.Entity<Service>()
-        //   .HasOne(c => c.CreatedByUser)
-        //   .WithMany(u => u.ServiceCreated)
-        //   .HasForeignKey(c => c.CreatedByUserId)
-        //   .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Service>()
+           .HasOne(c => c.CreatedByUser)
+           .WithMany(u => u.ServiceCreated)
+           .HasForeignKey(c => c.CreatedByUserId)
+           .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Service>()
+            .Property(s => s.Type)
+            .HasConversion(v => v.ToString(), v => (ServiceType)Enum.Parse(typeof(ServiceType), v)
+            );
         // Feedback
         modelBuilder.Entity<Feedback>()
             .HasOne(r => r.User)
@@ -103,7 +109,7 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(r => r.ServiceId)
             .OnDelete(DeleteBehavior.Restrict);
-        modelBuilder.Entity<UserService>()
+        modelBuilder.Entity<Booking>()
             .HasKey(r => new { r.UserId, r.ServiceId });
 
         // ShopData

@@ -4,9 +4,13 @@ using Server.API;
 using Server.Application;
 using Server.Domain.Entities;
 using Server.Infrastructure;
+using StackExchange.Redis;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+// Redis 
+//builder.Services.AddSingleton<IConnectionMultiplexer>(x => ConnectionMultiplexer.Connect(builder
+//    .Configuration.GetSection("Redis:RedisUrl").Value!.ToString()));
 
 // Firebase
 
