@@ -27,6 +27,10 @@ namespace Server.Infrastructure.Repositories
             _mapper = mapper;
 
         }
+        public async Task<Service> GetServiceById(Guid serviceId)
+        {
+            return await _context.Service.FirstOrDefaultAsync(s => s.Id == serviceId);
+        }
         public async Task<List<UserService>> GetUserByServiceId(Guid serviceId)
         {
             return await _context.UserService

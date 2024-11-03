@@ -24,8 +24,8 @@ namespace Server.Application.Interfaces
         Task<ApplicationUser> GetByVerificationToken(string token);
         Task<bool> VerifyOtpAsync(string email, string otp);
 
-        //REGISTER INSTRUCTOR
-        Task RegisterInstructorAsync(ShopRegisterDTO shopRegisterDTO);
+        //REGISTER Shop
+        Task RegisterShopAsync(ShopRegisterDTO shopRegisterDTO);
         Task<bool> VerifyOtpAndCompleteRegistrationAsync(string email, string otp);
         //Google
         /*        Task<Result<object>> UserCompleteSignUpByGoogle(SignupGoogleRequest userRegistrationDto);*/

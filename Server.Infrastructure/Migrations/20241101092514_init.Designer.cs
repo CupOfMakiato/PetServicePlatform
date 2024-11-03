@@ -12,8 +12,8 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241018131949_FixTable")]
-    partial class FixTable
+    [Migration("20241101092514_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,13 +30,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AvatarId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AvatarUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("Balance")
                         .HasColumnType("float");
@@ -59,9 +52,6 @@ namespace Server.Infrastructure.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Introduction")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -88,6 +78,10 @@ namespace Server.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");
 
@@ -111,6 +105,47 @@ namespace Server.Infrastructure.Migrations
                     b.HasIndex("RoleCodeId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"),
+                            CreationDate = new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6319),
+                            Email = "admin",
+                            FullName = "Admin",
+                            IsDeleted = false,
+                            IsVerified = true,
+                            Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2",
+                            PhoneNumber = "0123456789",
+                            RoleCodeId = 1,
+                            Status = "Active"
+                        },
+                        new
+                        {
+                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"),
+                            CreationDate = new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6325),
+                            Email = "user",
+                            FullName = "User",
+                            IsDeleted = false,
+                            IsVerified = true,
+                            Password = "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G",
+                            PhoneNumber = "0123456789",
+                            RoleCodeId = 2,
+                            Status = "Active"
+                        },
+                        new
+                        {
+                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"),
+                            CreationDate = new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6329),
+                            Email = "shop",
+                            FullName = "Shop",
+                            IsDeleted = false,
+                            IsVerified = true,
+                            Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2",
+                            PhoneNumber = "0123456789",
+                            RoleCodeId = 3,
+                            Status = "Active"
+                        });
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.BillDetail", b =>
@@ -167,6 +202,9 @@ namespace Server.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -179,6 +217,10 @@ namespace Server.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -187,6 +229,14 @@ namespace Server.Infrastructure.Migrations
 
                     b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("OptionPay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
@@ -384,9 +434,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -412,6 +459,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("SubCategoryId")
                         .HasColumnType("uniqueidentifier");
 
@@ -426,6 +476,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<bool>("isVerified")
                         .HasColumnType("bit");

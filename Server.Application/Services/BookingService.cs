@@ -6,6 +6,7 @@ using Server.Application.Repositories;
 using Server.Contracts.Abstractions.Shared;
 using Server.Contracts.DTO.Booking;
 using Server.Contracts.DTO.Service;
+using Server.Contracts.Enum;
 using Server.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,15 @@ namespace Server.Application.Services
         private readonly IBookingRepository _repository;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public BookingService(IBookingRepository repository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        private readonly IServiceRepository _serviceRepository;
+        private readonly IUserService _userService;
+        public BookingService(IBookingRepository repository, IMapper mapper, IHttpContextAccessor httpContextAccessor, IServiceRepository serviceRepository, IUserService userService)
         {
             _repository = repository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+            _serviceRepository = serviceRepository;
+            _userService = userService;
         }
 
         public async Task<Result<IEnumerable<GetBookingDto>>> GetListBookingByShopId(int PAGE_SIZE = 10, int page = 1)
@@ -78,6 +83,52 @@ namespace Server.Application.Services
                 listBookings.Add(bookingDto);
             }
             return new Result<IEnumerable<GetBookingDto>>() { Error = 0, Message = "", Data = listBookings };
+        }
+
+        public async Task<Result<object>> AddBooking(AddBookingDto addBookingDto)
+        {
+            var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            if (token == null)
+                return new Result<object>() { Error = 1, Message = "Token not found", Data = null };
+
+            var jwtToken = new JwtSecurityTokenHandler().ReadToken(token) as JwtSecurityToken;
+
+            if (jwtToken == null)
+                return new Result<object>() { Error = 1, Message = "Invalid token", Data = null };
+            var userId = Guid.Parse(jwtToken.Claims.First(claim => claim.Type == "id").Value);
+            var getService = await _serviceRepository.GetServiceById(addBookingDto.ServiceId);
+            if(getService == null)
+            {
+                return new Result<object>() { Error = 1, Message = "Service not found", Data = null };
+            }
+            if(addBookingDto.OptionPay == OptionPay.CashPayment)
+            {
+                var bookingCash = new Booking()
+                {
+                    UserId = userId,
+                    ServiceId = addBookingDto.ServiceId,
+                    FullName = addBookingDto.FullName,
+                    PhoneNumber = addBookingDto.PhoneNumber,
+                    BookingDate = addBookingDto.BookingDate,
+                    OptionPay = OptionPay.CashPayment.ToString(),
+                    IsPayment = false
+                };
+                await _repository.AddBooking(bookingCash);
+                return new Result<object>() { Error = 0, Message = "Booking Successfully", Data = bookingCash };
+            }
+            var bookingOnl = new Booking()
+            {
+                UserId = userId,
+                ServiceId = addBookingDto.ServiceId,
+                FullName = addBookingDto.FullName,
+                PhoneNumber = addBookingDto.PhoneNumber,
+                BookingDate = addBookingDto.BookingDate,
+                OptionPay = OptionPay.CashPayment.ToString(),
+                IsPayment = true
+            };
+            await _repository.AddBooking(bookingOnl);
+            return new Result<object>() { Error = 0, Message = "Booking Successfully", Data = bookingOnl };
         }
     }
 }

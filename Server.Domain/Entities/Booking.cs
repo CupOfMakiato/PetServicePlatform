@@ -10,6 +10,11 @@ namespace Server.Domain.Entities
     {
         public Guid UserId { get; set; }
         public Guid ServiceId { get; set; }
+        public string FullName { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime BookingDate { get; set; }
+        public string OptionPay { get; set; }
+        public bool IsPayment { get; set; }
         public ApplicationUser User { get; set; }
         public Service Service { get; set; }
     }

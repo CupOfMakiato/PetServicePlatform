@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Application.Interfaces;
+using Server.Contracts.DTO.Booking;
+using System.Drawing.Printing;
 
 namespace Server.API.Controllers
 {
@@ -38,6 +40,21 @@ namespace Server.API.Controllers
             try
             {
                 var result = await _bookingService.GetListBookingByUserId(PAGE_SIZE, page);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("user/booking")]
+        [Authorize(Policy = "UserPolicy")]
+        public async Task<IActionResult> AddBooking([FromForm]AddBookingDto addBookingDto)
+        {
+            try
+            {
+                var result = await _bookingService.AddBooking(addBookingDto);
                 return Ok(result);
             }
             catch (Exception ex)

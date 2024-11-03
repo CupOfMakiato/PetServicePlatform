@@ -22,7 +22,8 @@ namespace Server.API.Controllers
         {
             try
             {
-                return Ok(_userService.GetCurrentUserById());
+                var result = await _userService.GetCurrentUserById();
+                return Ok(result);
             }
             catch (Exception ex)
             {

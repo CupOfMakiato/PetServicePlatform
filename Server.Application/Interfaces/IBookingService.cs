@@ -13,5 +13,6 @@ namespace Server.Application.Interfaces
     {
         Task<Result<IEnumerable<GetBookingDto>>> GetListBookingByShopId(int PAGE_SIZE = 10, int page = 1);
         Task<Result<IEnumerable<GetBookingDto>>> GetListBookingByUserId(int PAGE_SIZE = 10, int page = 1);
+        Task<Result<object>> AddBooking(AddBookingDto addBookingDto);
     }
 }

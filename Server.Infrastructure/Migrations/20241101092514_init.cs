@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FixTable : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,9 +92,7 @@ namespace Server.Infrastructure.Migrations
                     ResetToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ResetTokenExpiry = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsStaff = table.Column<bool>(type: "bit", nullable: true),
-                    AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AvatarId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Introduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -125,7 +123,8 @@ namespace Server.Infrastructure.Migrations
                     ThumbNailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     isVerified = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -209,6 +208,10 @@ namespace Server.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OptionPay = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -368,6 +371,16 @@ namespace Server.Infrastructure.Migrations
                     { 1, "Admin" },
                     { 2, "User" },
                     { 3, "Staff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Balance", "CreatedBy", "CreationDate", "DeleteBy", "DeletionDate", "Email", "FullName", "IsDeleted", "IsStaff", "IsVerified", "ModificationBy", "ModificationDate", "Otp", "OtpExpiryTime", "Password", "PhoneNumber", "RefreshToken", "ResetToken", "ResetTokenExpiry", "RoleCodeId", "Status", "VerificationToken" },
+                values: new object[,]
+                {
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"), null, null, new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6329), null, null, "shop", "Shop", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 3, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"), null, null, new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6319), null, null, "admin", "Admin", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 1, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"), null, null, new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6325), null, null, "user", "User", false, null, true, null, null, null, null, "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", "0123456789", null, null, null, 2, "Active", null }
                 });
 
             migrationBuilder.CreateIndex(
