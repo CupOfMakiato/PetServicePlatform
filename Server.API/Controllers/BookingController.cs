@@ -18,7 +18,7 @@ namespace Server.API.Controllers
             _bookingService = bookingService;
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("admin/get-all")]
         [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> GetAll()
         {
