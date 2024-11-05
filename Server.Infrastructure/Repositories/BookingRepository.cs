@@ -20,13 +20,14 @@ namespace Server.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<Booking> GetBookingById(Guid id)
+        {
+            return await _context.Booking.FirstOrDefaultAsync(b => b.Id == id);
+        }
         public async Task<IQueryable<Booking>> GetListBookingByShopId(Guid shopId)
         {
             return _context.Booking
-                .Include(b => b.User)
-                .Where(b => b.User.RoleCodeId == 3)
-                .Include(b => b.Service)
-                .Where(b => b.UserId == shopId)
+                .Where(b => b.ShopId == shopId)
                 .AsQueryable();
                 
         }
@@ -47,5 +48,10 @@ namespace Server.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateBooking(Booking booking)
+        {
+            _context.Booking.Update(booking);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -17,6 +17,20 @@ namespace Server.API.Controllers
         {
             _bookingService = bookingService;
         }
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetBookingById(Guid id)
+        {
+            try
+            {
+                var result = await _bookingService.GetBookingById(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         [HttpGet("shop/listbookings")]
         [Authorize(Policy = "ShopPolicy")]
@@ -55,6 +69,21 @@ namespace Server.API.Controllers
             try
             {
                 var result = await _bookingService.AddBooking(addBookingDto);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("shop/checkin-booking/{id}")]
+        [Authorize(Policy = "ShopPolicy")]
+        public async Task<IActionResult> CheckInBooking(Guid id)
+        {
+            try
+            {
+                var result = await _bookingService.CheckInBooking(id);
                 return Ok(result);
             }
             catch (Exception ex)

@@ -77,7 +77,7 @@ public static class DependencyInjection
             options.AddPolicy("AdminPolicy", policy =>
                 policy.RequireClaim(System.Security.Claims.ClaimTypes.Role, "Admin"));
             options.AddPolicy("ShopPolicy", policy =>
-                policy.RequireClaim(System.Security.Claims.ClaimTypes.Role, "Shop"));
+                policy.RequireClaim(System.Security.Claims.ClaimTypes.Role, "Staff"));
         });
 
         return services;

@@ -33,6 +33,12 @@ namespace Server.Application.Services
             _userService = userService;
         }
 
+        public async Task<Result<Booking>> GetBookingById(Guid id)
+        {
+            var result = await _repository.GetBookingById(id);
+            return new Result<Booking>() { Error = 0, Message = "", Data = result };
+        }
+
         public async Task<Result<IEnumerable<GetBookingDto>>> GetListBookingByShopId(int PAGE_SIZE = 10, int page = 1)
         {
             var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
@@ -52,7 +58,13 @@ namespace Server.Application.Services
             {
                 var bookingDto = new GetBookingDto()
                 {
-
+                    BookingId = booking.Id,
+                    UserBooking = booking.UserId,
+                    ServiceBooking = booking.ServiceId,
+                    TimeBooking = booking.CreationDate,
+                    StatusBooking = booking.OptionPay,
+                    IsPayment = booking.IsPayment,
+                    IsCheckIn = booking.IsCheckIn
                 };
                 listBookings.Add(bookingDto);
             }
@@ -78,7 +90,12 @@ namespace Server.Application.Services
             {
                 var bookingDto = new GetBookingDto()
                 {
-
+                    BookingId = booking.Id,
+                    UserBooking = booking.UserId,
+                    ServiceBooking = booking.ServiceId,
+                    TimeBooking = booking.CreationDate,
+                    StatusBooking = booking.OptionPay,
+                    IsPayment = booking.IsPayment
                 };
                 listBookings.Add(bookingDto);
             }
@@ -107,12 +124,14 @@ namespace Server.Application.Services
                 var bookingCash = new Booking()
                 {
                     UserId = userId,
+                    ShopId = (Guid)getService.CreatedBy,
                     ServiceId = addBookingDto.ServiceId,
                     FullName = addBookingDto.FullName,
                     PhoneNumber = addBookingDto.PhoneNumber,
-                    BookingDate = addBookingDto.BookingDate,
+                    BookingDate = DateTime.Now,
                     OptionPay = OptionPay.CashPayment.ToString(),
-                    IsPayment = false
+                    IsPayment = false,
+                    IsCheckIn = false
                 };
                 await _repository.AddBooking(bookingCash);
                 return new Result<object>() { Error = 0, Message = "Booking Successfully", Data = bookingCash };
@@ -123,12 +142,38 @@ namespace Server.Application.Services
                 ServiceId = addBookingDto.ServiceId,
                 FullName = addBookingDto.FullName,
                 PhoneNumber = addBookingDto.PhoneNumber,
-                BookingDate = addBookingDto.BookingDate,
-                OptionPay = OptionPay.CashPayment.ToString(),
-                IsPayment = true
+                BookingDate = DateTime.Now,
+                OptionPay = OptionPay.PayByWalletCard.ToString(),
+                IsPayment = true,
+                IsCheckIn = false
             };
             await _repository.AddBooking(bookingOnl);
             return new Result<object>() { Error = 0, Message = "Booking Successfully", Data = bookingOnl };
+        }
+
+        public async Task<Result<object>> CheckInBooking(Guid bookingId)
+        {
+            var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            if (token == null)
+                return new Result<object>() { Error = 1, Message = "Token not found", Data = null };
+
+            var jwtToken = new JwtSecurityTokenHandler().ReadToken(token) as JwtSecurityToken;
+
+            if (jwtToken == null)
+                return new Result<object>() { Error = 1, Message = "Invalid token", Data = null };
+            var userId = Guid.Parse(jwtToken.Claims.First(claim => claim.Type == "id").Value);
+            var getBooking = await _repository.GetBookingById(bookingId);
+            if (getBooking == null)
+                return new Result<object>() { Error = 1, Message = "Booking is not exist", Data = null };
+            if(getBooking.IsCheckIn == true)
+                return new Result<object>() { Error = 1, Message = "Booking was checked in before", Data = null };
+            if(getBooking.ShopId != userId)
+                return new Result<object>() { Error = 1, Message = "You are not allowed to check in this booking", Data = null };
+
+            getBooking.IsCheckIn = true;
+            await _repository.UpdateBooking(getBooking);
+            return new Result<object>() { Error = 0, Message = "Checkin Booking Successfully", Data = null };
         }
     }
 }
