@@ -33,6 +33,12 @@ namespace Server.Application.Services
             _userService = userService;
         }
 
+        public async Task<Result<IList<Booking>>> GetBookingList()
+        {
+            var result = await _repository.GetAll();
+            return new Result<IList<Booking>>() { Error = 0, Message = "", Data = result };
+        }
+
         public async Task<Result<Booking>> GetBookingById(Guid id)
         {
             var result = await _repository.GetBookingById(id);

@@ -19,6 +19,13 @@ namespace Server.Infrastructure.Repositories
         {
             _context = context;
         }
+        public async Task<IList<Booking>> GetAll()
+        {
+            return await _context.Booking
+                .Include(b => b.User)
+                .Include(b => b.Service)
+                .ToListAsync();
+        }
 
         public async Task<Booking> GetBookingById(Guid id)
         {

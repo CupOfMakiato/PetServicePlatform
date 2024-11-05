@@ -12,6 +12,7 @@ namespace Server.Application.Interfaces
 {
     public interface IBookingService
     {
+        Task<Result<IList<Booking>>> GetBookingList();
         Task<Result<Booking>> GetBookingById(Guid id);
         Task<Result<IEnumerable<GetBookingDto>>> GetListBookingByShopId(int PAGE_SIZE = 10, int page = 1);
         Task<Result<IEnumerable<GetBookingDto>>> GetListBookingByUserId(int PAGE_SIZE = 10, int page = 1);

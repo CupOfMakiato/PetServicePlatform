@@ -17,6 +17,22 @@ namespace Server.API.Controllers
         {
             _bookingService = bookingService;
         }
+
+        [HttpGet("get-all")]
+        [Authorize(Policy = "AdminPolicy")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var result = await _bookingService.GetBookingList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetBookingById(Guid id)
