@@ -25,6 +25,7 @@ namespace Server.Application.Mappers.UserExtensions
             {
                 Id = user.Id,
                 FullName = user.FullName,
+                PhoneNumber = user.PhoneNumber,
             };
         }
     }

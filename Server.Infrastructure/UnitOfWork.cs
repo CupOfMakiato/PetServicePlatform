@@ -18,8 +18,6 @@ public class UnitOfWork : IUnitOfWork
     private readonly IBookingRepository _bookingRepository;
 
 
-    public UnitOfWork(AppDbContext dbContext, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository, 
-        IAuthRepository authRepository, IUserRepository userRepository, IFeedbackRepository feedbackRepository, IServiceRepository serviceRepository, ISearchRepository searchRepository)
     public UnitOfWork(AppDbContext dbContext, ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository,
         IAuthRepository authRepository, IUserRepository userRepository, IFeedbackRepository feedbackRepository, IServiceRepository serviceRepository, IBookingRepository bookingRepository)
     {
