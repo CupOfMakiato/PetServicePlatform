@@ -8,11 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Infrastructure.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:Server.Infrastructure/Migrations/20241029164309_FixServiceUser.cs
-    public partial class FixServiceUser : Migration
-========
-    public partial class init : Migration
->>>>>>>> cb2f4fbcc6bde50b0f55b5d6d2edbcaef5f6754d:Server.Infrastructure/Migrations/20241101092514_init.cs
+    public partial class RestoreTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -158,14 +154,9 @@ namespace Server.Infrastructure.Migrations
                     ThumbNailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     isVerified = table.Column<bool>(type: "bit", nullable: false),
-<<<<<<<< HEAD:Server.Infrastructure/Migrations/20241029164309_FixServiceUser.cs
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-========
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
->>>>>>>> cb2f4fbcc6bde50b0f55b5d6d2edbcaef5f6754d:Server.Infrastructure/Migrations/20241101092514_init.cs
                     SubCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -261,13 +252,16 @@ namespace Server.Infrastructure.Migrations
                 name: "Booking",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShopId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OptionPay = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsPayment = table.Column<bool>(type: "bit", nullable: false),
+                    IsCheckIn = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -279,7 +273,7 @@ namespace Server.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.PrimaryKey("PK_Booking", x => new { x.UserId, x.ServiceId });
                     table.ForeignKey(
                         name: "FK_Booking_Service_ServiceId",
                         column: x => x.ServiceId,
@@ -364,30 +358,6 @@ namespace Server.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserService",
-                columns: table => new
-                {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserService", x => new { x.UserId, x.ServiceId });
-                    table.ForeignKey(
-                        name: "FK_UserService_Service_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Service",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserService_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "RoleName" },
@@ -396,16 +366,6 @@ namespace Server.Infrastructure.Migrations
                     { 1, "Admin" },
                     { 2, "User" },
                     { 3, "Staff" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Balance", "CreatedBy", "CreationDate", "DeleteBy", "DeletionDate", "Email", "FullName", "IsDeleted", "IsStaff", "IsVerified", "ModificationBy", "ModificationDate", "Otp", "OtpExpiryTime", "Password", "PhoneNumber", "RefreshToken", "ResetToken", "ResetTokenExpiry", "RoleCodeId", "Status", "VerificationToken" },
-                values: new object[,]
-                {
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"), null, null, new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6329), null, null, "shop", "Shop", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 3, "Active", null },
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"), null, null, new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6319), null, null, "admin", "Admin", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 1, "Active", null },
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"), null, null, new DateTime(2024, 11, 1, 16, 25, 13, 637, DateTimeKind.Local).AddTicks(6325), null, null, "user", "User", false, null, true, null, null, null, null, "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", "0123456789", null, null, null, 2, "Active", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -422,11 +382,6 @@ namespace Server.Infrastructure.Migrations
                 name: "IX_Booking_ServiceId",
                 table: "Booking",
                 column: "ServiceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Booking_UserId",
-                table: "Booking",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedback_ServiceId",
@@ -478,11 +433,6 @@ namespace Server.Infrastructure.Migrations
                 name: "IX_Users_RoleCodeId",
                 table: "Users",
                 column: "RoleCodeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserService_ServiceId",
-                table: "UserService",
-                column: "ServiceId");
         }
 
         /// <inheritdoc />
@@ -502,9 +452,6 @@ namespace Server.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Transaction");
-
-            migrationBuilder.DropTable(
-                name: "UserService");
 
             migrationBuilder.DropTable(
                 name: "Payment");

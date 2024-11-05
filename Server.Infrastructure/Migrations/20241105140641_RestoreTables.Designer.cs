@@ -12,8 +12,8 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241104025914_fix-table-booking")]
-    partial class fixtablebooking
+    [Migration("20241105140641_RestoreTables")]
+    partial class RestoreTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -105,47 +108,6 @@ namespace Server.Infrastructure.Migrations
                     b.HasIndex("RoleCodeId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"),
-                            CreationDate = new DateTime(2024, 11, 4, 9, 59, 14, 292, DateTimeKind.Local).AddTicks(3530),
-                            Email = "admin",
-                            FullName = "Admin",
-                            IsDeleted = false,
-                            IsVerified = true,
-                            Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2",
-                            PhoneNumber = "0123456789",
-                            RoleCodeId = 1,
-                            Status = "Active"
-                        },
-                        new
-                        {
-                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"),
-                            CreationDate = new DateTime(2024, 11, 4, 9, 59, 14, 292, DateTimeKind.Local).AddTicks(3535),
-                            Email = "user",
-                            FullName = "User",
-                            IsDeleted = false,
-                            IsVerified = true,
-                            Password = "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G",
-                            PhoneNumber = "0123456789",
-                            RoleCodeId = 2,
-                            Status = "Active"
-                        },
-                        new
-                        {
-                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"),
-                            CreationDate = new DateTime(2024, 11, 4, 9, 59, 14, 292, DateTimeKind.Local).AddTicks(3539),
-                            Email = "shop",
-                            FullName = "Shop",
-                            IsDeleted = false,
-                            IsVerified = true,
-                            Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2",
-                            PhoneNumber = "0123456789",
-                            RoleCodeId = 3,
-                            Status = "Active"
-                        });
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.BillDetail", b =>
@@ -158,6 +120,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -198,14 +163,19 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -220,6 +190,12 @@ namespace Server.Infrastructure.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsCheckIn")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -241,20 +217,12 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ShopId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "ServiceId");
 
                     b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Booking");
                 });
@@ -275,6 +243,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -309,6 +280,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -364,6 +338,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -440,6 +417,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -483,13 +463,16 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isVerified")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -513,6 +496,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -558,6 +544,9 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -607,6 +596,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -644,21 +636,6 @@ namespace Server.Infrastructure.Migrations
                     b.ToTable("Transaction");
                 });
 
-            modelBuilder.Entity("Server.Domain.Entities.UserService", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "ServiceId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("UserService");
-                });
-
             modelBuilder.Entity("ApplicationUser", b =>
                 {
                     b.HasOne("Server.Domain.Entities.Role", "RoleCode")
@@ -692,13 +669,13 @@ namespace Server.Infrastructure.Migrations
             modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
                 {
                     b.HasOne("Server.Domain.Entities.Service", "Service")
-                        .WithMany()
+                        .WithMany("Booking")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Booking")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -740,11 +717,19 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Service", b =>
                 {
+                    b.HasOne("ApplicationUser", "CreatedByUser")
+                        .WithMany("ServiceCreated")
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Server.Domain.Entities.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CreatedByUser");
 
                     b.Navigation("SubCategory");
                 });
@@ -789,34 +774,17 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Server.Domain.Entities.UserService", b =>
-                {
-                    b.HasOne("Server.Domain.Entities.Service", "Service")
-                        .WithMany("UserService")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApplicationUser", "User")
-                        .WithMany("UserSerive")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Service");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ApplicationUser", b =>
                 {
+                    b.Navigation("Booking");
+
                     b.Navigation("Payment");
+
+                    b.Navigation("ServiceCreated");
 
                     b.Navigation("ShopData");
 
                     b.Navigation("Transaction");
-
-                    b.Navigation("UserSerive");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Category", b =>
@@ -838,9 +806,9 @@ namespace Server.Infrastructure.Migrations
                 {
                     b.Navigation("BillDetail");
 
-                    b.Navigation("Transaction");
+                    b.Navigation("Booking");
 
-                    b.Navigation("UserService");
+                    b.Navigation("Transaction");
                 });
 #pragma warning restore 612, 618
         }
