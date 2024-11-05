@@ -8,9 +8,12 @@ namespace Server.Contracts.DTO.Booking
 {
     public class GetBookingDto
     {
-        public string UserBooking {  get; set; }
-        public string ServiceBooking { get; set; }
+        public Guid BookingId { get; set; }
+        public Guid UserBooking {  get; set; }
+        public Guid ServiceBooking { get; set; }
         public DateTime TimeBooking { get; set; }
         public string StatusBooking { get; set; }
+        public bool IsPayment { get; set; }
+        public bool IsCheckIn { get; set; }
     }
 }

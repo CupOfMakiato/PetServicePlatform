@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241104025914_fix-table-booking")]
+    partial class fixtablebooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +35,6 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -110,7 +110,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"),
-                            CreationDate = new DateTime(2024, 11, 5, 10, 17, 27, 843, DateTimeKind.Local).AddTicks(469),
+                            CreationDate = new DateTime(2024, 11, 4, 9, 59, 14, 292, DateTimeKind.Local).AddTicks(3530),
                             Email = "admin",
                             FullName = "Admin",
                             IsDeleted = false,
@@ -123,7 +123,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"),
-                            CreationDate = new DateTime(2024, 11, 5, 10, 17, 27, 843, DateTimeKind.Local).AddTicks(475),
+                            CreationDate = new DateTime(2024, 11, 4, 9, 59, 14, 292, DateTimeKind.Local).AddTicks(3535),
                             Email = "user",
                             FullName = "User",
                             IsDeleted = false,
@@ -136,7 +136,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"),
-                            CreationDate = new DateTime(2024, 11, 5, 10, 17, 27, 843, DateTimeKind.Local).AddTicks(479),
+                            CreationDate = new DateTime(2024, 11, 4, 9, 59, 14, 292, DateTimeKind.Local).AddTicks(3539),
                             Email = "shop",
                             FullName = "Shop",
                             IsDeleted = false,
@@ -158,9 +158,6 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -211,9 +208,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -226,9 +220,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsCheckIn")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -286,9 +277,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -321,9 +309,6 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -379,9 +364,6 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -458,9 +440,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -504,16 +483,13 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<bool>("isVerified")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedByUserId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -537,9 +513,6 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -587,9 +560,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -635,9 +605,6 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
@@ -773,19 +740,11 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Service", b =>
                 {
-                    b.HasOne("ApplicationUser", "CreatedByUser")
-                        .WithMany("ServiceCreated")
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Server.Domain.Entities.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CreatedByUser");
 
                     b.Navigation("SubCategory");
                 });
@@ -852,8 +811,6 @@ namespace Server.Infrastructure.Migrations
             modelBuilder.Entity("ApplicationUser", b =>
                 {
                     b.Navigation("Payment");
-
-                    b.Navigation("ServiceCreated");
 
                     b.Navigation("ShopData");
 

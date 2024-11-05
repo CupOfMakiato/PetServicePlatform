@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Application.Interfaces;
+using Server.Contracts.DTO.Booking;
+using System.Drawing.Printing;
 
 namespace Server.API.Controllers
 {
@@ -14,6 +16,36 @@ namespace Server.API.Controllers
         public BookingController(IBookingService bookingService)
         {
             _bookingService = bookingService;
+        }
+
+        [HttpGet("admin/get-all")]
+        [Authorize(Policy = "AdminPolicy")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var result = await _bookingService.GetBookingList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetBookingById(Guid id)
+        {
+            try
+            {
+                var result = await _bookingService.GetBookingById(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpGet("shop/listbookings")]
@@ -38,6 +70,36 @@ namespace Server.API.Controllers
             try
             {
                 var result = await _bookingService.GetListBookingByUserId(PAGE_SIZE, page);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("user/booking")]
+        [Authorize(Policy = "UserPolicy")]
+        public async Task<IActionResult> AddBooking([FromForm]AddBookingDto addBookingDto)
+        {
+            try
+            {
+                var result = await _bookingService.AddBooking(addBookingDto);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("shop/checkin-booking/{id}")]
+        [Authorize(Policy = "ShopPolicy")]
+        public async Task<IActionResult> CheckInBooking(Guid id)
+        {
+            try
+            {
+                var result = await _bookingService.CheckInBooking(id);
                 return Ok(result);
             }
             catch (Exception ex)
