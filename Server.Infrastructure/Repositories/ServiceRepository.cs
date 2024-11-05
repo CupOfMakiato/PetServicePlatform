@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using CloudinaryDotNet;
 using Microsoft.EntityFrameworkCore;
 using Server.Application.Common;
 using Server.Application.Interfaces;
@@ -34,6 +35,10 @@ namespace Server.Infrastructure.Repositories
                 .Include(u => u.User)
                 .Where(c => c.ServiceId == serviceId)
                 .ToListAsync();
+        }
+        public async Task<Service> GetServiceById(Guid id)
+        {
+            return await _context.Service.Where(c => c.Id == id).Include(c => c.CreatedByUser).FirstOrDefaultAsync();
         }
         public async Task<Pagination<ViewUserRegitered>> GetListUserByServiceId(Guid serviceId, int pageIndex = 0, int pageSize = 10)
         {
@@ -73,6 +78,7 @@ namespace Server.Infrastructure.Repositories
 
             return !isServiceRegistered;
         }
+
         public async Task<IEnumerable<Service>> SearchServicesAsync(string textSearch)
         {
             return await _context.Service
@@ -80,6 +86,7 @@ namespace Server.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
         public async Task<List<Service>> GetPagedServices(int pageIndex, int pageSize)
         {
             return await _context.Service
@@ -145,11 +152,12 @@ namespace Server.Infrastructure.Repositories
 
         public async Task<List<ServiceIdTitleDTO>> GetListServicesTitleByUserId(Guid userId)
         {
-            return await _context.Service.Where(c => c.CreatedBy == userId).ProjectTo<ServiceIdTitleDTO>(_mapper.ConfigurationProvider).ToListAsync();
+            return await _context.Service.Where(c => c.CreatedByUserId == userId).ProjectTo<ServiceIdTitleDTO>(_mapper.ConfigurationProvider).ToListAsync();
         }
+
         public async Task<List<ServiceListDTO>> GetListServicesByUserId(Guid userId)
         {
-            return await _context.Service.Where(c => c.CreatedBy == userId).ProjectTo<ServiceListDTO>(_mapper.ConfigurationProvider).ToListAsync();
+            return await _context.Service.Where(c => c.CreatedByUserId == userId).ProjectTo<ServiceListDTO>(_mapper.ConfigurationProvider).ToListAsync();
         }
     }
 }

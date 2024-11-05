@@ -12,6 +12,7 @@ namespace Server.Application.Repositories
 {
     public interface IServiceRepository : IGenericRepository<Service>
     {
+        Task<Service> GetServiceById(Guid id);
         Task<Pagination<ViewUserRegitered>> GetListUserByServiceId(Guid serviceId, int pageIndex = 0, int pageSize = 10);
         Task<List<Booking>> GetUserByServiceId(Guid serviceId);
         Task<bool> CheckUserCanRegisterService(Guid userId, Guid serviceId);
@@ -22,5 +23,6 @@ namespace Server.Application.Repositories
         Task<Pagination<ViewSearchServiceUserDTO>> SearchServicePagination(string textSearch, int pageIndex = 0, int pageSize = 5);
         Task<List<Service>> GetListServicesByCategoryId(Guid? categoryId = null, Guid? subCategoryId = null);
         Task<List<ServiceListDTO>> GetListServicesByUserId(Guid userId);
+        
     }
 }

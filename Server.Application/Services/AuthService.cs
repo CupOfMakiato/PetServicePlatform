@@ -141,7 +141,7 @@ namespace Server.Application.Services
         }
 
         //Register Shop Account
-        public async Task RegisterInstructorAsync(ShopRegisterDTO shopRegisterDTO)
+        public async Task RegisterShopAsync(ShopRegisterDTO shopRegisterDTO)
         {
             var existingUser = await _userRepository.FindByEmail(shopRegisterDTO.Email);
             if(existingUser != null)
@@ -165,6 +165,7 @@ namespace Server.Application.Services
             {
                 FullName = shopRegisterDTO.FullName,
                 Email = shopRegisterDTO.Email,
+                PhoneNumber = shopRegisterDTO.PhoneNo,
                 Status = UserStatus.Pending,
                 Password = HashPassword(shopRegisterDTO.Password),
                 RoleCodeId = 3,

@@ -122,6 +122,18 @@ namespace Server.API.Controllers
             return Ok(pagedCourses);
         }
 
+        [HttpGet("ViewServiceById")]
+        [ProducesResponseType(200, Type = typeof(ViewServiceDTO))]
+        [ProducesResponseType(400, Type = typeof(Result<object>))]
+        public async Task<IActionResult> ViewServiceById(Guid serviceId)
+        {
+            var pagedCourses = await _serviceService.ViewServiceById(serviceId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(pagedCourses);
+        }
+
         [HttpGet("GetListUserFromService")]
         [ProducesResponseType(200, Type = typeof(ViewServiceDTO))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]

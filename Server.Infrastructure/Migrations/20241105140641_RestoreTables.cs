@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FixServiceUser : Migration
+    public partial class RestoreTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -252,9 +252,16 @@ namespace Server.Infrastructure.Migrations
                 name: "Booking",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShopId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OptionPay = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsPayment = table.Column<bool>(type: "bit", nullable: false),
+                    IsCheckIn = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -266,7 +273,7 @@ namespace Server.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.PrimaryKey("PK_Booking", x => new { x.UserId, x.ServiceId });
                     table.ForeignKey(
                         name: "FK_Booking_Service_ServiceId",
                         column: x => x.ServiceId,
@@ -351,30 +358,6 @@ namespace Server.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserService",
-                columns: table => new
-                {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserService", x => new { x.UserId, x.ServiceId });
-                    table.ForeignKey(
-                        name: "FK_UserService_Service_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Service",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserService_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "RoleName" },
@@ -399,11 +382,6 @@ namespace Server.Infrastructure.Migrations
                 name: "IX_Booking_ServiceId",
                 table: "Booking",
                 column: "ServiceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Booking_UserId",
-                table: "Booking",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedback_ServiceId",
@@ -455,11 +433,6 @@ namespace Server.Infrastructure.Migrations
                 name: "IX_Users_RoleCodeId",
                 table: "Users",
                 column: "RoleCodeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserService_ServiceId",
-                table: "UserService",
-                column: "ServiceId");
         }
 
         /// <inheritdoc />
@@ -479,9 +452,6 @@ namespace Server.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Transaction");
-
-            migrationBuilder.DropTable(
-                name: "UserService");
 
             migrationBuilder.DropTable(
                 name: "Payment");

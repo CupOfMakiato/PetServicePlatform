@@ -27,6 +27,21 @@ namespace Server.Application.Services
             _cloudinaryService = cloudinaryService;
         }
 
+        public async Task<Result<object>> ViewServiceById(Guid serviceId)
+        {
+            ViewSearchServiceUserDTO result = null;
+            var course = await _unitOfWork.serviceRepository.GetServiceById(serviceId);
+            if (course != null)
+                result = course.ToViewSearchServiceDTO();
+
+            return new Result<object>
+            {
+                Error = result != null ? 0 : 1,
+                Message = result != null ? "Get service successfully" : "Get service fail",
+                Data = result
+            };
+        }
+
         public async Task<Pagination<ViewServiceDTO>> ViewServices(int pageIndex, int pageSize)
         {
             var totalItemsCount = await _unitOfWork.serviceRepository.GetTotalServiceCount();
@@ -218,6 +233,7 @@ namespace Server.Application.Services
 
             return result;
         }
+
         public async Task<Result<object>> ViewListServicesByUserId(Guid userId)
         {
             var result = await _unitOfWork.serviceRepository.GetListServicesByUserId(userId);

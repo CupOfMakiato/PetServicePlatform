@@ -127,7 +127,7 @@ namespace Server.API.Controllers
 
         //Register Shop
         [HttpPost("user/register/shop")]
-        public async Task<IActionResult> RegisterInstructor([FromForm] ShopRegisterDTO shopRegisterDTO)
+        public async Task<IActionResult> RegisterShop([FromForm] ShopRegisterDTO shopRegisterDTO)
         {
             // Check if the user is authenticated
             if (User.Identity.IsAuthenticated)
@@ -136,7 +136,7 @@ namespace Server.API.Controllers
             }
             try
             {
-                await _authService.RegisterInstructorAsync(shopRegisterDTO);
+                await _authService.RegisterShopAsync(shopRegisterDTO);
                 return Ok(new { Message = "Registration successful. Please check your email for the OTP." });
             }
             catch (Exception ex)

@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FirebaseAdmin.Messaging;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Configuration;
 using Server.Application.Interfaces;
 using Server.Application.Repositories;
 using Server.Application.Utils;
+using Server.Contracts.Abstractions.Shared;
 using Server.Contracts.DTO.User;
 using Server.Infrastructure.Services;
 using System;
@@ -11,6 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Server.Application.Services
 {
@@ -66,20 +70,20 @@ namespace Server.Application.Services
             await _userRepository.UpdateAsync(user);
         }
 
-        public async Task<ApplicationUser> GetCurrentUserById()
+        public async Task<Result<ApplicationUser>> GetCurrentUserById()
         {
             var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token == null)
-                throw new Exception("Token not found");
+                return new Result<ApplicationUser>() { Error = 1, Message = "Token not found", Data = null };
 
             var jwtToken = new JwtSecurityTokenHandler().ReadToken(token) as JwtSecurityToken;
 
             if (jwtToken == null)
-                throw new Exception("Invalid token");
-
+                return new Result<ApplicationUser>() { Error = 1, Message = "Invalid token", Data = null };
             var userId = Guid.Parse(jwtToken.Claims.First(claim => claim.Type == "id").Value);
-            return await _userRepository.GetByIdAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
+            return new Result<ApplicationUser>(){ Error = 1, Message = "Invalid token", Data = user };
         }
     }
 }

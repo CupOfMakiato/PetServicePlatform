@@ -12,6 +12,7 @@ namespace Server.Application.Interfaces
 {
     public interface IServiceService
     {
+        Task<Result<object>> ViewServiceById(Guid serviceId);
         Task<Pagination<ViewServiceDTO>> ViewServices(int pageIndex, int pageSize);
         Task<Result<object>> ViewListServicesTitleByUserId(Guid userId);
         Task<Result<object>> CreateService(CreateServiceDTO serviceDto);

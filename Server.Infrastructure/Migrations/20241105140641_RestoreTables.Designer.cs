@@ -12,8 +12,8 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241029164309_FixServiceUser")]
-    partial class FixServiceUser
+    [Migration("20241105140641_RestoreTables")]
+    partial class RestoreTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,9 +163,14 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -182,7 +187,20 @@ namespace Server.Infrastructure.Migrations
                     b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsCheckIn")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPayment")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModificationBy")
@@ -191,17 +209,20 @@ namespace Server.Infrastructure.Migrations
                     b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ServiceId")
+                    b.Property<string>("OptionPay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ShopId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "ServiceId");
 
                     b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Booking");
                 });
@@ -615,21 +636,6 @@ namespace Server.Infrastructure.Migrations
                     b.ToTable("Transaction");
                 });
 
-            modelBuilder.Entity("Server.Domain.Entities.UserService", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "ServiceId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("UserService");
-                });
-
             modelBuilder.Entity("ApplicationUser", b =>
                 {
                     b.HasOne("Server.Domain.Entities.Role", "RoleCode")
@@ -663,13 +669,13 @@ namespace Server.Infrastructure.Migrations
             modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
                 {
                     b.HasOne("Server.Domain.Entities.Service", "Service")
-                        .WithMany()
+                        .WithMany("Booking")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Booking")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -768,27 +774,10 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Server.Domain.Entities.UserService", b =>
-                {
-                    b.HasOne("Server.Domain.Entities.Service", "Service")
-                        .WithMany("UserService")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApplicationUser", "User")
-                        .WithMany("UserSerive")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Service");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ApplicationUser", b =>
                 {
+                    b.Navigation("Booking");
+
                     b.Navigation("Payment");
 
                     b.Navigation("ServiceCreated");
@@ -796,8 +785,6 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("ShopData");
 
                     b.Navigation("Transaction");
-
-                    b.Navigation("UserSerive");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Category", b =>
@@ -819,9 +806,9 @@ namespace Server.Infrastructure.Migrations
                 {
                     b.Navigation("BillDetail");
 
-                    b.Navigation("Transaction");
+                    b.Navigation("Booking");
 
-                    b.Navigation("UserService");
+                    b.Navigation("Transaction");
                 });
 #pragma warning restore 612, 618
         }
