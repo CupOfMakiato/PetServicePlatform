@@ -10,6 +10,7 @@ public abstract class BaseEntity
     public DateTime CreationDate { get; set; } = DateTime.Now;
 
     public Guid? CreatedBy { get; set; }
+    public Guid? CreatedByUserId { get; set; }
 
     public DateTime? ModificationDate { get; set; }
 

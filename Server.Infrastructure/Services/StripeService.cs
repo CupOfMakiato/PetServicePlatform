@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Contracts.Enum
+namespace Server.Infrastructure.Services
 {
-    public enum ServiceType
+    public class StripeService
     {
-        Cat = 1,
-        Dog = 2
     }
 }

@@ -20,7 +20,11 @@ public class ApplicationUser : BaseEntity
     public bool? IsStaff { get; set; }
     [ForeignKey("RoleCodeId")]
     public Role RoleCode { get; set; }
-    public ICollection<UserService> UserSerive { get; set; }
+    //public ICollection<Message> SentMessages { get; set; }
+    //public ICollection<Message> ReceivedMessages { get; set; }
+    public ICollection<Booking> Booking { get; set; }
+    public ICollection<Service> ServiceCreated { get; set; }
+    //public virtual ICollection<Notification> Notifications { get; set; }
     public List<Payment> Payment { get; set; }
     public List<Transaction> Transaction { get; set; }
     public virtual ShopData? ShopData { get; set; }

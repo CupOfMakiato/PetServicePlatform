@@ -4,9 +4,13 @@ using Server.API;
 using Server.Application;
 using Server.Domain.Entities;
 using Server.Infrastructure;
+using StackExchange.Redis;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+// Redis 
+//builder.Services.AddSingleton<IConnectionMultiplexer>(x => ConnectionMultiplexer.Connect(builder
+//    .Configuration.GetSection("Redis:RedisUrl").Value!.ToString()));
 
 // Firebase
 
@@ -51,7 +55,20 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
     });
 
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins(
+                "http://localhost:3000",
+                "https://front-end-swd.vercel.app"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -77,8 +94,8 @@ else
 
 app.UseExceptionHandler("/Error");
 
-app.UseCors(c => c.SetIsOriginAllowed(isOriginAllowed => true)
-.AllowCredentials().AllowAnyHeader().AllowAnyMethod());
+app.UseCors("AllowSpecificOrigin"); 
+
 app.UseSwagger();   
 app.UseHttpsRedirection();
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using CloudinaryDotNet;
 using Microsoft.EntityFrameworkCore;
 using Server.Application.Common;
 using Server.Application.Interfaces;
@@ -27,21 +28,21 @@ namespace Server.Infrastructure.Repositories
             _mapper = mapper;
 
         }
-        public async Task<Service> GetServiceById(Guid serviceId)
+        public async Task<List<Booking>> GetUserByServiceId(Guid serviceId)
         {
-            return await _context.Service.FirstOrDefaultAsync(s => s.Id == serviceId);
-        }
-        public async Task<List<UserService>> GetUserByServiceId(Guid serviceId)
-        {
-            return await _context.UserService
+            return await _context.Booking
                 .Include(c => c.Service)
                 .Include(u => u.User)
                 .Where(c => c.ServiceId == serviceId)
                 .ToListAsync();
         }
+        public async Task<Service> GetServiceById(Guid id)
+        {
+            return await _context.Service.Where(c => c.Id == id).Include(c => c.CreatedByUser).FirstOrDefaultAsync();
+        }
         public async Task<Pagination<ViewUserRegitered>> GetListUserByServiceId(Guid serviceId, int pageIndex = 0, int pageSize = 10)
         {
-            var query = _context.UserService
+            var query = _context.Booking    
                               .Where(c => c.ServiceId == serviceId)
                               .Select(c => new ViewUserRegitered
                               {
@@ -65,7 +66,7 @@ namespace Server.Infrastructure.Repositories
             };
 
             // Calculate the total student count for the course
-            var totalStudentCount = await _context.UserService
+            var totalStudentCount = await _context.Booking
                                                      .Where(c => c.ServiceId == serviceId)
                                                      .CountAsync();
 
@@ -73,10 +74,11 @@ namespace Server.Infrastructure.Repositories
         }
         public async Task<bool> CheckUserCanRegisterService(Guid userId, Guid serviceId)
         {
-            bool isServiceRegistered = await _context.UserService.AnyAsync(x => x.ServiceId == serviceId && x.UserId == userId);
+            bool isServiceRegistered = await _context.Booking.AnyAsync(x => x.ServiceId == serviceId && x.UserId == userId);
 
             return !isServiceRegistered;
         }
+
         public async Task<IEnumerable<Service>> SearchServicesAsync(string textSearch)
         {
             return await _context.Service
@@ -84,36 +86,37 @@ namespace Server.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
         public async Task<List<Service>> GetPagedServices(int pageIndex, int pageSize)
         {
             return await _context.Service
                                     .Skip(pageIndex * pageSize)
                                     .Take(pageSize)
-                                    .Include(s => s.UserService) // Include UserService to access users
-                                    .ThenInclude(us => us.User) // Then include the User
+                                    .Include(s => s.CreatedByUser)
                                     .ToListAsync();
         }
 
-        public async Task<Pagination<ViewServiceDTO>> SearchServicePagination(string textSearch, int pageIndex = 0, int pageSize = 5)
+        public async Task<Pagination<ViewSearchServiceUserDTO>> SearchServicePagination(string textSearch, int pageIndex = 0, int pageSize = 5)
         {
-            var itemCount = await _context.Service.CountAsync(t => t.Title.Contains(textSearch));
-            var items = await _context.Service.Where(t => t.Title.Contains(textSearch))
-                                    .Skip(pageIndex * pageSize)
-                                    .Include(c => c.UserService) // Include UserService to access related users
-                                    .Take(pageSize)
-                                    .AsNoTracking()
-                                    .ToListAsync();
+            // Check if textSearch is provided; if not, retrieve all records
+            var query = _context.Service.AsQueryable();
 
-            var serviceDTO = new List<ViewServiceDTO>();
-
-            foreach (var service in items)
+            if (!string.IsNullOrWhiteSpace(textSearch))
             {
-                // Assuming the first user in UserService is the creator
-                var createdByUser = service.UserService.FirstOrDefault()?.User; // Get the ApplicationUser
-                serviceDTO.Add(service.ToViewServiceDTO(createdByUser));
+                query = query.Where(t => t.Title.Contains(textSearch));
             }
 
-            var result = new Pagination<ViewServiceDTO>
+            var itemCount = await query.CountAsync();
+            var items = await query
+                            .Skip(pageIndex * pageSize)
+                            .Include(c => c.CreatedByUser)
+                            .Take(pageSize)
+                            .AsNoTracking()
+                            .ToListAsync();
+
+            var serviceDTO = items.Select(t => t.ToViewSearchServiceDTO()).ToList();
+
+            var result = new Pagination<ViewSearchServiceUserDTO>()
             {
                 PageIndex = pageIndex,
                 PageSize = pageSize,
@@ -123,6 +126,7 @@ namespace Server.Infrastructure.Repositories
 
             return result;
         }
+
 
         public async Task<List<Service>> GetListServicesByCategoryId(Guid? categoryId = null, Guid? subCategoryId = null)
         {
@@ -148,7 +152,12 @@ namespace Server.Infrastructure.Repositories
 
         public async Task<List<ServiceIdTitleDTO>> GetListServicesTitleByUserId(Guid userId)
         {
-            return await _context.Service.Where(c => c.CreatedBy == userId).ProjectTo<ServiceIdTitleDTO>(_mapper.ConfigurationProvider).ToListAsync();
+            return await _context.Service.Where(c => c.CreatedByUserId == userId).ProjectTo<ServiceIdTitleDTO>(_mapper.ConfigurationProvider).ToListAsync();
+        }
+
+        public async Task<List<ServiceListDTO>> GetListServicesByUserId(Guid userId)
+        {
+            return await _context.Service.Where(c => c.CreatedByUserId == userId).ProjectTo<ServiceListDTO>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         public async Task UpdateService(Service service)

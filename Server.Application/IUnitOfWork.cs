@@ -11,4 +11,5 @@ public interface IUnitOfWork
     IAuthRepository authRepository { get; }
     IUserRepository userRepository { get; }
     IServiceRepository serviceRepository { get; }
+    ISearchRepository searchRepository { get; }
 }

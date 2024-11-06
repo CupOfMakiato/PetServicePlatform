@@ -19,5 +19,14 @@ namespace Server.Application.Mappers.UserExtensions
                 Balance = null,
             };
         }
+        public static SearchServiceUserDTO ToSearchUserDTO(this ApplicationUser user)
+        {
+            return new SearchServiceUserDTO
+            {
+                Id = user.Id,
+                FullName = user.FullName,
+                PhoneNumber = user.PhoneNumber,
+            };
+        }
     }
 }

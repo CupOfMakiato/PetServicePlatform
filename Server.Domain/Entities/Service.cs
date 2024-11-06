@@ -16,14 +16,14 @@ namespace Server.Domain.Entities
         public string ThumbNail { get; set; }
         public string ThumbNailId { get; set; }
         public double Price { get; set; }
-        public ICollection<UserService> UserService { get; set; }
+        public ICollection<Booking> Booking { get; set; }
         public bool isVerified { get; set; }
         [Required]
         public ServiceType? Type { get; set; }
 
         public string? Reason { get; set; }
-        //public Guid CreatedByUserId { get; set; }
-        //public ApplicationUser CreatedByUser { get; set; }
+        public Guid CreatedByUserId { get; set; }
+        public ApplicationUser CreatedByUser { get; set; }
 
         public List<Transaction> Transaction { get; set; }
         public List<BillDetail> BillDetail { get; set; }

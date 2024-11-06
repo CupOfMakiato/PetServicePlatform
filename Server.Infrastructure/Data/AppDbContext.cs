@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Application.Enum;
 using Server.Contracts.Enum;
 using Server.Domain.Entities;
@@ -23,7 +24,6 @@ public class AppDbContext : DbContext
     public DbSet<Transaction> Transaction { get; set; }
     public DbSet<Payment> Payment { get; set; }
     public DbSet<BillDetail> BillDetail { get; set; }
-    public DbSet<UserService> UserService { get; set; }
     public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<ShopData> ShopDatas { get; set; }
 
@@ -87,18 +87,16 @@ public class AppDbContext : DbContext
            new Role { Id = 3, RoleName = "Staff" }
         );
 
-        //User
-        modelBuilder.Entity<ApplicationUser>().HasData(
-            new ApplicationUser { Id = Guid.Parse("8B56687E-8377-4743-AAC9-08DCF5C4B471"), FullName = "Admin", Email = "admin", Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", Status = UserStatus.Active, RoleCodeId = 1, IsVerified = true, PhoneNumber = "0123456789", CreationDate = DateTime.Now, IsDeleted = false },
-            new ApplicationUser { Id = Guid.Parse("8B56687E-8377-4743-AAC9-08DCF5C4B47F"), FullName = "User", Email = "user", Password = "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", Status = UserStatus.Active, RoleCodeId = 2, IsVerified = true, PhoneNumber = "0123456789", CreationDate = DateTime.Now, IsDeleted = false },
-            new ApplicationUser { Id = Guid.Parse("8B56687E-8377-4743-AAC9-08DCF5C4B470"), FullName = "Shop", Email = "shop", Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", Status = UserStatus.Active, RoleCodeId = 3, IsVerified = true, PhoneNumber = "0123456789", CreationDate = DateTime.Now, IsDeleted = false }
-            );
+        modelBuilder.Entity<Service>()
+           .HasOne(c => c.CreatedByUser)
+           .WithMany(u => u.ServiceCreated)
+           .HasForeignKey(c => c.CreatedByUserId)
+           .OnDelete(DeleteBehavior.Restrict);
 
-        //modelBuilder.Entity<Service>()
-        //   .HasOne(c => c.CreatedByUser)
-        //   .WithMany(u => u.ServiceCreated)
-        //   .HasForeignKey(c => c.CreatedByUserId)
-        //   .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Service>()
+            .Property(s => s.Type)
+            .HasConversion(v => v.ToString(), v => (ServiceType)Enum.Parse(typeof(ServiceType), v)
+            );
         // Feedback
         modelBuilder.Entity<Feedback>()
             .HasOne(r => r.User)
@@ -111,7 +109,7 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(r => r.ServiceId)
             .OnDelete(DeleteBehavior.Restrict);
-        modelBuilder.Entity<UserService>()
+        modelBuilder.Entity<Booking>()
             .HasKey(r => new { r.UserId, r.ServiceId });
 
         // ShopData
