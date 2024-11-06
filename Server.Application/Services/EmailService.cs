@@ -187,5 +187,50 @@ namespace Server.Application.Services
 
             await SendEmailAsync(emailDto);
         }
+
+        public async Task SendApprovalServiceAsync(string email)
+        {
+            var emailDto = new EmailDTO
+            {
+                To = email,
+                Subject = "Service Approval",
+                Body = $@"
+                    <html>
+                    <body style='font-family: Arial, sans-serif; line-height: 1.6;'>
+                        <div style='max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
+                            <h2 style='color: #333;'>Congratulations!</h2>
+                            <p style='color: #555;'>Your service has been approved.</p>
+                            <p style='color: #555;'>Thank you for use my website.</p>
+                            <p style='color: #555;'>Best regards,<br />Pet Setvice Platform</p>
+                        </div>
+                    </body>
+                    </html>"
+            };
+
+            await SendEmailAsync(emailDto);
+        }
+
+        public async Task SendRejectServiceAsync(string email, string reason)
+        {
+            var emailDto = new EmailDTO
+            {
+                To = email,
+                Subject = "Service Rejection",
+                Body = $@"
+                    <html>
+                    <body style='font-family: Arial, sans-serif; line-height: 1.6;'>
+                        <div style='max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;'>
+                            <h2 style='color: #333;'>Service Rejection</h2>
+                            <p style='color: #555;'>We regret to inform you that your service registration has been rejected.</p>
+                            <p style='color: #555;'>Reason: {reason}</p>
+                            <p style='color: #555;'>If you have any questions or need further assistance, please contact our support team.</p>
+                            <p style='color: #555;'>Best regards,<br />Pet Setvice Platform</p>
+                        </div>
+                    </body>
+                    </html>"
+            };
+
+            await SendEmailAsync(emailDto);
+        }
     }
 }

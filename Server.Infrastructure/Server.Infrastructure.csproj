@@ -29,8 +29,4 @@
     <ProjectReference Include="..\Server.Contracts\Server.Contracts.csproj" />
     <ProjectReference Include="..\Server.Domain\Server.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
 </Project>

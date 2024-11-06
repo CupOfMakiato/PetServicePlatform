@@ -22,5 +22,6 @@ namespace Server.Application.Repositories
         Task<Pagination<ViewServiceDTO>> SearchServicePagination(string textSearch, int pageIndex = 0, int pageSize = 5);
         Task<List<Service>> GetListServicesByCategoryId(Guid? categoryId = null, Guid? subCategoryId = null);
         Task<Service> GetServiceById(Guid serviceId);
+        Task UpdateService(Service service);
     }
 }

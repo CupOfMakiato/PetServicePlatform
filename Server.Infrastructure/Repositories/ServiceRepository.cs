@@ -150,5 +150,11 @@ namespace Server.Infrastructure.Repositories
         {
             return await _context.Service.Where(c => c.CreatedBy == userId).ProjectTo<ServiceIdTitleDTO>(_mapper.ConfigurationProvider).ToListAsync();
         }
+
+        public async Task UpdateService(Service service)
+        {
+            _context.Service.Update(service);
+            await _context.SaveChangesAsync();
+        }
     }
 }

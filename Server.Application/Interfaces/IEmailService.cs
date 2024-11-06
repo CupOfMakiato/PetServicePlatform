@@ -24,5 +24,9 @@ namespace Server.Application.Interfaces
         Task SendApprovalEmailAsync(string email);
 
         Task SendRejectionEmailAsync(string email, string reason);
+
+        //Service
+        Task SendApprovalServiceAsync(string email);
+        Task SendRejectServiceAsync(string email, string reason);
     }
 }
