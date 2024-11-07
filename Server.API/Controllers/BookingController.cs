@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Application.Interfaces;
+using Server.Contracts.Abstractions.RequestAndResponse.Payment;
 using Server.Contracts.DTO.Booking;
 using System.Drawing.Printing;
 
@@ -12,10 +13,12 @@ namespace Server.API.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
+        private readonly IPayoutService _payoutService;
 
-        public BookingController(IBookingService bookingService)
+        public BookingController(IBookingService bookingService, IPayoutService payoutService)
         {
             _bookingService = bookingService;
+            _payoutService = payoutService;
         }
 
         [HttpGet("admin/get-all")]
@@ -101,6 +104,40 @@ namespace Server.API.Controllers
             {
                 var result = await _bookingService.CheckInBooking(id);
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("payment/check-out")]
+        [Authorize(Policy = "UserPolicy")]
+        public async Task<IActionResult> CheckOunt(Guid bookingId)
+        {
+            try
+            {
+                var ressult = await _payoutService.CreatePayment(bookingId);
+                return Ok(ressult);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("payment/call-back")]
+        [Authorize(Policy = "UserPolicy")]
+        public ActionResult PaymentCallBack()
+        {
+            try
+            {
+                var ressult = _payoutService.PaymentExcute(Request.Query);
+                if(ressult == null || ressult.VnPayResponseCode != "00")
+                {
+                    return BadRequest("Check out failed");
+                }
+                return Ok("Check out Successfully");
             }
             catch (Exception ex)
             {

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class RestoreTables : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -366,6 +366,16 @@ namespace Server.Infrastructure.Migrations
                     { 1, "Admin" },
                     { 2, "User" },
                     { 3, "Staff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Balance", "CreatedBy", "CreatedByUserId", "CreationDate", "DeleteBy", "DeletionDate", "Email", "FullName", "IsDeleted", "IsStaff", "IsVerified", "ModificationBy", "ModificationDate", "Otp", "OtpExpiryTime", "Password", "PhoneNumber", "RefreshToken", "ResetToken", "ResetTokenExpiry", "RoleCodeId", "Status", "VerificationToken" },
+                values: new object[,]
+                {
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"), null, null, null, new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6121), null, null, "shop", "Shop", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 3, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"), null, null, null, new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6112), null, null, "admin", "Admin", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 1, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"), null, null, null, new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6117), null, null, "user", "User", false, null, true, null, null, null, null, "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", "0123456789", null, null, null, 2, "Active", null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -130,11 +130,10 @@ namespace Server.Application.Services
                 var bookingCash = new Booking()
                 {
                     UserId = userId,
-                    ShopId = (Guid)getService.CreatedBy,
                     ServiceId = addBookingDto.ServiceId,
                     FullName = addBookingDto.FullName,
                     PhoneNumber = addBookingDto.PhoneNumber,
-                    BookingDate = DateTime.Now,
+                    BookingDate = addBookingDto.BookingDate,
                     OptionPay = OptionPay.CashPayment.ToString(),
                     IsPayment = false,
                     IsCheckIn = false
@@ -146,6 +145,7 @@ namespace Server.Application.Services
             {
                 UserId = userId,
                 ServiceId = addBookingDto.ServiceId,
+                ShopId = getService.CreatedByUserId,
                 FullName = addBookingDto.FullName,
                 PhoneNumber = addBookingDto.PhoneNumber,
                 BookingDate = DateTime.Now,

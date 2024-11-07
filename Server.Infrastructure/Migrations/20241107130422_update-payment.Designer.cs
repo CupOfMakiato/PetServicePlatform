@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241107130422_update-payment")]
+    partial class updatepayment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,7 +113,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"),
-                            CreationDate = new DateTime(2024, 11, 7, 20, 10, 49, 797, DateTimeKind.Local).AddTicks(4926),
+                            CreationDate = new DateTime(2024, 11, 7, 20, 4, 21, 664, DateTimeKind.Local).AddTicks(7637),
                             Email = "admin",
                             FullName = "Admin",
                             IsDeleted = false,
@@ -123,7 +126,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"),
-                            CreationDate = new DateTime(2024, 11, 7, 20, 10, 49, 797, DateTimeKind.Local).AddTicks(4933),
+                            CreationDate = new DateTime(2024, 11, 7, 20, 4, 21, 664, DateTimeKind.Local).AddTicks(7641),
                             Email = "user",
                             FullName = "User",
                             IsDeleted = false,
@@ -136,7 +139,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"),
-                            CreationDate = new DateTime(2024, 11, 7, 20, 10, 49, 797, DateTimeKind.Local).AddTicks(4937),
+                            CreationDate = new DateTime(2024, 11, 7, 20, 4, 21, 664, DateTimeKind.Local).AddTicks(7648),
                             Email = "shop",
                             FullName = "Shop",
                             IsDeleted = false,
@@ -378,12 +381,6 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid>("BookingId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BookingServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BookingUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -435,8 +432,6 @@ namespace Server.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("BookingUserId", "BookingServiceId");
 
                     b.ToTable("Payment");
                 });
@@ -779,15 +774,7 @@ namespace Server.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Domain.Entities.Booking", "Booking")
-                        .WithMany("Payments")
-                        .HasForeignKey("BookingUserId", "BookingServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Service", b =>
@@ -860,11 +847,6 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("ShopData");
 
                     b.Navigation("Transaction");
-                });
-
-            modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
-                {
-                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Category", b =>

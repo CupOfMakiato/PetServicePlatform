@@ -19,5 +19,6 @@ namespace Server.Domain.Entities
         public bool IsCheckIn { get; set; }
         public ApplicationUser User { get; set; }
         public Service Service { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; } = new HashSet<Payment>();
     }
 }

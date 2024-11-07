@@ -226,6 +226,7 @@ namespace Server.Application.Services
                 new Claim("id", user.Id.ToString()), // Ensuring UserId claim is added
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.RoleCode?.RoleName),
+                new Claim(ClaimTypes.Name, user.FullName)
             };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

@@ -12,8 +12,8 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241105140641_RestoreTables")]
-    partial class RestoreTables
+    [Migration("20241107094915_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,6 +108,47 @@ namespace Server.Infrastructure.Migrations
                     b.HasIndex("RoleCodeId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"),
+                            CreationDate = new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6112),
+                            Email = "admin",
+                            FullName = "Admin",
+                            IsDeleted = false,
+                            IsVerified = true,
+                            Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2",
+                            PhoneNumber = "0123456789",
+                            RoleCodeId = 1,
+                            Status = "Active"
+                        },
+                        new
+                        {
+                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"),
+                            CreationDate = new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6117),
+                            Email = "user",
+                            FullName = "User",
+                            IsDeleted = false,
+                            IsVerified = true,
+                            Password = "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G",
+                            PhoneNumber = "0123456789",
+                            RoleCodeId = 2,
+                            Status = "Active"
+                        },
+                        new
+                        {
+                            Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"),
+                            CreationDate = new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6121),
+                            Email = "shop",
+                            FullName = "Shop",
+                            IsDeleted = false,
+                            IsVerified = true,
+                            Password = "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2",
+                            PhoneNumber = "0123456789",
+                            RoleCodeId = 3,
+                            Status = "Active"
+                        });
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.BillDetail", b =>

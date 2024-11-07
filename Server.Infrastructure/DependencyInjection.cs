@@ -38,6 +38,7 @@ public static class DependencyInjection
         services.AddScoped<ISearchService, SearchService>();
         services.AddScoped<ICloudinaryService, CloudinaryService>();
         services.AddScoped<IBookingService, BookingService>();
+        services.AddScoped<IPayoutService, PayoutService>();
         services.AddMemoryCache();
 
         // Repo
