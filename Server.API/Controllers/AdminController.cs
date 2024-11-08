@@ -17,16 +17,27 @@ namespace Server.API.Controllers
     {
         private readonly IShopService _shopService;
         private readonly IServiceService _serviceService;
+        private readonly IUserService _userService;
 
-        public AdminController(IShopService shopService, IServiceService serviceService)
+        public AdminController(IShopService shopService, IServiceService serviceService, IUserService userService)
         {
             _shopService = shopService;
             _serviceService = serviceService;
+            _userService = userService;
         }
 
         /// <summary>
         /// Gets all pending shops.
         /// </summary>
+        /// 
+        [HttpGet("get-all-user")]
+        [Authorize(Policy = "AdminPolicy")]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var result = await _userService.GetALl();
+            return Ok(result);
+        }
+
         [HttpGet("shops/pending")]
         [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> GetPendingInstructors()

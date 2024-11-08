@@ -134,7 +134,7 @@ namespace Server.API.Controllers
                 var respone = await _payoutService.PaymentExcute(Request.Query);
                 if(respone == null || respone.VnPayResponseCode != "00")
                 {
-                    return BadRequest();
+                    return BadRequest(respone);
                 }
                 return Ok(respone);
             }
