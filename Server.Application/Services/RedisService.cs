@@ -13,7 +13,7 @@ namespace Server.Infrastructure.Services
         {
             // Retrieve the Redis connection string from the environment variable
             var connectionString = Environment.GetEnvironmentVariable("REDIS_CONNECTION_STRING")
-                                   ?? configuration["Redis:RedisUrl"]; // Fallback to appsettings if env var is missing
+                                   ?? configuration["ConnectionStrings:Redis"]; // Fallback to appsettings if env var is missing
 
             // Connect to Redis using the connection string
             _redis = ConnectionMultiplexer.Connect(connectionString);

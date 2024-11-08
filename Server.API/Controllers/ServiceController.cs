@@ -146,32 +146,6 @@ namespace Server.API.Controllers
             return Ok(pagedCourses);
         }
 
-        [HttpPost("ApproveOrReject")]
-        [ProducesResponseType(200, Type = typeof(Result<object>))]
-        [ProducesResponseType(400, Type = typeof(Result<object>))]
-        public async Task<IActionResult> ApproveOrReject([FromForm] CreateApproveOrRejectRequest req)
-        {
-            var validator = new CreateApproveOrRejectValidator();
-            var validatorResult = validator.Validate(req);
-            if (validatorResult.IsValid == false)
-            {
-                return BadRequest(new Result<object>
-                {
-                    Error = 1,
-                    Message = "Missing value!",
-                    Data = validatorResult.Errors.Select(x => x.ErrorMessage),
-                });
-            }
-            var result = await _serviceService.ApproveOrReject(req.ServiceId, req.IsApproved, req.Reason);
-
-            if (result.Error == 1)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(result);
-        }
-
         [HttpDelete("SoftDeleteService/{id}")]
         [ProducesResponseType(200, Type = typeof(Result<object>))]
         [ProducesResponseType(400, Type = typeof(Result<object>))]

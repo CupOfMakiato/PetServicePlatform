@@ -130,11 +130,10 @@ namespace Server.Application.Services
                 var bookingCash = new Booking()
                 {
                     UserId = userId,
-                    ShopId = (Guid)getService.CreatedBy,
                     ServiceId = addBookingDto.ServiceId,
                     FullName = addBookingDto.FullName,
                     PhoneNumber = addBookingDto.PhoneNumber,
-                    BookingDate = DateTime.Now,
+                    BookingDate = addBookingDto.BookingDate,
                     OptionPay = OptionPay.CashPayment.ToString(),
                     IsPayment = false,
                     IsCheckIn = false
@@ -174,7 +173,7 @@ namespace Server.Application.Services
                 return new Result<object>() { Error = 1, Message = "Booking is not exist", Data = null };
             if(getBooking.IsCheckIn == true)
                 return new Result<object>() { Error = 1, Message = "Booking was checked in before", Data = null };
-            if(getBooking.ShopId != userId)
+            if(getBooking.CreatedBy != userId)
                 return new Result<object>() { Error = 1, Message = "You are not allowed to check in this booking", Data = null };
 
             getBooking.IsCheckIn = true;

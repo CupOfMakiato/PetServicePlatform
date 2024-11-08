@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
 using CloudinaryDotNet;
+using Microsoft.AspNetCore.Http;
 using Server.Application.Common;
 using Server.Application.Interfaces;
 using Server.Application.Mappers.ServiceExtensions;
+using Server.Application.Repositories;
 using Server.Contracts.Abstractions.CloudinaryService;
 using Server.Contracts.Abstractions.Shared;
 using Server.Contracts.DTO.Service;
 using Server.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +23,19 @@ namespace Server.Application.Services
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICloudinaryService _cloudinaryService;
-        public ServiceService(IUnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEmailService _emailService;
+        private readonly IUserService _userService;
+        private readonly IServiceRepository _serviceRepository;
+        public ServiceService(IUnitOfWork unitOfWork, IMapper mapper, ICloudinaryService cloudinaryService, IHttpContextAccessor contextAccessor, IEmailService emailService, IUserService userService, IServiceRepository serviceRepository)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _cloudinaryService = cloudinaryService;
+            _httpContextAccessor = contextAccessor;
+            _emailService = emailService;
+            _userService = userService;
+            _serviceRepository = serviceRepository;
         }
 
         public async Task<Result<object>> ViewServiceById(Guid serviceId)

@@ -26,7 +26,6 @@ namespace Server.Domain.Entities
         public ApplicationUser CreatedByUser { get; set; }
 
         public List<Transaction> Transaction { get; set; }
-        public List<BillDetail> BillDetail { get; set; }
         public Guid SubCategoryId { get; set; }
         public SubCategory SubCategory { get; set; }
     }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Application.Interfaces;
+using Server.Contracts.Abstractions.RequestAndResponse.Payment;
 using Server.Contracts.DTO.Booking;
 using System.Drawing.Printing;
 
@@ -12,10 +13,12 @@ namespace Server.API.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
+        private readonly IPayoutService _payoutService;
 
-        public BookingController(IBookingService bookingService)
+        public BookingController(IBookingService bookingService, IPayoutService payoutService)
         {
             _bookingService = bookingService;
+            _payoutService = payoutService;
         }
 
         [HttpGet("admin/get-all")]
@@ -105,6 +108,39 @@ namespace Server.API.Controllers
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("payment/check-out/{bookingId}")]
+        [Authorize(Policy = "UserPolicy")]
+        public async Task<IActionResult> CheckOut(Guid bookingId)
+        {
+            try
+            {
+                var ressult = await _payoutService.CreatePayment(bookingId);
+                return Ok(ressult);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet("payment-return")]
+        public async Task<IActionResult> PaymentReturn()
+        {
+            try
+            {
+                var respone = await _payoutService.PaymentExcute(Request.Query);
+                if(respone == null || respone.VnPayResponseCode != "00")
+                {
+                    return BadRequest();
+                }
+                return Ok(respone);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
             }
         }
     }

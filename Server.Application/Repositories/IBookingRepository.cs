@@ -15,5 +15,6 @@ namespace Server.Application.Repositories
         Task<IQueryable<Booking>> GetListBookingByUserId(Guid userId);
         Task AddBooking(Booking booking);
         Task UpdateBooking(Booking booking);
+        Task<int> SaveChangeAsync();
     }
 }
