@@ -80,13 +80,14 @@ namespace Server.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleCodeId = table.Column<int>(type: "int", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Balance = table.Column<double>(type: "float", nullable: true),
                     RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RoleCodeId = table.Column<int>(type: "int", nullable: false),
                     Otp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsVerified = table.Column<bool>(type: "bit", nullable: false),
                     OtpExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -94,7 +95,6 @@ namespace Server.Infrastructure.Migrations
                     ResetToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ResetTokenExpiry = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsStaff = table.Column<bool>(type: "bit", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -111,34 +111,6 @@ namespace Server.Infrastructure.Migrations
                         name: "FK_Users_Role_RoleCodeId",
                         column: x => x.RoleCodeId,
                         principalTable: "Role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payment",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TotalAmount = table.Column<double>(type: "float", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Payment_Users_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -214,54 +186,18 @@ namespace Server.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BillDetail",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BillDetail", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BillDetail_Payment_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payment",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BillDetail_Service_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Service",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Booking",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ShopId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OptionPay = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPayment = table.Column<bool>(type: "bit", nullable: false),
                     IsCheckIn = table.Column<bool>(type: "bit", nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -273,19 +209,19 @@ namespace Server.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => new { x.UserId, x.ServiceId });
+                    table.PrimaryKey("PK_Booking", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Booking_Service_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Service",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Booking_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -358,6 +294,43 @@ namespace Server.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Payment",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TotalAmount = table.Column<double>(type: "float", nullable: false),
+                    BookingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PaymentUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TransactionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModificationBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payment_Booking_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "Booking",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Payment_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "RoleName" },
@@ -373,25 +346,20 @@ namespace Server.Infrastructure.Migrations
                 columns: new[] { "Id", "Balance", "CreatedBy", "CreatedByUserId", "CreationDate", "DeleteBy", "DeletionDate", "Email", "FullName", "IsDeleted", "IsStaff", "IsVerified", "ModificationBy", "ModificationDate", "Otp", "OtpExpiryTime", "Password", "PhoneNumber", "RefreshToken", "ResetToken", "ResetTokenExpiry", "RoleCodeId", "Status", "VerificationToken" },
                 values: new object[,]
                 {
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"), null, null, null, new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6121), null, null, "shop", "Shop", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 3, "Active", null },
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"), null, null, null, new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6112), null, null, "admin", "Admin", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 1, "Active", null },
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"), null, null, null, new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6117), null, null, "user", "User", false, null, true, null, null, null, null, "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", "0123456789", null, null, null, 2, "Active", null }
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"), null, null, null, new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4836), null, null, "shop", "Shop", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 3, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"), null, null, null, new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4825), null, null, "admin", "Admin", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 1, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"), null, null, null, new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4831), null, null, "user", "User", false, null, true, null, null, null, null, "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", "0123456789", null, null, null, 2, "Active", null }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BillDetail_PaymentId",
-                table: "BillDetail",
-                column: "PaymentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BillDetail_ServiceId",
-                table: "BillDetail",
-                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Booking_ServiceId",
                 table: "Booking",
                 column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Booking_UserId",
+                table: "Booking",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedback_ServiceId",
@@ -404,9 +372,14 @@ namespace Server.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_ApplicationUserId",
+                name: "IX_Payment_BookingId",
                 table: "Payment",
-                column: "ApplicationUserId");
+                column: "BookingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payment_UserId",
+                table: "Payment",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Service_CreatedByUserId",
@@ -449,13 +422,10 @@ namespace Server.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BillDetail");
-
-            migrationBuilder.DropTable(
-                name: "Booking");
-
-            migrationBuilder.DropTable(
                 name: "Feedback");
+
+            migrationBuilder.DropTable(
+                name: "Payment");
 
             migrationBuilder.DropTable(
                 name: "ShopDatas");
@@ -464,7 +434,7 @@ namespace Server.Infrastructure.Migrations
                 name: "Transaction");
 
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "Booking");
 
             migrationBuilder.DropTable(
                 name: "Service");

@@ -12,7 +12,7 @@ using Server.Infrastructure.Data;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241107094915_init")]
+    [Migration("20241107160200_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -113,7 +113,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"),
-                            CreationDate = new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6112),
+                            CreationDate = new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4825),
                             Email = "admin",
                             FullName = "Admin",
                             IsDeleted = false,
@@ -126,7 +126,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"),
-                            CreationDate = new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6117),
+                            CreationDate = new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4831),
                             Email = "user",
                             FullName = "User",
                             IsDeleted = false,
@@ -139,7 +139,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"),
-                            CreationDate = new DateTime(2024, 11, 7, 16, 49, 14, 630, DateTimeKind.Local).AddTicks(6121),
+                            CreationDate = new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4836),
                             Email = "shop",
                             FullName = "Shop",
                             IsDeleted = false,
@@ -151,63 +151,10 @@ namespace Server.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Server.Domain.Entities.BillDetail", b =>
+            modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BillId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleteBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModificationBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModificationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PaymentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaymentId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("BillDetail");
-                });
-
-            modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("BookingDate")
@@ -232,9 +179,6 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsCheckIn")
                         .HasColumnType("bit");
 
@@ -258,14 +202,19 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ShopId")
+                    b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId", "ServiceId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("Booking");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Booking", (string)null);
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Category", b =>
@@ -375,7 +324,7 @@ namespace Server.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ApplicationUserId")
+                    b.Property<Guid>("BookingId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -402,17 +351,37 @@ namespace Server.Infrastructure.Migrations
                     b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("TotalAmount")
                         .HasColumnType("float");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("BookingId");
 
-                    b.ToTable("Payment");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Payment", (string)null);
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Role", b =>
@@ -688,37 +657,18 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("RoleCode");
                 });
 
-            modelBuilder.Entity("Server.Domain.Entities.BillDetail", b =>
-                {
-                    b.HasOne("Server.Domain.Entities.Payment", "Payment")
-                        .WithMany("BillDetail")
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Server.Domain.Entities.Service", "Service")
-                        .WithMany("BillDetail")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Payment");
-
-                    b.Navigation("Service");
-                });
-
             modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
                 {
                     b.HasOne("Server.Domain.Entities.Service", "Service")
                         .WithMany("Booking")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApplicationUser", "User")
                         .WithMany("Booking")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Service");
@@ -747,13 +697,21 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Payment", b =>
                 {
+                    b.HasOne("Server.Domain.Entities.Booking", "Booking")
+                        .WithMany("Payments")
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("ApplicationUser", "ApplicationUser")
-                        .WithMany("Payment")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Payments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Service", b =>
@@ -819,7 +777,7 @@ namespace Server.Infrastructure.Migrations
                 {
                     b.Navigation("Booking");
 
-                    b.Navigation("Payment");
+                    b.Navigation("Payments");
 
                     b.Navigation("ServiceCreated");
 
@@ -828,14 +786,14 @@ namespace Server.Infrastructure.Migrations
                     b.Navigation("Transaction");
                 });
 
+            modelBuilder.Entity("Server.Domain.Entities.Booking", b =>
+                {
+                    b.Navigation("Payments");
+                });
+
             modelBuilder.Entity("Server.Domain.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("Server.Domain.Entities.Payment", b =>
-                {
-                    b.Navigation("BillDetail");
                 });
 
             modelBuilder.Entity("Server.Domain.Entities.Role", b =>
@@ -845,8 +803,6 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Service", b =>
                 {
-                    b.Navigation("BillDetail");
-
                     b.Navigation("Booking");
 
                     b.Navigation("Transaction");

@@ -34,7 +34,7 @@ namespace Server.Infrastructure.Repositories
         public async Task<IQueryable<Booking>> GetListBookingByShopId(Guid shopId)
         {
             return _context.Booking
-                .Where(b => b.ShopId == shopId)
+                .Where(b => b.Service.CreatedBy == shopId)
                 .AsQueryable();
                 
         }
@@ -60,5 +60,19 @@ namespace Server.Infrastructure.Repositories
             _context.Booking.Update(booking);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<int> SaveChangeAsync()
+        {
+            try
+            {
+                return await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi tại đây nếu cần thiết
+                throw new Exception("An error occurred while saving changes to the database.", ex);
+            }
+        }
+
     }
 }

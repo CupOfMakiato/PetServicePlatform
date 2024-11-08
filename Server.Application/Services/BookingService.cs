@@ -145,7 +145,6 @@ namespace Server.Application.Services
             {
                 UserId = userId,
                 ServiceId = addBookingDto.ServiceId,
-                ShopId = getService.CreatedByUserId,
                 FullName = addBookingDto.FullName,
                 PhoneNumber = addBookingDto.PhoneNumber,
                 BookingDate = DateTime.Now,
@@ -174,7 +173,7 @@ namespace Server.Application.Services
                 return new Result<object>() { Error = 1, Message = "Booking is not exist", Data = null };
             if(getBooking.IsCheckIn == true)
                 return new Result<object>() { Error = 1, Message = "Booking was checked in before", Data = null };
-            if(getBooking.ShopId != userId)
+            if(getBooking.CreatedBy != userId)
                 return new Result<object>() { Error = 1, Message = "You are not allowed to check in this booking", Data = null };
 
             getBooking.IsCheckIn = true;

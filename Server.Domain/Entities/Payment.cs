@@ -11,13 +11,14 @@ namespace Server.Domain.Entities
         public Guid UserId { get; set; }
         public double TotalAmount { get; set; }
         public Guid BookingId { get; set; }
+
         public string PaymentUrl { get; set; }
         public string PaymentStatus { get; set; }
         public DateTime PaymentDate { get; set; }
         public string PaymentMethod { get; set; }
         public string? TransactionId { get; set; }
-        public ApplicationUser ApplicationUser{ get; set; }
-        public List<BillDetail> BillDetail { get; set; }
+
+        public virtual ApplicationUser ApplicationUser{ get; set; }
         public virtual Booking Booking { get; set; }
     }
 }

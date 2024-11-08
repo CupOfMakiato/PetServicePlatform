@@ -51,7 +51,7 @@ public static class DependencyInjection
         services.AddScoped<IServiceRepository, ServiceRepository>();
         services.AddScoped<ISearchRepository, SearchRepository>();
         services.AddScoped<IBookingRepository, BookingRepository>();
-
+        services.AddScoped<IPaymentRepository, PaymentRepository>();
         //
         services.Configure<CloudinarySetting>(configuration.GetSection("CloudinarySetting"));
 

@@ -111,9 +111,9 @@ namespace Server.API.Controllers
             }
         }
 
-        [HttpPost("payment/check-out")]
+        [HttpPost("payment/check-out/{bookingId}")]
         [Authorize(Policy = "UserPolicy")]
-        public async Task<IActionResult> CheckOunt(Guid bookingId)
+        public async Task<IActionResult> CheckOut(Guid bookingId)
         {
             try
             {
@@ -126,22 +126,21 @@ namespace Server.API.Controllers
             }
         }
 
-        [HttpPost("payment/call-back")]
-        [Authorize(Policy = "UserPolicy")]
-        public ActionResult PaymentCallBack()
+        [HttpGet("payment-return")]
+        public async Task<IActionResult> PaymentReturn()
         {
             try
             {
-                var ressult = _payoutService.PaymentExcute(Request.Query);
-                if(ressult == null || ressult.VnPayResponseCode != "00")
+                var respone = await _payoutService.PaymentExcute(Request.Query);
+                if(respone == null || respone.VnPayResponseCode != "00")
                 {
-                    return BadRequest("Check out failed");
+                    return BadRequest();
                 }
-                return Ok("Check out Successfully");
+                return Ok(respone);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return StatusCode(500, ex.Message);
             }
         }
     }
