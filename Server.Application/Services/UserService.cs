@@ -43,6 +43,11 @@ namespace Server.Application.Services
             _claimsService = claimsService;
         }
 
+        public async Task<IList<ApplicationUser>> GetALl()
+        {
+            var getUser = await _userRepository.GetALl();
+            return getUser;
+        }
         public async Task<ApplicationUser> GetByEmail(string email)
         {
             return await _userRepository.GetUserByEmail(email);

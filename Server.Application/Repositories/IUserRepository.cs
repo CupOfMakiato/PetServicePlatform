@@ -10,6 +10,7 @@ namespace Server.Application.Repositories
 {
     public interface IUserRepository : IGenericRepository<ApplicationUser>
     {
+        Task<IList<ApplicationUser>> GetALl();
         Task<ApplicationUser?> FindByEmail(string email);
         Task UpdateAsync(ApplicationUser user);
         Task AddAsync(ApplicationUser user);
