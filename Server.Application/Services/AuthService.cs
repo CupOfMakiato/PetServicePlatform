@@ -62,6 +62,10 @@ namespace Server.Application.Services
                 {
                     throw new InvalidOperationException("Account is not activated. Please verify your email.");
                 }
+                if(user.Status.ToString() != "Active")
+                {
+                    throw new InvalidOperationException("Your account has been lock. Contact to website to solve it.");
+                }
                 if (!BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password))
                 {
                     throw new UnauthorizedAccessException("Invalid password.");
