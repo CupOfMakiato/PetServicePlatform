@@ -68,7 +68,7 @@ namespace Server.Application.Services
                 TotalAmount = getService.Price,
                 BookingId = bookingId,
                 PaymentUrl = paymentUrl,
-                PaymentStatus = "Paid",
+                PaymentStatus = "Pending",
                 PaymentDate = DateTime.UtcNow.AddHours(7),
                 PaymentMethod = "VNPAY"
             };

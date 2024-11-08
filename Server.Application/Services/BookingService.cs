@@ -67,7 +67,7 @@ namespace Server.Application.Services
                     BookingId = booking.Id,
                     UserBooking = booking.UserId,
                     ServiceBooking = booking.ServiceId,
-                    TimeBooking = booking.CreationDate,
+                    TimeBooking = booking.BookingDate,
                     StatusBooking = booking.OptionPay,
                     IsPayment = booking.IsPayment,
                     IsCheckIn = booking.IsCheckIn
@@ -99,7 +99,7 @@ namespace Server.Application.Services
                     BookingId = booking.Id,
                     UserBooking = booking.UserId,
                     ServiceBooking = booking.ServiceId,
-                    TimeBooking = booking.CreationDate,
+                    TimeBooking = booking.BookingDate,
                     StatusBooking = booking.OptionPay,
                     IsPayment = booking.IsPayment
                 };
@@ -147,7 +147,7 @@ namespace Server.Application.Services
                 ServiceId = addBookingDto.ServiceId,
                 FullName = addBookingDto.FullName,
                 PhoneNumber = addBookingDto.PhoneNumber,
-                BookingDate = DateTime.Now,
+                BookingDate = addBookingDto.BookingDate,
                 OptionPay = OptionPay.PayByWalletCard.ToString(),
                 IsPayment = true,
                 IsCheckIn = false
