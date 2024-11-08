@@ -609,3 +609,6 @@ CoverageReport/
 /Server.Contracts/obj/project.nuget.cache
 /Server.Contracts/obj/Server.Contracts.csproj.nuget.dgspec.json
 /Server.Contracts/obj/Server.Contracts.csproj.nuget.g.props
+/Server.Contracts/bin/Release/net8.0/Server.Contracts.deps.json
+/Server.Contracts/obj/Release/net8.0/Server.Contracts.assets.cache
+/Server.Contracts/obj/Release/net8.0/Server.Contracts.csproj.AssemblyReference.cache
