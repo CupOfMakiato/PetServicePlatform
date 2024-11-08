@@ -10,6 +10,7 @@ namespace Server.Application.Interfaces
 {
     public interface IUserService
     {
+        Task<IList<ApplicationUser>> GetALl();
         Task<ApplicationUser> GetByEmail(string email);
         Task UpdateUserAsync(ApplicationUser user);
 

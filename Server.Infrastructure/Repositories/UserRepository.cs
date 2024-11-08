@@ -21,6 +21,10 @@ namespace Server.Infrastructure.Repositories
             _context = dataContext;
         }
 
+        public async Task<IList<ApplicationUser>> GetALl()
+        {
+            return await _context.Users.Where(u => u.RoleCodeId != 1).ToListAsync();
+        }
         public async Task<ApplicationUser> FindByEmail(string email)
         {
             return await _context.Users
