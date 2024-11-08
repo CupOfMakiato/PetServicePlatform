@@ -110,7 +110,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"),
-                            CreationDate = new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4825),
+                            CreationDate = new DateTime(2024, 11, 8, 12, 37, 42, 523, DateTimeKind.Local).AddTicks(2917),
                             Email = "admin",
                             FullName = "Admin",
                             IsDeleted = false,
@@ -123,7 +123,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"),
-                            CreationDate = new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4831),
+                            CreationDate = new DateTime(2024, 11, 8, 12, 37, 42, 523, DateTimeKind.Local).AddTicks(2923),
                             Email = "user",
                             FullName = "User",
                             IsDeleted = false,
@@ -136,7 +136,7 @@ namespace Server.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"),
-                            CreationDate = new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4836),
+                            CreationDate = new DateTime(2024, 11, 8, 12, 37, 42, 523, DateTimeKind.Local).AddTicks(2929),
                             Email = "shop",
                             FullName = "Shop",
                             IsDeleted = false,

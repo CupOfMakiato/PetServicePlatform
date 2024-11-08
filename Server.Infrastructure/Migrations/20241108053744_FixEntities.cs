@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class FixEntities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -346,9 +346,9 @@ namespace Server.Infrastructure.Migrations
                 columns: new[] { "Id", "Balance", "CreatedBy", "CreatedByUserId", "CreationDate", "DeleteBy", "DeletionDate", "Email", "FullName", "IsDeleted", "IsStaff", "IsVerified", "ModificationBy", "ModificationDate", "Otp", "OtpExpiryTime", "Password", "PhoneNumber", "RefreshToken", "ResetToken", "ResetTokenExpiry", "RoleCodeId", "Status", "VerificationToken" },
                 values: new object[,]
                 {
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"), null, null, null, new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4836), null, null, "shop", "Shop", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 3, "Active", null },
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"), null, null, null, new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4825), null, null, "admin", "Admin", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 1, "Active", null },
-                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"), null, null, null, new DateTime(2024, 11, 7, 23, 2, 0, 478, DateTimeKind.Local).AddTicks(4831), null, null, "user", "User", false, null, true, null, null, null, null, "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", "0123456789", null, null, null, 2, "Active", null }
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b470"), null, null, null, new DateTime(2024, 11, 8, 12, 37, 42, 523, DateTimeKind.Local).AddTicks(2929), null, null, "shop", "Shop", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 3, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b471"), null, null, null, new DateTime(2024, 11, 8, 12, 37, 42, 523, DateTimeKind.Local).AddTicks(2917), null, null, "admin", "Admin", false, null, true, null, null, null, null, "$2y$10$VtkJppM0TJ1d/fTye4yJWOTe22rx6Fuyf.hDlz7bbw2q9sHkPRqF2", "0123456789", null, null, null, 1, "Active", null },
+                    { new Guid("8b56687e-8377-4743-aac9-08dcf5c4b47f"), null, null, null, new DateTime(2024, 11, 8, 12, 37, 42, 523, DateTimeKind.Local).AddTicks(2923), null, null, "user", "User", false, null, true, null, null, null, null, "$2a$11$ZWjOEkgvfYFnpSK.M/LEjerhgFMk4CAKR8J2cLnG6BrFN61EN/s3G", "0123456789", null, null, null, 2, "Active", null }
                 });
 
             migrationBuilder.CreateIndex(
